@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.takwolf.android.demo.hfrecyclerview.adapter.LinearVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityMultiRecyclerViewBinding
-import com.takwolf.android.demo.hfrecyclerview.helper.HfViewHelper
-import com.takwolf.android.demo.hfrecyclerview.helper.PhotosViewHelper
-import com.takwolf.android.demo.hfrecyclerview.vm.HfViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.SinglePhotosViewModel
+import com.takwolf.android.demo.hfrecyclerview.helper.ExtraInfoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.helper.PhotoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.vm.ExtraInfoListViewModel
+import com.takwolf.android.demo.hfrecyclerview.vm.PhotoListViewModel
 
 class MultiRecyclerViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,10 +19,10 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModelProvider = ViewModelProvider(this)
-        val hfViewModel1 = viewModelProvider["hf_1", HfViewModel::class.java]
-        val hfViewModel2 = viewModelProvider["hf_2", HfViewModel::class.java]
-        val photosViewModel1 = viewModelProvider["photos_1", SinglePhotosViewModel::class.java]
-        val photosViewModel2 = viewModelProvider["photos_2", SinglePhotosViewModel::class.java]
+        val extraInfoListViewModel1 = viewModelProvider["infos_1", ExtraInfoListViewModel::class.java]
+        val extraInfoListViewModel2 = viewModelProvider["infos_2", ExtraInfoListViewModel::class.java]
+        val photoListViewModel1 = viewModelProvider["photos_1", PhotoListViewModel::class.java]
+        val photoListViewModel2 = viewModelProvider["photos_2", PhotoListViewModel::class.java]
 
         binding.toolbar.setNavigationOnClickListener {
             finish()
@@ -32,16 +32,16 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
 
         binding.recyclerViewLeft.setRecycledViewPool(recycledViewPool)
         binding.recyclerViewLeft.layoutManager = LinearLayoutManager(this)
-        HfViewHelper.setupVertical(hfViewModel1, binding.recyclerViewLeft)
+        ExtraInfoViewHelper.setupVertical(extraInfoListViewModel1, binding.recyclerViewLeft)
         val adapter1 = LinearVerticalAdapter()
-        PhotosViewHelper.listen(this, photosViewModel1, adapter1)
+        PhotoViewHelper.listen(this, photoListViewModel1, adapter1)
         binding.recyclerViewLeft.adapter = adapter1
 
         binding.recyclerViewRight.setRecycledViewPool(recycledViewPool)
         binding.recyclerViewRight.layoutManager = LinearLayoutManager(this)
-        HfViewHelper.setupVertical(hfViewModel2, binding.recyclerViewRight)
+        ExtraInfoViewHelper.setupVertical(extraInfoListViewModel2, binding.recyclerViewRight)
         val adapter2 = LinearVerticalAdapter()
-        PhotosViewHelper.listen(this, photosViewModel2, adapter2)
+        PhotoViewHelper.listen(this, photoListViewModel2, adapter2)
         binding.recyclerViewRight.adapter = adapter2
 
         binding.btnReplaceAdapters.setOnClickListener {

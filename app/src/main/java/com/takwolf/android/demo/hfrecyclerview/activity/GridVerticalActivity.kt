@@ -8,10 +8,10 @@ import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.adapter.GridVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.adapter.GridVerticalSpanSizeLookup
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRecyclerViewBinding
-import com.takwolf.android.demo.hfrecyclerview.helper.HfViewHelper
-import com.takwolf.android.demo.hfrecyclerview.helper.PhotosViewHelper
-import com.takwolf.android.demo.hfrecyclerview.vm.HfViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.SinglePhotosViewModel
+import com.takwolf.android.demo.hfrecyclerview.helper.ExtraInfoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.helper.PhotoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.vm.ExtraInfoListViewModel
+import com.takwolf.android.demo.hfrecyclerview.vm.PhotoListViewModel
 
 class GridVerticalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +19,8 @@ class GridVerticalActivity : AppCompatActivity() {
         val binding = ActivityRecyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val hfViewModel: HfViewModel by viewModels()
-        val photosViewModel: SinglePhotosViewModel by viewModels()
+        val extraInfoListViewModel: ExtraInfoListViewModel by viewModels()
+        val photoListViewModel: PhotoListViewModel by viewModels()
 
         binding.toolbar.setTitle(R.string.grid_vertical)
         binding.toolbar.setNavigationOnClickListener {
@@ -30,10 +30,10 @@ class GridVerticalActivity : AppCompatActivity() {
         val layoutManager = GridLayoutManager(this, 2)
         layoutManager.spanSizeLookup = GridVerticalSpanSizeLookup(layoutManager, binding.recyclerView.proxyAdapter)
         binding.recyclerView.layoutManager = layoutManager
-        HfViewHelper.setupVertical(hfViewModel, binding.recyclerView)
-        HfViewHelper.listenVertical(hfViewModel, binding.recyclerView, binding.hfDashboard)
+        ExtraInfoViewHelper.setupVertical(extraInfoListViewModel, binding.recyclerView)
+        ExtraInfoViewHelper.listenVertical(extraInfoListViewModel, binding.recyclerView, binding.hfDashboard)
         val adapter = GridVerticalAdapter()
-        PhotosViewHelper.listen(this, photosViewModel, adapter)
+        PhotoViewHelper.listen(this, photoListViewModel, adapter)
         binding.recyclerView.adapter = adapter
     }
 }

@@ -2,8 +2,8 @@ package com.takwolf.android.demo.hfrecyclerview.vm
 
 import com.takwolf.android.demo.hfrecyclerview.data.Photo
 
-class SinglePhotosViewModel : PhotosViewModel() {
+class PhotoListViewModel : ListViewModel<Photo>() {
     init {
-        photosData.value = Photo.getList()
+        entitiesData.value = Photo.getList()
     }
 }

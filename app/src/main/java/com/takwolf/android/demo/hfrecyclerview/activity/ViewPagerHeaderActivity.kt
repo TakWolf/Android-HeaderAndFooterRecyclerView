@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.takwolf.android.demo.hfrecyclerview.adapter.LinearVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityViewPagerHeaderBinding
-import com.takwolf.android.demo.hfrecyclerview.helper.PhotosViewHelper
-import com.takwolf.android.demo.hfrecyclerview.holder.BannerHeader
-import com.takwolf.android.demo.hfrecyclerview.vm.BannerViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.SinglePhotosViewModel
+import com.takwolf.android.demo.hfrecyclerview.helper.PhotoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.holder.BannerPageHeader
+import com.takwolf.android.demo.hfrecyclerview.vm.BannerPageViewModel
+import com.takwolf.android.demo.hfrecyclerview.vm.PhotoListViewModel
 
 class ViewPagerHeaderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,18 +17,18 @@ class ViewPagerHeaderActivity : AppCompatActivity() {
         val binding = ActivityViewPagerHeaderBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bannerViewModel: BannerViewModel by viewModels()
-        val photosViewModel: SinglePhotosViewModel by viewModels()
+        val bannerPageViewModel: BannerPageViewModel by viewModels()
+        val photoListViewModel: PhotoListViewModel by viewModels()
 
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        val bannerHeader = BannerHeader(binding.recyclerView)
-        bannerHeader.listen(this, bannerViewModel, photosViewModel)
+        val bannerPageHeader = BannerPageHeader(binding.recyclerView)
+        bannerPageHeader.listen(this, bannerPageViewModel, photoListViewModel)
         val adapter = LinearVerticalAdapter()
-        PhotosViewHelper.listen(this, photosViewModel, adapter)
+        PhotoViewHelper.listen(this, photoListViewModel, adapter)
         binding.recyclerView.adapter = adapter
     }
 }

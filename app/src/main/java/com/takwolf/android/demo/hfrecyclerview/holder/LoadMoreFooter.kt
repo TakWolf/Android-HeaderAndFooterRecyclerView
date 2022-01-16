@@ -38,19 +38,19 @@ class LoadMoreFooter(val binding: FooterLoadMoreBinding) : com.takwolf.android.h
             LoadMoreState.FINISHED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
-                binding.tvText.setText(R.string.loading_finished)
+                binding.tvText.setText(R.string.load_more_finished)
                 binding.tvText.isClickable = false
             }
             LoadMoreState.ENDLESS -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
-                binding.tvText.text = null
+                binding.tvText.setText(R.string.load_more_endless)
                 binding.tvText.isClickable = true
             }
             LoadMoreState.FAILED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
-                binding.tvText.setText(R.string.loading_failed_click_to_retry)
+                binding.tvText.setText(R.string.load_more_failed)
                 binding.tvText.isClickable = true
             }
         }

@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.adapter.LinearHorizontalAdapter
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRecyclerViewBinding
-import com.takwolf.android.demo.hfrecyclerview.helper.HfViewHelper
-import com.takwolf.android.demo.hfrecyclerview.helper.PhotosViewHelper
-import com.takwolf.android.demo.hfrecyclerview.vm.HfViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.SinglePhotosViewModel
+import com.takwolf.android.demo.hfrecyclerview.helper.ExtraInfoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.helper.PhotoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.vm.ExtraInfoListViewModel
+import com.takwolf.android.demo.hfrecyclerview.vm.PhotoListViewModel
 
 class LinearHorizontalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +19,8 @@ class LinearHorizontalActivity : AppCompatActivity() {
         val binding = ActivityRecyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val hfViewModel: HfViewModel by viewModels()
-        val photosViewModel: SinglePhotosViewModel by viewModels()
+        val extraInfoListViewModel: ExtraInfoListViewModel by viewModels()
+        val photoListViewModel: PhotoListViewModel by viewModels()
 
         binding.toolbar.setTitle(R.string.linear_horizontal)
         binding.toolbar.setNavigationOnClickListener {
@@ -28,10 +28,10 @@ class LinearHorizontalActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        HfViewHelper.setupHorizontal(hfViewModel, binding.recyclerView)
-        HfViewHelper.listenHorizontal(hfViewModel, binding.recyclerView, binding.hfDashboard)
+        ExtraInfoViewHelper.setupHorizontal(extraInfoListViewModel, binding.recyclerView)
+        ExtraInfoViewHelper.listenHorizontal(extraInfoListViewModel, binding.recyclerView, binding.hfDashboard)
         val adapter = LinearHorizontalAdapter()
-        PhotosViewHelper.listen(this, photosViewModel, adapter)
+        PhotoViewHelper.listen(this, photoListViewModel, adapter)
         binding.recyclerView.adapter = adapter
     }
 }

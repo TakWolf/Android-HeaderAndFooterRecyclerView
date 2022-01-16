@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.adapter.StaggeredVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRecyclerViewBinding
-import com.takwolf.android.demo.hfrecyclerview.helper.HfViewHelper
-import com.takwolf.android.demo.hfrecyclerview.helper.PhotosViewHelper
-import com.takwolf.android.demo.hfrecyclerview.vm.HfViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.SinglePhotosViewModel
+import com.takwolf.android.demo.hfrecyclerview.helper.ExtraInfoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.helper.PhotoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.vm.ExtraInfoListViewModel
+import com.takwolf.android.demo.hfrecyclerview.vm.PhotoListViewModel
 
 class StaggeredVerticalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +19,8 @@ class StaggeredVerticalActivity : AppCompatActivity() {
         val binding = ActivityRecyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val hfViewModel: HfViewModel by viewModels()
-        val photosViewModel: SinglePhotosViewModel by viewModels()
+        val extraInfoListViewModel: ExtraInfoListViewModel by viewModels()
+        val photoListViewModel: PhotoListViewModel by viewModels()
 
         binding.toolbar.setTitle(R.string.staggered_vertical)
         binding.toolbar.setNavigationOnClickListener {
@@ -28,10 +28,10 @@ class StaggeredVerticalActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
-        HfViewHelper.setupVertical(hfViewModel, binding.recyclerView)
-        HfViewHelper.listenVertical(hfViewModel, binding.recyclerView, binding.hfDashboard)
+        ExtraInfoViewHelper.setupVertical(extraInfoListViewModel, binding.recyclerView)
+        ExtraInfoViewHelper.listenVertical(extraInfoListViewModel, binding.recyclerView, binding.hfDashboard)
         val adapter = StaggeredVerticalAdapter()
-        PhotosViewHelper.listen(this, photosViewModel, adapter)
+        PhotoViewHelper.listen(this, photoListViewModel, adapter)
         binding.recyclerView.adapter = adapter
     }
 }

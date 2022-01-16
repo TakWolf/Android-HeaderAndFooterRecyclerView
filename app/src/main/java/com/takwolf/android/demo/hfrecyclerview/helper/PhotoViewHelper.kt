@@ -3,30 +3,39 @@ package com.takwolf.android.demo.hfrecyclerview.helper
 import androidx.lifecycle.LifecycleOwner
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.takwolf.android.demo.hfrecyclerview.adapter.PhotoListAdapter
+import com.takwolf.android.demo.hfrecyclerview.data.Photo
 import com.takwolf.android.demo.hfrecyclerview.holder.LoadMoreFooter
-import com.takwolf.android.demo.hfrecyclerview.vm.PagingPhotosViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.PhotosViewModel
+import com.takwolf.android.demo.hfrecyclerview.vm.ListViewModel
+import com.takwolf.android.demo.hfrecyclerview.vm.PhotoPagingViewModel
+import java.util.*
+import kotlin.collections.ArrayList
 
-object PhotosViewHelper {
+object PhotoViewHelper {
     fun <VH : PhotoListAdapter.ViewHolder> listen(
         owner: LifecycleOwner,
-        viewModel: PhotosViewModel,
+        viewModel: ListViewModel<Photo>,
         adapter: PhotoListAdapter<VH>,
     ) {
-        viewModel.photosData.observe(owner) { photos ->
+        viewModel.entitiesData.observe(owner) { photos ->
             adapter.submitList(ArrayList(photos))
         }
         adapter.onPhotosSwapListener = { oldPosition, newPosition ->
-            viewModel.swapPhotos(oldPosition, newPosition)
+            viewModel.entitiesData.value?.let { photos ->
+                Collections.swap(photos, oldPosition, newPosition)
+                viewModel.entitiesData.value = photos
+            }
         }
         adapter.onPhotoDeleteListener = { position ->
-            viewModel.deletePhoto(position)
+            viewModel.entitiesData.value?.let { photos ->
+                photos.removeAt(position)
+                viewModel.entitiesData.value = photos
+            }
         }
     }
 
     fun listenerPaging(
         owner: LifecycleOwner,
-        viewModel: PagingPhotosViewModel,
+        viewModel: PhotoPagingViewModel,
         refreshLayout: SwipeRefreshLayout,
         loadMoreFooter: LoadMoreFooter,
     ) {

@@ -3,12 +3,12 @@ package com.takwolf.android.demo.hfrecyclerview.helper
 import android.view.LayoutInflater
 import com.takwolf.android.demo.hfrecyclerview.data.ColorInfo
 import com.takwolf.android.demo.hfrecyclerview.databinding.*
-import com.takwolf.android.demo.hfrecyclerview.vm.HfViewModel
+import com.takwolf.android.demo.hfrecyclerview.vm.ExtraInfoListViewModel
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
 
-object HfViewHelper {
+object ExtraInfoViewHelper {
     fun setupVertical(
-        viewModel: HfViewModel,
+        viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
     ) {
         for (colorInfo in viewModel.headerInfos) {
@@ -20,7 +20,7 @@ object HfViewHelper {
     }
 
     fun setupHorizontal(
-        viewModel: HfViewModel,
+        viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
     ) {
         for (colorInfo in viewModel.headerInfos) {
@@ -32,7 +32,7 @@ object HfViewHelper {
     }
 
     fun listenVertical(
-        viewModel: HfViewModel,
+        viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
         binding: WidgetHfDashboardBinding,
     ) {
@@ -61,7 +61,7 @@ object HfViewHelper {
     }
 
     fun listenHorizontal(
-        viewModel: HfViewModel,
+        viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
         binding: WidgetHfDashboardBinding,
     ) {
@@ -90,7 +90,7 @@ object HfViewHelper {
     }
 
     private fun addVerticalHeader(
-        viewModel: HfViewModel,
+        viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
         colorInfo: ColorInfo,
     ) {
@@ -106,7 +106,7 @@ object HfViewHelper {
     }
 
     private fun addVerticalFooter(
-        viewModel: HfViewModel,
+        viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
         colorInfo: ColorInfo,
     ) {
@@ -122,7 +122,7 @@ object HfViewHelper {
     }
 
     private fun addHorizontalHeader(
-        viewModel: HfViewModel,
+        viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
         colorInfo: ColorInfo,
     ) {
@@ -138,7 +138,7 @@ object HfViewHelper {
     }
 
     private fun addHorizontalFooter(
-        viewModel: HfViewModel,
+        viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
         colorInfo: ColorInfo,
     ) {

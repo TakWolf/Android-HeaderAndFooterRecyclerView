@@ -4,9 +4,12 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
+import com.takwolf.android.hfrecyclerview.ProxyAdapter;
 
 public abstract class LoadMoreFooter {
     private final View footerView;
@@ -65,8 +68,25 @@ public abstract class LoadMoreFooter {
 
         private void handleScrolled(@NonNull RecyclerView recyclerView) {
             if (!recyclerView.canScrollVertically(1)) {
-                // TODO
                 checkDoLoadMore();
+            } else if (preloadOffset > 0 && recyclerView instanceof HeaderAndFooterRecyclerView) {
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                if (layoutManager instanceof LinearLayoutManager) {
+                    int lastPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                    ProxyAdapter proxyAdapter = ((HeaderAndFooterRecyclerView) recyclerView).getProxyAdapter();
+                    if (lastPosition >= proxyAdapter.getItemCount() - preloadOffset) {
+                        checkDoLoadMore();
+                    }
+                } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+                    int[] lastPositions = ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(null);
+                    ProxyAdapter proxyAdapter = ((HeaderAndFooterRecyclerView) recyclerView).getProxyAdapter();
+                    for (int lastPosition : lastPositions) {
+                        if (lastPosition >= proxyAdapter.getItemCount() - preloadOffset) {
+                            checkDoLoadMore();
+                            break;
+                        }
+                    }
+                }
             }
         }
     };

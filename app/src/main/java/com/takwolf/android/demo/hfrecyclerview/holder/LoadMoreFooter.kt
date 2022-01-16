@@ -19,6 +19,7 @@ class LoadMoreFooter(val binding: FooterLoadMoreBinding) : com.takwolf.android.h
         binding.tvText.setOnClickListener {
             checkDoLoadMore()
         }
+        preloadOffset = 10
     }
 
     override fun onUpdateViews(footerView: View, @LoadMoreState state: Int) {

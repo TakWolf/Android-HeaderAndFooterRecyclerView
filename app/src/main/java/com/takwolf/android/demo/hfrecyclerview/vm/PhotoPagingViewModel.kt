@@ -9,13 +9,13 @@ class PhotoPagingViewModel : PagingViewModel<Photo>() {
     }
 
     override suspend fun doRefresh() {
-        delay(2000L)
+        delay(1000L)
         refreshSuccess(Photo.getList(20), false)
     }
 
     override suspend fun doLoadMore(version: Int) {
-        delay(2000L)
-        val isFinished = (entitiesData.value?.size ?: 0 + 20) >= 100
+        delay(1000L)
+        val isFinished = (entitiesData.value?.size ?: 0 + 20) >= 500
         loadMoreSuccess(version, Photo.getList(20), isFinished)
     }
 }

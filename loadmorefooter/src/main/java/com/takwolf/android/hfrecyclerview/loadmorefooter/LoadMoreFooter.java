@@ -20,6 +20,9 @@ public abstract class LoadMoreFooter {
     private int preloadOffset;
 
     @Nullable
+    private HeaderAndFooterRecyclerView recyclerView;
+
+    @Nullable
     private OnLoadMoreListener listener;
 
     public LoadMoreFooter(@NonNull View footerView) {
@@ -94,21 +97,57 @@ public abstract class LoadMoreFooter {
     private final RecyclerView.AdapterDataObserver targetAdapterDataObserver = new RecyclerView.AdapterDataObserver() {
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
-            // TODO
+            if (recyclerView != null) {
+                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                if (layoutManager instanceof LinearLayoutManager) {
+                    LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+                    int firstPosition = linearLayoutManager.findFirstVisibleItemPosition();
+                    RecyclerView.ViewHolder holder = recyclerView.findViewHolderForLayoutPosition(firstPosition);
+                    if (holder != null) {
+                        int offset;
+                        if (linearLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
+                            offset = holder.itemView.getLeft();
+                        } else {
+                            offset = holder.itemView.getTop();
+                        }
+                        linearLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
+                    }
+                } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+                    StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+                    int firstPosition = staggeredGridLayoutManager.findFirstVisibleItemPositions(null)[0];
+                    RecyclerView.ViewHolder holder = recyclerView.findViewHolderForLayoutPosition(firstPosition);
+                    if (holder != null) {
+                        int offset;
+                        if (staggeredGridLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
+                            offset = holder.itemView.getLeft();
+                        } else {
+                            offset = holder.itemView.getTop();
+                        }
+                        staggeredGridLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
+                    }
+                }
+            }
         }
     };
 
     public void addToRecyclerView(@NonNull HeaderAndFooterRecyclerView recyclerView) {
+        if (this.recyclerView != null) {
+            throw new IllegalStateException("LoadMoreFooter has been added.");
+        }
+        this.recyclerView = recyclerView;
         onUpdateViews(footerView, state);
         recyclerView.addFooterView(footerView);
         recyclerView.addOnScrollListener(onScrollListener);
         recyclerView.getProxyAdapter().registerTargetAdapterDataObserver(targetAdapterDataObserver);
     }
 
-    public void removeFromRecyclerView(@NonNull HeaderAndFooterRecyclerView recyclerView) {
-        recyclerView.getProxyAdapter().unregisterTargetAdapterDataObserver(targetAdapterDataObserver);
-        recyclerView.removeOnScrollListener(onScrollListener);
-        recyclerView.removeFooterView(footerView);
+    public void removeFromRecyclerView() {
+        if (recyclerView != null) {
+            recyclerView.getProxyAdapter().unregisterTargetAdapterDataObserver(targetAdapterDataObserver);
+            recyclerView.removeOnScrollListener(onScrollListener);
+            recyclerView.removeFooterView(footerView);
+            recyclerView = null;
+        }
     }
 
     public void checkDoLoadMore() {

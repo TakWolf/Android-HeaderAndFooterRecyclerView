@@ -33,11 +33,15 @@
 
         <activity android:name=".activity.StaggeredHorizontalActivity" />
 
+        <activity android:name=".activity.RefreshLinearActivity" />
+
+        <activity android:name=".activity.RefreshGridActivity" />
+
+        <activity android:name=".activity.RefreshStaggeredActivity" />
+
         <activity android:name=".activity.MultiRecyclerViewActivity" />
 
         <activity android:name=".activity.ViewPagerHeaderActivity" />
-
-        <activity android:name=".activity.RefreshAndLoadMoreActivity" />
 
     </application>
 

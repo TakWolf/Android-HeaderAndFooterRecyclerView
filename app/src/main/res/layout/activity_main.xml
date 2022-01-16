@@ -77,6 +77,30 @@
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/btn_refresh_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/refresh_linear"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_refresh_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/refresh_grid"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_refresh_staggered"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/refresh_staggered"
+                android:textAllCaps="false" />
+
+            <Button
                 android:id="@+id/btn_multi_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,14 +114,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/view_pager_header"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_refresh_and_load_more"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/refresh_and_load_more"
                 android:textAllCaps="false" />
 
         </LinearLayout>

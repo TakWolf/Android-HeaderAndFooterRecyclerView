@@ -11,7 +11,7 @@ import com.takwolf.android.demo.hfrecyclerview.helper.PhotoViewHelper
 import com.takwolf.android.demo.hfrecyclerview.holder.LoadMoreFooter
 import com.takwolf.android.demo.hfrecyclerview.vm.PhotoPagingViewModel
 
-class RefreshAndLoadMoreActivity : AppCompatActivity() {
+class RefreshLinearActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityRefreshAndLoadMoreBinding.inflate(layoutInflater)
@@ -19,6 +19,7 @@ class RefreshAndLoadMoreActivity : AppCompatActivity() {
 
         val photoPagingViewModel: PhotoPagingViewModel by viewModels()
 
+        binding.toolbar.setTitle(R.string.refresh_linear)
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }

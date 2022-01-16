@@ -7,9 +7,11 @@
     <string name="grid_horizontal">Grid Horizontal</string>
     <string name="staggered_vertical">Staggered Vertical</string>
     <string name="staggered_horizontal">Staggered Horizontal</string>
+    <string name="refresh_linear">Refresh Linear</string>
+    <string name="refresh_grid">Refresh Grid</string>
+    <string name="refresh_staggered">Refresh Staggered</string>
     <string name="multi_recyclerView">Multi RecyclerView</string>
     <string name="view_pager_header">ViewPager Header</string>
-    <string name="refresh_and_load_more">Refresh and Load more</string>
     <string name="header">Header</string>
     <string name="footer">Footer</string>
     <string name="add_header">+ Header</string>

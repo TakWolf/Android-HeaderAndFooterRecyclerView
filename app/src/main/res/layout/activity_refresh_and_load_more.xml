@@ -13,7 +13,6 @@
         android:elevation="@dimen/toolbar_elevation"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/refresh_and_load_more"
         app:navigationIcon="?attr/homeAsUpIndicator" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

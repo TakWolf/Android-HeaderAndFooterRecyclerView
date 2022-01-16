@@ -35,16 +35,24 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, StaggeredHorizontalActivity::class.java))
         }
 
+        binding.btnRefreshLinear.setOnClickListener {
+            startActivity(Intent(this, RefreshLinearActivity::class.java))
+        }
+
+        binding.btnRefreshGrid.setOnClickListener {
+            startActivity(Intent(this, RefreshGridActivity::class.java))
+        }
+
+        binding.btnRefreshStaggered.setOnClickListener {
+            startActivity(Intent(this, RefreshStaggeredActivity::class.java))
+        }
+
         binding.btnMultiRecyclerView.setOnClickListener {
             startActivity(Intent(this, MultiRecyclerViewActivity::class.java))
         }
 
         binding.btnViewPagerHeader.setOnClickListener {
             startActivity(Intent(this, ViewPagerHeaderActivity::class.java))
-        }
-
-        binding.btnRefreshAndLoadMore.setOnClickListener {
-            startActivity(Intent(this, RefreshAndLoadMoreActivity::class.java))
         }
     }
 }

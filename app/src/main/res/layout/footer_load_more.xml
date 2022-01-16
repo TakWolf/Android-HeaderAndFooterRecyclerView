@@ -23,7 +23,7 @@
         android:gravity="center"
         android:background="?attr/selectableItemBackground"
         android:visibility="invisible"
-        tools:text="@string/loading_finished"
+        tools:text="@string/load_more_finished"
         tools:visibility="visible" />
 
 </FrameLayout>

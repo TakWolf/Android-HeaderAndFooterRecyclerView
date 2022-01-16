@@ -21,6 +21,5 @@
     <string name="replace_adapters">Replace adapters</string>
     <string name="swap_adapters">Swap adapters</string>
     <string name="load_more_finished">加载完毕</string>
-    <string name="load_more_endless">下滑加载更多</string>
     <string name="load_more_failed">加载失败，点击重试</string>
 </resources>

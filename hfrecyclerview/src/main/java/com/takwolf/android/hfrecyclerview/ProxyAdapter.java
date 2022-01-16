@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.annotation.Retention;
@@ -30,6 +31,9 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
 
     @Nullable
     private RecyclerView.Adapter adapter;
+
+    @NonNull
+    private final AdapterDataObservable observable = new AdapterDataObservable();
 
     ProxyAdapter(@NonNull HeaderAndFooterRecyclerView recyclerView) {
         this.recyclerView = recyclerView;
@@ -63,6 +67,16 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         if (getStateRestorationPolicy() != stateRestorationPolicy) {
             super.setStateRestorationPolicy(stateRestorationPolicy);
         }
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    public void registerTargetAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
+        observable.registerObserver(observer);
+    }
+
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    public void unregisterTargetAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
+        observable.unregisterObserver(observer);
     }
 
     @Override
@@ -140,26 +154,31 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         @Override
         public void onChanged() {
             notifyDataSetChanged();
+            observable.onChanged();
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount) {
             notifyItemRangeChanged(positionStart + getPositionOffset(), itemCount);
+            observable.onItemRangeChanged(positionStart, itemCount);
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
             notifyItemRangeChanged(positionStart + getPositionOffset(), itemCount, payload);
+            observable.onItemRangeChanged(positionStart, itemCount, payload);
         }
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
             notifyItemRangeInserted(positionStart + getPositionOffset(), itemCount);
+            observable.onItemRangeInserted(positionStart, itemCount);
         }
 
         @Override
         public void onItemRangeRemoved(int positionStart, int itemCount) {
             notifyItemRangeRemoved(positionStart + getPositionOffset(), itemCount);
+            observable.onItemRangeRemoved(positionStart, itemCount);
         }
 
         @Override
@@ -168,6 +187,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
                 throw new IllegalArgumentException("Moving more than 1 item is not supported yet");
             }
             notifyItemMoved(fromPosition + getPositionOffset(), toPosition + getPositionOffset());
+            observable.onItemRangeMoved(fromPosition, toPosition, itemCount);
         }
 
         @Override
@@ -175,6 +195,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
             if (adapter != null) {
                 setStateRestorationPolicy(adapter.getStateRestorationPolicy());
             }
+            observable.onStateRestorationPolicyChanged();
         }
     };
 
@@ -243,6 +264,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List payloads) {
         if (holder instanceof FixedViewHolder) {
@@ -264,13 +286,13 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
                 }
             }
         } else if (adapter != null) {
-            //noinspection unchecked
             adapter.bindViewHolder(holder, position - getPositionOffset());
         } else {
             throw new IllegalStateException("Target adapter has not been set.");
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof FixedViewHolder) {
@@ -282,18 +304,17 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
                 throw new IllegalStateException("Impossible fixed view type.");
             }
         } else if (adapter != null) {
-            //noinspection unchecked
             adapter.bindViewHolder(holder, position - getPositionOffset());
         } else {
             throw new IllegalStateException("Target adapter has not been set.");
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
-                //noinspection unchecked
                 adapter.onViewRecycled(holder);
             } else {
                 throw new IllegalStateException("Target adapter has not been set.");
@@ -301,26 +322,25 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean onFailedToRecycleView(@NonNull RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
-                //noinspection unchecked
                 return adapter.onFailedToRecycleView(holder);
             } else {
                 throw new IllegalStateException("Target adapter has not been set.");
             }
         } else {
-            //noinspection unchecked
             return super.onFailedToRecycleView(holder);
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
-                //noinspection unchecked
                 adapter.onViewAttachedToWindow(holder);
             } else {
                 throw new IllegalStateException("Target adapter has not been set.");
@@ -328,11 +348,11 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onViewDetachedFromWindow(@NonNull RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
-                //noinspection unchecked
                 adapter.onViewDetachedFromWindow(holder);
             } else {
                 throw new IllegalStateException("Target adapter has not been set.");
@@ -347,12 +367,12 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public int findRelativeAdapterPositionIn(@NonNull RecyclerView.Adapter adapter, @NonNull RecyclerView.ViewHolder viewHolder, int localPosition) {
         if (adapter == this && viewHolder instanceof FixedViewHolder) {
             return localPosition;
         } else if (adapter == this.adapter) {
-            //noinspection unchecked
             return adapter.findRelativeAdapterPositionIn(adapter, viewHolder, localPosition - getPositionOffset());
         } else {
             return RecyclerView.NO_POSITION;

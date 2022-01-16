@@ -55,18 +55,26 @@ public abstract class LoadMoreFooter {
     private final RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-            check(recyclerView);
+            handleScrolled(recyclerView);
         }
 
         @Override
         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-            check(recyclerView);
+            handleScrolled(recyclerView);
         }
 
-        private void check(@NonNull RecyclerView recyclerView) {
+        private void handleScrolled(@NonNull RecyclerView recyclerView) {
             if (!recyclerView.canScrollVertically(1)) {
+                // TODO
                 checkDoLoadMore();
             }
+        }
+    };
+
+    private final RecyclerView.AdapterDataObserver targetAdapterDataObserver = new RecyclerView.AdapterDataObserver() {
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            // TODO
         }
     };
 
@@ -74,10 +82,11 @@ public abstract class LoadMoreFooter {
         onUpdateViews(footerView, state);
         recyclerView.addFooterView(footerView);
         recyclerView.addOnScrollListener(onScrollListener);
-        // TODO
+        recyclerView.getProxyAdapter().registerTargetAdapterDataObserver(targetAdapterDataObserver);
     }
 
     public void removeFromRecyclerView(@NonNull HeaderAndFooterRecyclerView recyclerView) {
+        recyclerView.getProxyAdapter().unregisterTargetAdapterDataObserver(targetAdapterDataObserver);
         recyclerView.removeOnScrollListener(onScrollListener);
         recyclerView.removeFooterView(footerView);
     }

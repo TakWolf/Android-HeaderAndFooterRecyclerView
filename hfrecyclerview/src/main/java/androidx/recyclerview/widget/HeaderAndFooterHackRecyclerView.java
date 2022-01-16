@@ -6,7 +6,9 @@ import android.util.AttributeSet;
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public abstract class HeaderAndFooterHackRecyclerView extends RecyclerView {
     public HeaderAndFooterHackRecyclerView(@NonNull Context context) {
         super(context);

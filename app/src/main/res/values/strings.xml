@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HeaderAndFooterRecyclerView</string>
+    <string name="linear_vertical">Linear Vertical</string>
+    <string name="linear_horizontal">Linear Horizontal</string>
+    <string name="grid_vertical">Grid Vertical</string>
+    <string name="grid_horizontal">Grid Horizontal</string>
+    <string name="staggered_vertical">Staggered Vertical</string>
+    <string name="staggered_horizontal">Staggered Horizontal</string>
+    <string name="multi_recyclerView">Multi RecyclerView</string>
+    <string name="view_pager_header">ViewPager Header</string>
+    <string name="refresh_and_load_more">Refresh and Load more</string>
+    <string name="header">Header</string>
+    <string name="footer">Footer</string>
+    <string name="add_header">+ Header</string>
+    <string name="remove_header">- Header</string>
+    <string name="add_footer">+ Footer</string>
+    <string name="remove_footer">- Footer</string>
+    <string name="replace_adapters">Replace adapters</string>
+    <string name="swap_adapters">Swap adapters</string>
+    <string name="loading_finished">Loading finished</string>
+    <string name="loading_failed_click_to_retry">Loading failed, click to retry</string>
+</resources>

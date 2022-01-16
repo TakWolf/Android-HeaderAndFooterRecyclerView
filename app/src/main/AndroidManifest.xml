@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.takwolf.android.demo.hfrecyclerview">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.App"
+        android:allowBackup="true"
+        android:fullBackupContent="true">
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.LinearVerticalActivity" />
+
+        <activity android:name=".activity.LinearHorizontalActivity" />
+
+        <activity android:name=".activity.GridVerticalActivity" />
+
+        <activity android:name=".activity.GridHorizontalActivity" />
+
+        <activity android:name=".activity.StaggeredVerticalActivity" />
+
+        <activity android:name=".activity.StaggeredHorizontalActivity" />
+
+        <activity android:name=".activity.MultiRecyclerViewActivity" />
+
+        <activity android:name=".activity.ViewPagerHeaderActivity" />
+
+        <activity android:name=".activity.RefreshAndLoadMoreActivity" />
+
+    </application>
+
+</manifest>

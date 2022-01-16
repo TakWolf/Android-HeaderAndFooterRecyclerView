@@ -1,0 +1,37 @@
+package com.takwolf.android.demo.hfrecyclerview.activity
+
+import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.takwolf.android.demo.hfrecyclerview.R
+import com.takwolf.android.demo.hfrecyclerview.adapter.LinearVerticalAdapter
+import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRefreshAndLoadMoreBinding
+import com.takwolf.android.demo.hfrecyclerview.helper.PhotosViewHelper
+import com.takwolf.android.demo.hfrecyclerview.holder.LoadMoreFooter
+import com.takwolf.android.demo.hfrecyclerview.vm.PagingPhotosViewModel
+
+class RefreshAndLoadMoreActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding = ActivityRefreshAndLoadMoreBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val photosViewModel: PagingPhotosViewModel by viewModels()
+
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
+        binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val loadMoreFooter = LoadMoreFooter.create(binding.recyclerView)
+        PhotosViewHelper.listenerPaging(this, photosViewModel, binding.refreshLayout, loadMoreFooter)
+        loadMoreFooter.addToRecyclerView(binding.recyclerView)
+
+        val adapter = LinearVerticalAdapter()
+        PhotosViewHelper.listen(this, photosViewModel, adapter)
+        binding.recyclerView.adapter = adapter
+    }
+}

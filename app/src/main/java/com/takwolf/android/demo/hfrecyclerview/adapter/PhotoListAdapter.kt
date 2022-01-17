@@ -40,6 +40,6 @@ object PhotoDiffItemCallback : DiffUtil.ItemCallback<Photo>() {
     }
 
     override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean {
-        return oldItem.url == newItem.url
+        return oldItem == newItem
     }
 }

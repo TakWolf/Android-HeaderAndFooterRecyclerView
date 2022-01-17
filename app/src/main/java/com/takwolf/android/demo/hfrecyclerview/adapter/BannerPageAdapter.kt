@@ -31,6 +31,6 @@ object ColorInfoDiffItemCallback : DiffUtil.ItemCallback<ColorInfo>() {
     }
 
     override fun areContentsTheSame(oldItem: ColorInfo, newItem: ColorInfo): Boolean {
-        return oldItem.color == newItem.color
+        return oldItem == newItem
     }
 }

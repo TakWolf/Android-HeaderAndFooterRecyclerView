@@ -94,7 +94,7 @@ public abstract class LoadMoreFooter {
         }
     };
 
-    private final RecyclerView.AdapterDataObserver targetAdapterDataObserver = new RecyclerView.AdapterDataObserver() {
+    private final RecyclerView.AdapterDataObserver innerAdapterDataObserver = new RecyclerView.AdapterDataObserver() {
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
             if (recyclerView != null) {
@@ -138,12 +138,12 @@ public abstract class LoadMoreFooter {
         onUpdateViews(footerView, state);
         recyclerView.addFooterView(footerView);
         recyclerView.addOnScrollListener(onScrollListener);
-        recyclerView.getProxyAdapter().registerTargetAdapterDataObserver(targetAdapterDataObserver);
+        recyclerView.getProxyAdapter().registerInnerAdapterDataObserver(innerAdapterDataObserver);
     }
 
     public void removeFromRecyclerView() {
         if (recyclerView != null) {
-            recyclerView.getProxyAdapter().unregisterTargetAdapterDataObserver(targetAdapterDataObserver);
+            recyclerView.getProxyAdapter().unregisterInnerAdapterDataObserver(innerAdapterDataObserver);
             recyclerView.removeOnScrollListener(onScrollListener);
             recyclerView.removeFooterView(footerView);
             recyclerView = null;

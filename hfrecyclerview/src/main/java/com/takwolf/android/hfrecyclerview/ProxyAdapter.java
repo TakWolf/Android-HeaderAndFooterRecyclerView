@@ -33,7 +33,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
     private RecyclerView.Adapter adapter;
 
     @NonNull
-    private final AdapterDataObservable observable = new AdapterDataObservable();
+    private final AdapterDataObservable innerObservable = new AdapterDataObservable();
 
     ProxyAdapter(@NonNull HeaderAndFooterRecyclerView recyclerView) {
         this.recyclerView = recyclerView;
@@ -46,14 +46,14 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
 
     void setAdapter(@Nullable RecyclerView.Adapter adapter) {
         if (this.adapter != null) {
-            this.adapter.unregisterAdapterDataObserver(targetAdapterDataObserver);
+            this.adapter.unregisterAdapterDataObserver(innerAdapterDataObserver);
             this.adapter.onDetachedFromRecyclerView(recyclerView);
         }
         this.adapter = adapter;
         boolean hasStableIds;
         StateRestorationPolicy stateRestorationPolicy;
         if (adapter != null) {
-            adapter.registerAdapterDataObserver(targetAdapterDataObserver);
+            adapter.registerAdapterDataObserver(innerAdapterDataObserver);
             adapter.onAttachedToRecyclerView(recyclerView);
             hasStableIds = adapter.hasStableIds();
             stateRestorationPolicy = adapter.getStateRestorationPolicy();
@@ -70,13 +70,13 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    public void registerTargetAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
-        observable.registerObserver(observer);
+    public void registerInnerAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
+        innerObservable.registerObserver(observer);
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    public void unregisterTargetAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
-        observable.unregisterObserver(observer);
+    public void unregisterInnerAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
+        innerObservable.unregisterObserver(observer);
     }
 
     @Override
@@ -149,36 +149,36 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private final RecyclerView.AdapterDataObserver targetAdapterDataObserver = new RecyclerView.AdapterDataObserver() {
+    private final RecyclerView.AdapterDataObserver innerAdapterDataObserver = new RecyclerView.AdapterDataObserver() {
         @SuppressLint("NotifyDataSetChanged")
         @Override
         public void onChanged() {
             notifyDataSetChanged();
-            observable.onChanged();
+            innerObservable.onChanged();
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount) {
             notifyItemRangeChanged(positionStart + getPositionOffset(), itemCount);
-            observable.onItemRangeChanged(positionStart, itemCount);
+            innerObservable.onItemRangeChanged(positionStart, itemCount);
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
             notifyItemRangeChanged(positionStart + getPositionOffset(), itemCount, payload);
-            observable.onItemRangeChanged(positionStart, itemCount, payload);
+            innerObservable.onItemRangeChanged(positionStart, itemCount, payload);
         }
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
             notifyItemRangeInserted(positionStart + getPositionOffset(), itemCount);
-            observable.onItemRangeInserted(positionStart, itemCount);
+            innerObservable.onItemRangeInserted(positionStart, itemCount);
         }
 
         @Override
         public void onItemRangeRemoved(int positionStart, int itemCount) {
             notifyItemRangeRemoved(positionStart + getPositionOffset(), itemCount);
-            observable.onItemRangeRemoved(positionStart, itemCount);
+            innerObservable.onItemRangeRemoved(positionStart, itemCount);
         }
 
         @Override
@@ -187,7 +187,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
                 throw new IllegalArgumentException("Moving more than 1 item is not supported yet");
             }
             notifyItemMoved(fromPosition + getPositionOffset(), toPosition + getPositionOffset());
-            observable.onItemRangeMoved(fromPosition, toPosition, itemCount);
+            innerObservable.onItemRangeMoved(fromPosition, toPosition, itemCount);
         }
 
         @Override
@@ -195,7 +195,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
             if (adapter != null) {
                 setStateRestorationPolicy(adapter.getStateRestorationPolicy());
             }
-            observable.onStateRestorationPolicyChanged();
+            innerObservable.onStateRestorationPolicyChanged();
         }
     };
 
@@ -221,7 +221,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
                     return viewType;
                 }
             } else {
-                throw new IllegalStateException("Target adapter has not been set.");
+                throw new IllegalStateException("Inner adapter has not been set.");
             }
         }
     }
@@ -243,7 +243,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
                     return itemId;
                 }
             } else {
-                throw new IllegalStateException("Target adapter has not been set.");
+                throw new IllegalStateException("Inner adapter has not been set.");
             }
         }
     }
@@ -259,7 +259,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
                 if (adapter != null) {
                     return adapter.onCreateViewHolder(parent, viewType);
                 } else {
-                    throw new IllegalStateException("Target adapter has not been set.");
+                    throw new IllegalStateException("Inner adapter has not been set.");
                 }
         }
     }
@@ -288,7 +288,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         } else if (adapter != null) {
             adapter.bindViewHolder(holder, position - getPositionOffset());
         } else {
-            throw new IllegalStateException("Target adapter has not been set.");
+            throw new IllegalStateException("Inner adapter has not been set.");
         }
     }
 
@@ -306,7 +306,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         } else if (adapter != null) {
             adapter.bindViewHolder(holder, position - getPositionOffset());
         } else {
-            throw new IllegalStateException("Target adapter has not been set.");
+            throw new IllegalStateException("Inner adapter has not been set.");
         }
     }
 
@@ -317,7 +317,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
             if (adapter != null) {
                 adapter.onViewRecycled(holder);
             } else {
-                throw new IllegalStateException("Target adapter has not been set.");
+                throw new IllegalStateException("Inner adapter has not been set.");
             }
         }
     }
@@ -329,7 +329,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
             if (adapter != null) {
                 return adapter.onFailedToRecycleView(holder);
             } else {
-                throw new IllegalStateException("Target adapter has not been set.");
+                throw new IllegalStateException("Inner adapter has not been set.");
             }
         } else {
             return super.onFailedToRecycleView(holder);
@@ -343,7 +343,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
             if (adapter != null) {
                 adapter.onViewAttachedToWindow(holder);
             } else {
-                throw new IllegalStateException("Target adapter has not been set.");
+                throw new IllegalStateException("Inner adapter has not been set.");
             }
         }
     }
@@ -355,7 +355,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
             if (adapter != null) {
                 adapter.onViewDetachedFromWindow(holder);
             } else {
-                throw new IllegalStateException("Target adapter has not been set.");
+                throw new IllegalStateException("Inner adapter has not been set.");
             }
         }
     }

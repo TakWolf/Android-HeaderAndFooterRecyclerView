@@ -3,19 +3,18 @@ package com.takwolf.android.demo.hfrecyclerview.vm
 import com.takwolf.android.demo.hfrecyclerview.data.Photo
 import kotlinx.coroutines.delay
 
-class PhotoPagingViewModel : PagingViewModel<Photo>() {
+class PhotoPagingViewModel : PagingViewModel<Photo, Int>() {
     init {
         refresh()
     }
 
     override suspend fun doRefresh() {
         delay(1000L)
-        refreshSuccess(Photo.getList(20), false)
+        refreshSuccess(Photo.getList(20), 1, false)
     }
 
-    override suspend fun doLoadMore(version: Int) {
+    override suspend fun doLoadMore(version: Int, pagingParams: Int) {
         delay(1000L)
-        val isFinished = (entitiesData.value?.size ?: 0 + 20) >= 500
-        loadMoreSuccess(version, Photo.getList(20), isFinished)
+        loadMoreSuccess(version, Photo.getList(20), pagingParams + 1, (pagingParams + 1) >= 10)
     }
 }

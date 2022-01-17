@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.adapter.LinearVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRefreshAndLoadMoreBinding
+import com.takwolf.android.demo.hfrecyclerview.helper.PagingViewHelper
 import com.takwolf.android.demo.hfrecyclerview.helper.PhotoViewHelper
 import com.takwolf.android.demo.hfrecyclerview.holder.LoadMoreFooter
 import com.takwolf.android.demo.hfrecyclerview.vm.PhotoPagingViewModel
@@ -26,11 +27,9 @@ class RefreshLinearActivity : AppCompatActivity() {
 
         binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-
         val loadMoreFooter = LoadMoreFooter.create(binding.recyclerView)
-        PhotoViewHelper.listenerPaging(this, photoPagingViewModel, binding.refreshLayout, loadMoreFooter)
+        PagingViewHelper.listen(this, photoPagingViewModel, binding.refreshLayout, loadMoreFooter)
         loadMoreFooter.addToRecyclerView(binding.recyclerView)
-
         val adapter = LinearVerticalAdapter()
         PhotoViewHelper.listen(this, photoPagingViewModel, adapter)
         binding.recyclerView.adapter = adapter

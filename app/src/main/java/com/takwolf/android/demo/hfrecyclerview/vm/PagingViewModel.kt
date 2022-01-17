@@ -6,13 +6,14 @@ import com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-abstract class PagingViewModel<Entity> : ListViewModel<Entity>() {
+abstract class PagingViewModel<Entity, PagingParams> : ListViewModel<Entity>() {
     val refreshStateData = MutableLiveData(false)
     val loadMoreStateData = MutableLiveData(LoadMoreState.DISABLED)
     private var isRefreshDoing = false
     private var isLoadMoreDoing = false
-    private var isFinished = false
     private var version = 0
+    private var pagingParams: PagingParams? = null
+    private var isFinished = false
 
     fun refresh() {
         if (!isRefreshDoing) {
@@ -24,13 +25,14 @@ abstract class PagingViewModel<Entity> : ListViewModel<Entity>() {
         }
     }
 
-    abstract suspend fun doRefresh();
+    abstract suspend fun doRefresh()
 
-    protected fun refreshSuccess(entities: MutableList<Entity>, @Suppress("SameParameterValue") isFinished: Boolean) {
+    protected fun refreshSuccess(entities: MutableList<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
         viewModelScope.launch(Dispatchers.Main) {
-            entitiesData.value = entities
-            this@PagingViewModel.isFinished = isFinished
             version += 1
+            entitiesData.value = entities
+            this@PagingViewModel.pagingParams = pagingParams
+            this@PagingViewModel.isFinished = isFinished
             isRefreshDoing = false
             refreshStateData.value = false
             isLoadMoreDoing = false
@@ -50,20 +52,21 @@ abstract class PagingViewModel<Entity> : ListViewModel<Entity>() {
             loadMoreStateData.value = LoadMoreState.LOADING
             isLoadMoreDoing = true
             viewModelScope.launch(Dispatchers.IO) {
-                doLoadMore(version)
+                doLoadMore(version, pagingParams!!)
             }
         }
     }
 
-    abstract suspend fun doLoadMore(version: Int);
+    abstract suspend fun doLoadMore(version: Int, pagingParams: PagingParams)
 
-    protected fun loadMoreSuccess(version: Int, entities: MutableList<Entity>, isFinished: Boolean) {
+    protected fun loadMoreSuccess(version: Int, entities: MutableList<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
         if (this.version == version) {
             viewModelScope.launch(Dispatchers.Main) {
                 entitiesData.value?.let { it ->
                     it.addAll(entities)
                     entitiesData.value = it
                 }
+                this@PagingViewModel.pagingParams = pagingParams
                 this@PagingViewModel.isFinished = isFinished
                 isLoadMoreDoing = false
                 loadMoreStateData.value = if (isFinished) LoadMoreState.FINISHED else LoadMoreState.ENDLESS

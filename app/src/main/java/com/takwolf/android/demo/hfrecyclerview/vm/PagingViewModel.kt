@@ -27,10 +27,10 @@ abstract class PagingViewModel<Entity, PagingParams> : ListViewModel<Entity>() {
 
     abstract suspend fun doRefresh()
 
-    protected fun refreshSuccess(entities: MutableList<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
+    protected fun refreshSuccess(entities: List<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
         viewModelScope.launch(Dispatchers.Main) {
             version += 1
-            entitiesData.value = entities
+            entitiesData.value = ArrayList(entities)
             this@PagingViewModel.pagingParams = pagingParams
             this@PagingViewModel.isFinished = isFinished
             isRefreshDoing = false
@@ -59,12 +59,12 @@ abstract class PagingViewModel<Entity, PagingParams> : ListViewModel<Entity>() {
 
     abstract suspend fun doLoadMore(version: Int, pagingParams: PagingParams)
 
-    protected fun loadMoreSuccess(version: Int, entities: MutableList<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
+    protected fun loadMoreSuccess(version: Int, addedEntities: List<Entity>, pagingParams: PagingParams, isFinished: Boolean) {
         if (this.version == version) {
             viewModelScope.launch(Dispatchers.Main) {
-                entitiesData.value?.let { it ->
-                    it.addAll(entities)
-                    entitiesData.value = it
+                entitiesData.value?.let { entities ->
+                    entities.addAll(addedEntities)
+                    entitiesData.value = entities
                 }
                 this@PagingViewModel.pagingParams = pagingParams
                 this@PagingViewModel.isFinished = isFinished

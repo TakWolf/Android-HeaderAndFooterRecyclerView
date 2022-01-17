@@ -34,7 +34,7 @@ abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<
     }
 }
 
-object PhotoDiffItemCallback : DiffUtil.ItemCallback<Photo>() {
+private object PhotoDiffItemCallback : DiffUtil.ItemCallback<Photo>() {
     override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
         return oldItem.id == newItem.id
     }

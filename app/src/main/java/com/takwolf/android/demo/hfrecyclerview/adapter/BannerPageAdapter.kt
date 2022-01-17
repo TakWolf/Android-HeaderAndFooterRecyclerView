@@ -25,7 +25,7 @@ class BannerPageAdapter : ListAdapter<ColorInfo, BannerPageAdapter.ViewHolder>(C
     }
 }
 
-object ColorInfoDiffItemCallback : DiffUtil.ItemCallback<ColorInfo>() {
+private object ColorInfoDiffItemCallback : DiffUtil.ItemCallback<ColorInfo>() {
     override fun areItemsTheSame(oldItem: ColorInfo, newItem: ColorInfo): Boolean {
         return oldItem.color == newItem.color
     }

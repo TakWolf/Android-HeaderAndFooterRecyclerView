@@ -17,7 +17,7 @@ class BannerPageAdapter : ListAdapter<ColorInfo, BannerPageAdapter.ViewHolder>(C
         holder.bind(position, getItem(position))
     }
 
-    class ViewHolder(val binding: ItemPageBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemPageBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int, colorInfo: ColorInfo) {
             binding.tvText.text = position.toString()
             binding.tvText.setBackgroundColor(colorInfo.color)

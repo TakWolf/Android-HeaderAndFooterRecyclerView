@@ -16,7 +16,7 @@ class LinearVerticalAdapter : PhotoListAdapter<LinearVerticalAdapter.ViewHolder>
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(val binding: ItemLinearVerticalBinding) : PhotoListAdapter.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemLinearVerticalBinding) : PhotoListAdapter.ViewHolder(binding.root) {
         init {
             binding.btnItem.setOnClickListener(onBtnItemClickListener)
             binding.btnItem.setOnLongClickListener(onBtnItemLongClickListener)

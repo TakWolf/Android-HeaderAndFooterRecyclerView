@@ -16,7 +16,7 @@ class StaggeredVerticalAdapter : PhotoListAdapter<StaggeredVerticalAdapter.ViewH
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(val binding: ItemStaggeredVerticalBinding) : PhotoListAdapter.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemStaggeredVerticalBinding) : PhotoListAdapter.ViewHolder(binding.root) {
         init {
             binding.btnItem.setOnClickListener(onBtnItemClickListener)
             binding.btnItem.setOnLongClickListener(onBtnItemLongClickListener)

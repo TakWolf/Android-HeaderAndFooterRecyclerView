@@ -95,7 +95,7 @@ dependencies {
 [LoadMoreFooter.kt](app/src/main/java/com/takwolf/android/demo/hfrecyclerview/holder/LoadMoreFooter.kt)
 
 ```kotlin
-class LoadMoreFooter(val binding: FooterLoadMoreBinding) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {
+class LoadMoreFooter(private val binding: FooterLoadMoreBinding) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {
     companion object {
         fun create(recyclerView: HeaderAndFooterRecyclerView): LoadMoreFooter {
             val binding = FooterLoadMoreBinding.inflate(LayoutInflater.from(recyclerView.context), recyclerView.footerViewContainer, false)

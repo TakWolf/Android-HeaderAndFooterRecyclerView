@@ -1,6 +1,7 @@
 package com.takwolf.android.hfrecyclerview.loadmorefooter;
 
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -105,10 +106,15 @@ public abstract class LoadMoreFooter {
                     RecyclerView.ViewHolder holder = recyclerView.findViewHolderForLayoutPosition(firstPosition);
                     if (holder != null) {
                         int offset;
+                        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
                         if (linearLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
-                            offset = holder.itemView.getLeft();
+                            if (recyclerView.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                                offset = holder.itemView.getLeft() - layoutParams.leftMargin;
+                            } else {
+                                offset = holder.itemView.getRight() - layoutParams.rightMargin;
+                            }
                         } else {
-                            offset = holder.itemView.getTop();
+                            offset = holder.itemView.getTop() - layoutParams.topMargin;
                         }
                         linearLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
                     }
@@ -118,10 +124,15 @@ public abstract class LoadMoreFooter {
                     RecyclerView.ViewHolder holder = recyclerView.findViewHolderForLayoutPosition(firstPosition);
                     if (holder != null) {
                         int offset;
+                        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
                         if (staggeredGridLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
-                            offset = holder.itemView.getLeft();
+                            if (recyclerView.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                                offset = holder.itemView.getLeft() - layoutParams.leftMargin;
+                            } else {
+                                offset = holder.itemView.getRight() - layoutParams.rightMargin;
+                            }
                         } else {
-                            offset = holder.itemView.getTop();
+                            offset = holder.itemView.getTop() - layoutParams.topMargin;
                         }
                         staggeredGridLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
                     }

@@ -46,7 +46,7 @@ recyclerView.addFooterView(footerView)
 
 ## LoadMoreFooter
 
-该项目也提供了一个 `LoadMoreFooter` 用于实现加载更多的功能。这是一个轻量级的方案，通常配合下拉刷新组件一起使用。
+该项目也提供了一个 `LoadMoreFooter` 用于实现加载更多的功能，通常配合下拉刷新组件一起使用。
 
 ```kotlin
 dependencies {
@@ -158,6 +158,8 @@ loadMoreFooter.addToRecyclerView(binding.recyclerView)
 ```
 
 通过 `loadMoreFooter.state` 来改变组件状态。
+
+在 [Android-RefreshAndLoadMore-Demo](https://github.com/TakWolf/Android-RefreshAndLoadMore-Demo) 提供了一个更详细的例子用于演示下拉刷新和加载更多。
 
 ## License
 

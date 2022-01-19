@@ -20,6 +20,6 @@
     <string name="remove_footer">- Footer</string>
     <string name="replace_adapters">Replace adapters</string>
     <string name="swap_adapters">Swap adapters</string>
-    <string name="load_more_finished">加载完毕</string>
+    <string name="load_more_finished">没有更多内容</string>
     <string name="load_more_failed">加载失败，点击重试</string>
 </resources>

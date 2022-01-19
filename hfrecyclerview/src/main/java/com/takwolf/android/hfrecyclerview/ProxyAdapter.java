@@ -14,8 +14,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-@SuppressWarnings("rawtypes")
-public final class ProxyAdapter extends RecyclerView.Adapter {
+public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int VIEW_TYPE_HEADER = Integer.MIN_VALUE;
     public static final int VIEW_TYPE_FOOTER = VIEW_TYPE_HEADER + 1;
 
@@ -29,6 +28,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
     @NonNull
     private final HeaderAndFooterRecyclerView recyclerView;
 
+    @SuppressWarnings("rawtypes")
     @Nullable
     private RecyclerView.Adapter adapter;
 
@@ -39,11 +39,13 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         this.recyclerView = recyclerView;
     }
 
+    @SuppressWarnings("rawtypes")
     @Nullable
     RecyclerView.Adapter getAdapter() {
         return adapter;
     }
 
+    @SuppressWarnings("rawtypes")
     void setAdapter(@Nullable RecyclerView.Adapter adapter) {
         if (this.adapter != null) {
             this.adapter.unregisterAdapterDataObserver(innerAdapterDataObserver);
@@ -264,9 +266,8 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List payloads) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
         if (holder instanceof FixedViewHolder) {
             if (payloads.isEmpty()) {
                 if (holder.getItemViewType() == VIEW_TYPE_HEADER) {
@@ -286,13 +287,13 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
                 }
             }
         } else if (adapter != null) {
+            //noinspection unchecked
             adapter.bindViewHolder(holder, position - getPositionOffset());
         } else {
             throw new IllegalStateException("Inner adapter has not been set.");
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof FixedViewHolder) {
@@ -304,17 +305,18 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
                 throw new IllegalStateException("Impossible fixed view type.");
             }
         } else if (adapter != null) {
+            //noinspection unchecked
             adapter.bindViewHolder(holder, position - getPositionOffset());
         } else {
             throw new IllegalStateException("Inner adapter has not been set.");
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
+                //noinspection unchecked
                 adapter.onViewRecycled(holder);
             } else {
                 throw new IllegalStateException("Inner adapter has not been set.");
@@ -322,11 +324,11 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public boolean onFailedToRecycleView(@NonNull RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
+                //noinspection unchecked
                 return adapter.onFailedToRecycleView(holder);
             } else {
                 throw new IllegalStateException("Inner adapter has not been set.");
@@ -336,11 +338,11 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
+                //noinspection unchecked
                 adapter.onViewAttachedToWindow(holder);
             } else {
                 throw new IllegalStateException("Inner adapter has not been set.");
@@ -348,11 +350,11 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onViewDetachedFromWindow(@NonNull RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
+                //noinspection unchecked
                 adapter.onViewDetachedFromWindow(holder);
             } else {
                 throw new IllegalStateException("Inner adapter has not been set.");
@@ -367,9 +369,8 @@ public final class ProxyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public int findRelativeAdapterPositionIn(@NonNull RecyclerView.Adapter adapter, @NonNull RecyclerView.ViewHolder viewHolder, int localPosition) {
+    public int findRelativeAdapterPositionIn(@NonNull RecyclerView.Adapter<? extends RecyclerView.ViewHolder> adapter, @NonNull RecyclerView.ViewHolder viewHolder, int localPosition) {
         if (adapter == this && viewHolder instanceof FixedViewHolder) {
             return localPosition;
         } else if (adapter == this.adapter) {

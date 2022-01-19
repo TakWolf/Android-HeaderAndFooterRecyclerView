@@ -27,9 +27,9 @@ class GridVerticalActivity : AppCompatActivity() {
             finish()
         }
 
-        val layoutManager = GridLayoutManager(this, 2)
-        layoutManager.spanSizeLookup = GridVerticalSpanSizeLookup(layoutManager, binding.recyclerView.proxyAdapter)
-        binding.recyclerView.layoutManager = layoutManager
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2).apply {
+            spanSizeLookup = GridVerticalSpanSizeLookup(this, binding.recyclerView.proxyAdapter)
+        }
         ExtraInfoViewHelper.setupVertical(extraInfoListViewModel, binding.recyclerView)
         ExtraInfoViewHelper.listenVertical(extraInfoListViewModel, binding.recyclerView, binding.hfDashboard)
         val adapter = GridVerticalAdapter()

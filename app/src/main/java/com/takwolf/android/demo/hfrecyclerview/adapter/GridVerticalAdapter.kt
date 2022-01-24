@@ -17,9 +17,9 @@ class GridVerticalAdapter : PhotoListAdapter<GridVerticalAdapter.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return if (position % 11 == 0) {
-            TYPE_FULL_SPAN;
+            TYPE_FULL_SPAN
         } else {
-            TYPE_NORMAL;
+            TYPE_NORMAL
         }
     }
 
@@ -50,7 +50,7 @@ class GridVerticalSpanSizeLookup(
     private val proxyAdapter: ProxyAdapter,
 ) : GridLayoutManager.SpanSizeLookup() {
     override fun getSpanSize(position: Int): Int {
-        val viewType = proxyAdapter.getItemViewType(position);
+        val viewType = proxyAdapter.getItemViewType(position)
         if (viewType == ProxyAdapter.VIEW_TYPE_HEADER || viewType == ProxyAdapter.VIEW_TYPE_FOOTER || viewType == GridVerticalAdapter.TYPE_FULL_SPAN) {
             return layoutManager.spanCount
         } else {

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.takwolf.android.demo.hfrecyclerview.data.Photo
+import kotlin.math.abs
 import kotlin.random.Random
 
 abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<Photo, VH>(PhotoDiffItemCallback) {
@@ -16,7 +17,7 @@ abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<
             (bindingAdapter as PhotoListAdapter?)?.let { adapter ->
                 adapter.onPhotosSwapListener?.let { listener ->
                     val oldPosition = bindingAdapterPosition
-                    val newPosition = Math.abs(Random.nextInt() % adapter.itemCount)
+                    val newPosition = abs(Random.nextInt() % adapter.itemCount)
                     listener(oldPosition, newPosition)
                 }
             }

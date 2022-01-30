@@ -110,33 +110,33 @@ class LoadMoreFooter(private val binding: FooterLoadMoreBinding) : com.takwolf.a
         preloadOffset = 10
     }
 
-    override fun onUpdateViews(footerView: View, @LoadMoreState state: Int) {
+    override fun onUpdateViews(footerView: View, @State state: Int) {
         when (state) {
-            LoadMoreState.DISABLED -> {
+            STATE_DISABLED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.INVISIBLE
                 binding.tvText.text = null
                 binding.tvText.isClickable = false
             }
-            LoadMoreState.LOADING -> {
+            STATE_LOADING -> {
                 binding.loadingBar.visibility = View.VISIBLE
                 binding.tvText.visibility = View.INVISIBLE
                 binding.tvText.text = null
                 binding.tvText.isClickable = false
             }
-            LoadMoreState.FINISHED -> {
+            STATE_FINISHED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
                 binding.tvText.setText(R.string.load_more_finished)
                 binding.tvText.isClickable = false
             }
-            LoadMoreState.ENDLESS -> {
+            STATE_ENDLESS -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
                 binding.tvText.text = null
                 binding.tvText.isClickable = true
             }
-            LoadMoreState.FAILED -> {
+            STATE_FAILED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
                 binding.tvText.setText(R.string.load_more_failed)

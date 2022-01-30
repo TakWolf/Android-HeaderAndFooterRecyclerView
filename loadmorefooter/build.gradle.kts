@@ -41,7 +41,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 groupId = "com.takwolf.android.hfrecyclerview"
                 artifactId = "loadmorefooter"
-                version = "0.0.1"
+                version = "0.0.2"
 
                 from(components["release"])
                 artifact(tasks.named("sourcesJar"))

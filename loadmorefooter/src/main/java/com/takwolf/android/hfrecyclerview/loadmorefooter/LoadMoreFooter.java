@@ -14,6 +14,7 @@ import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 import com.takwolf.android.hfrecyclerview.ProxyAdapter;
 
 public abstract class LoadMoreFooter {
+    @NonNull
     private final View footerView;
 
     @LoadMoreState
@@ -24,7 +25,6 @@ public abstract class LoadMoreFooter {
 
     @Nullable
     private HeaderAndFooterRecyclerView recyclerView;
-
     @Nullable
     private OnLoadMoreListener listener;
 

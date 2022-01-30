@@ -1,7 +1,6 @@
 package com.takwolf.android.demo.hfrecyclerview.data
 
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.abs
 import kotlin.random.Random
 

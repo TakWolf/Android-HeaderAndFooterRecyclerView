@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 final class FixedViewSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
     @Nullable
     private GridLayoutManager layoutManager;
-
     @Nullable
     private ProxyAdapter proxyAdapter;
 

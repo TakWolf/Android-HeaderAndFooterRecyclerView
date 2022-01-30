@@ -5,7 +5,6 @@ import com.takwolf.android.demo.hfrecyclerview.adapter.PhotoListAdapter
 import com.takwolf.android.demo.hfrecyclerview.data.Photo
 import com.takwolf.android.demo.hfrecyclerview.vm.ListViewModel
 import java.util.*
-import kotlin.collections.ArrayList
 
 object PhotoViewHelper {
     fun <VH : PhotoListAdapter.ViewHolder> listen(

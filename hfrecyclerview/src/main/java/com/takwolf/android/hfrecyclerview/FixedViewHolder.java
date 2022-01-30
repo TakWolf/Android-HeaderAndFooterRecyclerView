@@ -161,10 +161,8 @@ final class FixedViewHolder extends RecyclerView.ViewHolder {
 
         @Action
         private final int action;
-
         @NonNull
         private final View view;
-
         @Nullable
         private final Integer index;
 

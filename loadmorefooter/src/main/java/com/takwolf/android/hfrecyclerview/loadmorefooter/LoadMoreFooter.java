@@ -3,6 +3,7 @@ package com.takwolf.android.hfrecyclerview.loadmorefooter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,12 +14,25 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView;
 import com.takwolf.android.hfrecyclerview.ProxyAdapter;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 public abstract class LoadMoreFooter {
+    public static final int STATE_DISABLED = 0;
+    public static final int STATE_LOADING = 1;
+    public static final int STATE_FINISHED = 2;
+    public static final int STATE_ENDLESS = 3;
+    public static final int STATE_FAILED = 4;
+
+    @IntDef({STATE_DISABLED, STATE_LOADING, STATE_FINISHED, STATE_ENDLESS, STATE_FAILED})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface State {}
+
     @NonNull
     private final View footerView;
 
-    @LoadMoreState
-    private int state = LoadMoreState.DISABLED;
+    @State
+    private int state = STATE_DISABLED;
 
     @IntRange(from = 0)
     private int preloadOffset;
@@ -37,12 +51,12 @@ public abstract class LoadMoreFooter {
         return footerView;
     }
 
-    @LoadMoreState
+    @State
     public int getState() {
         return state;
     }
 
-    public void setState(@LoadMoreState int state) {
+    public void setState(@State int state) {
         if (this.state != state) {
             this.state = state;
             onUpdateViews(footerView, state);
@@ -165,15 +179,15 @@ public abstract class LoadMoreFooter {
     }
 
     public void checkDoLoadMore() {
-        if (state == LoadMoreState.ENDLESS || state == LoadMoreState.FAILED) {
-            setState(LoadMoreState.LOADING);
+        if (state == STATE_ENDLESS || state == STATE_FAILED) {
+            setState(STATE_LOADING);
             if (listener != null) {
                 listener.onLoadMore();
             }
         }
     }
 
-    protected abstract void onUpdateViews(@NonNull View footerView, @LoadMoreState int state);
+    protected abstract void onUpdateViews(@NonNull View footerView, @State int state);
 
     public interface OnLoadMoreListener {
         void onLoadMore();

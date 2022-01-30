@@ -25,7 +25,7 @@ android {
 
 dependencies {
     compileOnly("androidx.recyclerview:recyclerview:1.2.1")
-    compileOnly(project(":hfrecyclerview"))
+    api(project(":hfrecyclerview"))
 }
 
 tasks {

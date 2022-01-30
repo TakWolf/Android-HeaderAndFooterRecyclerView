@@ -3,6 +3,7 @@ package com.takwolf.android.hfrecyclerview.loadmorefooter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ public abstract class LoadMoreFooter {
     @LoadMoreState
     private int state = LoadMoreState.DISABLED;
 
+    @IntRange(from = 0)
     private int preloadOffset;
 
     @Nullable
@@ -47,11 +49,12 @@ public abstract class LoadMoreFooter {
         }
     }
 
+    @IntRange(from = 0)
     public int getPreloadOffset() {
         return preloadOffset;
     }
 
-    public void setPreloadOffset(int preloadOffset) {
+    public void setPreloadOffset(@IntRange(from = 0) int preloadOffset) {
         this.preloadOffset = preloadOffset;
     }
 

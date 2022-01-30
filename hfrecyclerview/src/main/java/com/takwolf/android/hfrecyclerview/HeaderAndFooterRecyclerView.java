@@ -10,12 +10,12 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.HeaderAndFooterHackRecyclerView;
+import androidx.recyclerview.widget.HFRVHack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeaderAndFooterRecyclerView extends HeaderAndFooterHackRecyclerView {
+public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
     final List<View> headerViews = new ArrayList<>();
     final List<View> footerViews = new ArrayList<>();
 
@@ -194,11 +194,11 @@ public class HeaderAndFooterRecyclerView extends HeaderAndFooterHackRecyclerView
     }
 
     @Override
-    protected final int hackGetAdapterPositionInRecyclerView(ViewHolder holder) {
-        if (holder instanceof FixedViewHolder) {
+    protected int getAdapterPositionInRecyclerView(@NonNull ViewHolder viewHolder) {
+        if (viewHolder instanceof FixedViewHolder) {
             return NO_POSITION;
         }
-        int globalPosition = super.hackGetAdapterPositionInRecyclerView(holder);
+        int globalPosition = super.getAdapterPositionInRecyclerView(viewHolder);
         if (globalPosition == NO_POSITION) {
             return NO_POSITION;
         }

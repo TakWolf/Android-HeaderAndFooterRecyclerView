@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <Button style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/btn_replace_adapters"
@@ -47,10 +47,10 @@
         android:layout_height="match_parent"
         app:layout_constrainedWidth="true"
         app:layout_constrainedHeight="true"
-        app:layout_constraintTop_toBottomOf="@+id/btn_bar"
+        app:layout_constraintTop_toBottomOf="@id/btn_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/recycler_view_right" />
+        app:layout_constraintEnd_toStartOf="@id/recycler_view_right" />
 
     <com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
         android:id="@+id/recycler_view_right"
@@ -58,9 +58,9 @@
         android:layout_height="match_parent"
         app:layout_constrainedWidth="true"
         app:layout_constrainedHeight="true"
-        app:layout_constraintTop_toBottomOf="@+id/btn_bar"
+        app:layout_constraintTop_toBottomOf="@id/btn_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/recycler_view_left" />
+        app:layout_constraintStart_toEndOf="@id/recycler_view_left" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app_primary">#ff4caf50</color>
-    <color name="app_primary_dark">#ff087f23</color>
-    <color name="red_200">#ffef9a9a</color>
-    <color name="brown_200">#ffbcaaa4</color>
-    <color name="image_placeholder">#20000000</color>
+    <color name="app_primary">#FF4CAF50</color>
+    <color name="app_primary_dark">#FF087F23</color>
+    <color name="red_200">#FFEF9A9A</color>
+    <color name="brown_200">#FFBCAAA4</color>
+    <color name="image_placeholder">#1F000000</color>
 </resources>

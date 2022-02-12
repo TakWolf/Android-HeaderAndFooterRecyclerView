@@ -1,7 +1,7 @@
 package com.takwolf.android.demo.hfrecyclerview.ui.helper
 
 import android.view.LayoutInflater
-import com.takwolf.android.demo.hfrecyclerview.model.ColorInfo
+import com.takwolf.android.demo.hfrecyclerview.model.Banner
 import com.takwolf.android.demo.hfrecyclerview.databinding.*
 import com.takwolf.android.demo.hfrecyclerview.vm.ExtraInfoListViewModel
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
@@ -37,7 +37,7 @@ object ExtraInfoViewHelper {
         binding: WidgetHfDashboardBinding,
     ) {
         binding.btnAddHeader.setOnClickListener {
-            val colorInfo = ColorInfo()
+            val colorInfo = Banner()
             viewModel.headerInfos.add(colorInfo)
             addVerticalHeader(viewModel, recyclerView, colorInfo)
         }
@@ -48,7 +48,7 @@ object ExtraInfoViewHelper {
             }
         }
         binding.btnAddFooter.setOnClickListener {
-            val colorInfo = ColorInfo()
+            val colorInfo = Banner()
             viewModel.footerInfos.add(colorInfo)
             addVerticalFooter(viewModel, recyclerView, colorInfo)
         }
@@ -66,7 +66,7 @@ object ExtraInfoViewHelper {
         binding: WidgetHfDashboardBinding,
     ) {
         binding.btnAddHeader.setOnClickListener {
-            val colorInfo = ColorInfo()
+            val colorInfo = Banner()
             viewModel.headerInfos.add(colorInfo)
             addHorizontalHeader(viewModel, recyclerView, colorInfo)
         }
@@ -77,7 +77,7 @@ object ExtraInfoViewHelper {
             }
         }
         binding.btnAddFooter.setOnClickListener {
-            val colorInfo = ColorInfo()
+            val colorInfo = Banner()
             viewModel.footerInfos.add(colorInfo)
             addHorizontalFooter(viewModel, recyclerView, colorInfo)
         }
@@ -92,13 +92,13 @@ object ExtraInfoViewHelper {
     private fun addVerticalHeader(
         viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
-        colorInfo: ColorInfo,
+        banner: Banner,
     ) {
         val layoutInflater = LayoutInflater.from(recyclerView.context)
         val headerBinding = HeaderVerticalBinding.inflate(layoutInflater, recyclerView.headerViewContainer, false)
-        headerBinding.tvName.setBackgroundColor(colorInfo.color)
+        headerBinding.tvName.setBackgroundColor(banner.color)
         headerBinding.btnItem.setOnLongClickListener {
-            viewModel.headerInfos.remove(colorInfo)
+            viewModel.headerInfos.remove(banner)
             recyclerView.removeHeaderView(headerBinding.root)
             true
         }
@@ -108,13 +108,13 @@ object ExtraInfoViewHelper {
     private fun addVerticalFooter(
         viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
-        colorInfo: ColorInfo,
+        banner: Banner,
     ) {
         val layoutInflater = LayoutInflater.from(recyclerView.context)
         val footerBinding = FooterVerticalBinding.inflate(layoutInflater, recyclerView.footerViewContainer, false)
-        footerBinding.tvName.setBackgroundColor(colorInfo.color)
+        footerBinding.tvName.setBackgroundColor(banner.color)
         footerBinding.btnItem.setOnLongClickListener {
-            viewModel.footerInfos.remove(colorInfo)
+            viewModel.footerInfos.remove(banner)
             recyclerView.removeFooterView(footerBinding.root)
             true
         }
@@ -124,13 +124,13 @@ object ExtraInfoViewHelper {
     private fun addHorizontalHeader(
         viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
-        colorInfo: ColorInfo,
+        banner: Banner,
     ) {
         val layoutInflater = LayoutInflater.from(recyclerView.context)
         val headerBinding = HeaderHorizontalBinding.inflate(layoutInflater, recyclerView.headerViewContainer, false)
-        headerBinding.tvName.setBackgroundColor(colorInfo.color)
+        headerBinding.tvName.setBackgroundColor(banner.color)
         headerBinding.btnItem.setOnLongClickListener {
-            viewModel.headerInfos.remove(colorInfo)
+            viewModel.headerInfos.remove(banner)
             recyclerView.removeHeaderView(headerBinding.root)
             true
         }
@@ -140,13 +140,13 @@ object ExtraInfoViewHelper {
     private fun addHorizontalFooter(
         viewModel: ExtraInfoListViewModel,
         recyclerView: HeaderAndFooterRecyclerView,
-        colorInfo: ColorInfo,
+        banner: Banner,
     ) {
         val layoutInflater = LayoutInflater.from(recyclerView.context)
         val footerBinding = FooterHorizontalBinding.inflate(layoutInflater, recyclerView.footerViewContainer, false)
-        footerBinding.tvName.setBackgroundColor(colorInfo.color)
+        footerBinding.tvName.setBackgroundColor(banner.color)
         footerBinding.btnItem.setOnLongClickListener {
-            viewModel.footerInfos.remove(colorInfo)
+            viewModel.footerInfos.remove(banner)
             recyclerView.removeFooterView(footerBinding.root)
             true
         }

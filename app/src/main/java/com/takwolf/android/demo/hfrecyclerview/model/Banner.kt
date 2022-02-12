@@ -5,7 +5,7 @@ import androidx.annotation.ColorInt
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
-data class ColorInfo(val color: Int = randomColor()) {
+data class Banner(val color: Int = randomColor()) {
     companion object {
         @ColorInt
         private fun randomColor(): Int {
@@ -15,10 +15,10 @@ data class ColorInfo(val color: Int = randomColor()) {
             return Color.rgb(red, green, blue)
         }
 
-        fun getList(size: Int = 5): MutableList<ColorInfo> {
-            val list = ArrayList<ColorInfo>()
+        fun getList(size: Int = 5): MutableList<Banner> {
+            val list = ArrayList<Banner>()
             repeat(size) {
-                list.add(ColorInfo())
+                list.add(Banner())
             }
             return list
         }

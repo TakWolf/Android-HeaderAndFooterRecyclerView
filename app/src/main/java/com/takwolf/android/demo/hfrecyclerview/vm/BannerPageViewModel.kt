@@ -1,9 +1,9 @@
 package com.takwolf.android.demo.hfrecyclerview.vm
 
-import com.takwolf.android.demo.hfrecyclerview.model.ColorInfo
+import com.takwolf.android.demo.hfrecyclerview.model.Banner
 
-class BannerPageViewModel : ListViewModel<ColorInfo>() {
+class BannerPageViewModel : ListViewModel<Banner>() {
     init {
-        entitiesData.value = ColorInfo.getList()
+        entitiesData.value = Banner.getList()
     }
 }

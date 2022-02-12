@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.takwolf.android.demo.hfrecyclerview.model.ColorInfo
+import com.takwolf.android.demo.hfrecyclerview.model.Banner
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemPageBinding
 
-class BannerPageAdapter : ListAdapter<ColorInfo, BannerPageAdapter.ViewHolder>(ColorInfoDiffItemCallback) {
+class BannerPageAdapter : ListAdapter<Banner, BannerPageAdapter.ViewHolder>(ColorInfoDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemPageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
@@ -18,19 +18,19 @@ class BannerPageAdapter : ListAdapter<ColorInfo, BannerPageAdapter.ViewHolder>(C
     }
 
     class ViewHolder(private val binding: ItemPageBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(position: Int, colorInfo: ColorInfo) {
+        fun bind(position: Int, banner: Banner) {
             binding.tvText.text = position.toString()
-            binding.tvText.setBackgroundColor(colorInfo.color)
+            binding.tvText.setBackgroundColor(banner.color)
         }
     }
 }
 
-private object ColorInfoDiffItemCallback : DiffUtil.ItemCallback<ColorInfo>() {
-    override fun areItemsTheSame(oldItem: ColorInfo, newItem: ColorInfo): Boolean {
+private object ColorInfoDiffItemCallback : DiffUtil.ItemCallback<Banner>() {
+    override fun areItemsTheSame(oldItem: Banner, newItem: Banner): Boolean {
         return oldItem.color == newItem.color
     }
 
-    override fun areContentsTheSame(oldItem: ColorInfo, newItem: ColorInfo): Boolean {
+    override fun areContentsTheSame(oldItem: Banner, newItem: Banner): Boolean {
         return oldItem == newItem
     }
 }

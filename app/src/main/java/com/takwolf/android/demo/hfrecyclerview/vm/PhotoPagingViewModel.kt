@@ -1,6 +1,6 @@
 package com.takwolf.android.demo.hfrecyclerview.vm
 
-import com.takwolf.android.demo.hfrecyclerview.data.Photo
+import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import kotlinx.coroutines.delay
 
 class PhotoPagingViewModel : PagingViewModel<Photo, Int>() {

@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import coil.load
 import com.takwolf.android.demo.hfrecyclerview.R
-import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemStaggeredHorizontalBinding
+import com.takwolf.android.demo.hfrecyclerview.model.Photo
 
 class StaggeredHorizontalAdapter : PhotoListAdapter<StaggeredHorizontalAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

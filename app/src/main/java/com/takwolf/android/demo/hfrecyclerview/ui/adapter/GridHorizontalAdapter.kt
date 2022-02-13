@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import coil.load
 import com.takwolf.android.demo.hfrecyclerview.R
-import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemGridHorizontalBinding
+import com.takwolf.android.demo.hfrecyclerview.model.Photo
 
 class GridHorizontalAdapter : PhotoListAdapter<GridHorizontalAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

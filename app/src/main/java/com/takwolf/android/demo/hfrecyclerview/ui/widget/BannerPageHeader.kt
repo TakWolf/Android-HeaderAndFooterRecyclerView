@@ -3,11 +3,10 @@ package com.takwolf.android.demo.hfrecyclerview.ui.widget
 import android.view.LayoutInflater
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager2.widget.ViewPager2
-import com.takwolf.android.demo.hfrecyclerview.ui.adapter.BannerPageAdapter
-import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.demo.hfrecyclerview.databinding.HeaderViewPagerBinding
-import com.takwolf.android.demo.hfrecyclerview.vm.BannerPageViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.PhotoListViewModel
+import com.takwolf.android.demo.hfrecyclerview.ui.adapter.BannerPageAdapter
+import com.takwolf.android.demo.hfrecyclerview.vm.ExtraListViewModel
+import com.takwolf.android.demo.refreshandloadmore.vm.holder.setupView
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
 
 class BannerPageHeader(recyclerView: HeaderAndFooterRecyclerView) {
@@ -19,13 +18,11 @@ class BannerPageHeader(recyclerView: HeaderAndFooterRecyclerView) {
         recyclerView.addHeaderView(binding.root)
     }
 
-    fun listen(owner: LifecycleOwner, bannerPageViewModel: BannerPageViewModel, photoListViewModel: PhotoListViewModel) {
-        bannerPageViewModel.entitiesData.observe(owner) { colorInfos ->
-            adapter.submitList(colorInfos)
-        }
+    fun setup(owner: LifecycleOwner, viewModel: ExtraListViewModel) {
+        viewModel.bannersHolder.setupView(owner, adapter)
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                photoListViewModel.entitiesData.value = Photo.getList()
+                viewModel.loadListAt(position)
             }
         })
     }

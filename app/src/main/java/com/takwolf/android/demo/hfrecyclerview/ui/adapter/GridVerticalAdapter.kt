@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.takwolf.android.demo.hfrecyclerview.R
-import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemGridVerticalBinding
+import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.hfrecyclerview.ProxyAdapter
 
 class GridVerticalAdapter : PhotoListAdapter<GridVerticalAdapter.ViewHolder>() {

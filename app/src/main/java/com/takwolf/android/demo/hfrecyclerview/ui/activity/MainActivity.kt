@@ -9,7 +9,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         binding.btnLinearVertical.setOnClickListener {
             startActivity(Intent(this, LinearVerticalActivity::class.java))
@@ -54,5 +53,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnViewPagerHeader.setOnClickListener {
             startActivity(Intent(this, ViewPagerHeaderActivity::class.java))
         }
+
+        setContentView(binding.root)
     }
 }

@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.takwolf.android.demo.hfrecyclerview.model.Banner
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemPageBinding
+import com.takwolf.android.demo.hfrecyclerview.model.Banner
 
 class BannerPageAdapter : ListAdapter<Banner, BannerPageAdapter.ViewHolder>(ColorInfoDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

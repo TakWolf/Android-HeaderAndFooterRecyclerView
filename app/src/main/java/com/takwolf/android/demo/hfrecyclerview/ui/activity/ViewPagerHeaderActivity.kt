@@ -4,21 +4,18 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.takwolf.android.demo.hfrecyclerview.ui.adapter.LinearVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityViewPagerHeaderBinding
-import com.takwolf.android.demo.hfrecyclerview.ui.helper.PhotoViewHelper
+import com.takwolf.android.demo.hfrecyclerview.ui.adapter.LinearVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.ui.widget.BannerPageHeader
-import com.takwolf.android.demo.hfrecyclerview.vm.BannerPageViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.PhotoListViewModel
+import com.takwolf.android.demo.hfrecyclerview.vm.ExtraListViewModel
+import com.takwolf.android.demo.refreshandloadmore.vm.holder.setupView
 
 class ViewPagerHeaderActivity : AppCompatActivity() {
+    private val viewModel: ExtraListViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityViewPagerHeaderBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val bannerPageViewModel: BannerPageViewModel by viewModels()
-        val photoListViewModel: PhotoListViewModel by viewModels()
 
         binding.toolbar.setNavigationOnClickListener {
             finish()
@@ -26,9 +23,11 @@ class ViewPagerHeaderActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val bannerPageHeader = BannerPageHeader(binding.recyclerView)
-        bannerPageHeader.listen(this, bannerPageViewModel, photoListViewModel)
+        bannerPageHeader.setup(this, viewModel)
         val adapter = LinearVerticalAdapter()
-        PhotoViewHelper.listen(this, photoListViewModel, adapter)
+        viewModel.photosHolder.setupView(this, adapter)
         binding.recyclerView.adapter = adapter
+
+        setContentView(binding.root)
     }
 }

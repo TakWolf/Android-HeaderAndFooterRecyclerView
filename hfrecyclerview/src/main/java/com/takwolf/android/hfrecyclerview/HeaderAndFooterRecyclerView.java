@@ -1,7 +1,11 @@
 package com.takwolf.android.hfrecyclerview;
 
 import android.content.Context;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -9,6 +13,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.HFRVHack;
 
@@ -203,5 +208,112 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
             return NO_POSITION;
         }
         return globalPosition - proxyAdapter.getPositionOffset();
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        SavedState state = new SavedState(super.onSaveInstanceState());
+        for (View view : headerViews) {
+            SparseArray<Parcelable> container = new SparseArray<>();
+            view.saveHierarchyState(container);
+            state.headerStates.add(container);
+        }
+        for (View view : footerViews) {
+            SparseArray<Parcelable> container = new SparseArray<>();
+            view.saveHierarchyState(container);
+            state.footerStates.add(container);
+        }
+        return state;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
+        }
+        SavedState savedState = (SavedState) state;
+        if (savedState.headerStates.size() == headerViews.size()) {
+            for (int i = 0; i < savedState.headerStates.size(); i++) {
+                SparseArray<Parcelable> container = savedState.headerStates.get(i);
+                View view = headerViews.get(i);
+                view.restoreHierarchyState(container);
+            }
+        }
+        if (savedState.footerStates.size() == footerViews.size()) {
+            for (int i = 0; i < savedState.footerStates.size(); i++) {
+                SparseArray<Parcelable> container = savedState.footerStates.get(i);
+                View view = footerViews.get(i);
+                view.restoreHierarchyState(container);
+            }
+        }
+        super.onRestoreInstanceState(savedState.getSuperState());
+    }
+
+    private static class SavedState extends BaseSavedState {
+        List<SparseArray<Parcelable>> headerStates = new ArrayList<>();
+        List<SparseArray<Parcelable>> footerStates = new ArrayList<>();
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public SavedState(Parcel source) {
+            super(source);
+            readValues(source, null);
+        }
+
+        @RequiresApi(Build.VERSION_CODES.N)
+        public SavedState(Parcel source, ClassLoader loader) {
+            super(source, loader);
+            readValues(source, loader);
+        }
+
+        private void readValues(@NonNull Parcel source, @Nullable ClassLoader loader) {
+            int headersCount = source.readInt();
+            for (int i = 0; i < headersCount; i++) {
+                SparseArray<Parcelable> container = source.readSparseArray(loader);
+                headerStates.add(container);
+            }
+            int footersCount = source.readInt();
+            for (int i = 0; i < footersCount; i++) {
+                SparseArray<Parcelable> container = source.readSparseArray(loader);
+                footerStates.add(container);
+            }
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(headerStates.size());
+            for (SparseArray<Parcelable> container : headerStates) {
+                out.writeSparseArray(container);
+            }
+            out.writeInt(footerStates.size());
+            for (SparseArray<Parcelable> container : footerStates) {
+                out.writeSparseArray(container);
+            }
+        }
+
+        public static final Creator<SavedState> CREATOR = new ClassLoaderCreator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel source, ClassLoader loader) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    return new SavedState(source, loader);
+                } else {
+                    return new SavedState(source);
+                }
+            }
+
+            @Override
+            public SavedState createFromParcel(Parcel source) {
+                return createFromParcel(source, null);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }

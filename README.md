@@ -92,7 +92,7 @@ dependencies {
 
 然后创建一个 `LoadMoreFooter` 的实现，示例如下（示例使用了 `ViewBinding`）：
 
-[LoadMoreFooter.kt](app/src/main/java/com/takwolf/android/demo/hfrecyclerview/holder/LoadMoreFooter.kt)
+[LoadMoreFooter.kt](app/src/main/java/com/takwolf/android/demo/hfrecyclerview/ui/widget/LoadMoreFooter.kt)
 
 ```kotlin
 class LoadMoreFooter(private val binding: FooterLoadMoreBinding) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {

@@ -13,7 +13,7 @@
         android:textSize="40sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:background="@color/red_200"
-        tools:text="1" />
+        tools:text="1"
+        tools:background="@color/red_200" />
 
 </FrameLayout>

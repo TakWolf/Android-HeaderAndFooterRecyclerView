@@ -5,7 +5,7 @@ import com.takwolf.android.demo.hfrecyclerview.databinding.*
 import com.takwolf.android.demo.hfrecyclerview.model.Banner
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
 
-class ExtraLiveHolder() {
+class ExtraLiveHolder {
     private val headers = Banner.getList(2)
     private val footers = Banner.getList(2)
 

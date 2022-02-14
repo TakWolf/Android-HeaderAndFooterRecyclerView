@@ -51,10 +51,10 @@ class GridVerticalSpanSizeLookup(
 ) : GridLayoutManager.SpanSizeLookup() {
     override fun getSpanSize(position: Int): Int {
         val viewType = proxyAdapter.getItemViewType(position)
-        if (viewType == ProxyAdapter.VIEW_TYPE_HEADER || viewType == ProxyAdapter.VIEW_TYPE_FOOTER || viewType == GridVerticalAdapter.TYPE_FULL_SPAN) {
-            return layoutManager.spanCount
+        return if (viewType == ProxyAdapter.VIEW_TYPE_HEADER || viewType == ProxyAdapter.VIEW_TYPE_FOOTER || viewType == GridVerticalAdapter.TYPE_FULL_SPAN) {
+            layoutManager.spanCount
         } else {
-            return 1
+            1
         }
     }
 }

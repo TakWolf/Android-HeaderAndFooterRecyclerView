@@ -3,10 +3,7 @@ package com.takwolf.android.demo.hfrecyclerview.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import coil.load
-import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemGridVerticalBinding
-import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.hfrecyclerview.ProxyAdapter
 
 class GridVerticalAdapter : PhotoListAdapter<GridVerticalAdapter.ViewHolder>() {
@@ -31,18 +28,7 @@ class GridVerticalAdapter : PhotoListAdapter<GridVerticalAdapter.ViewHolder>() {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ItemGridVerticalBinding) : PhotoListAdapter.ViewHolder(binding.root) {
-        init {
-            binding.btnItem.setOnClickListener(onBtnItemClickListener)
-            binding.btnItem.setOnLongClickListener(onBtnItemLongClickListener)
-        }
-
-        fun bind(photo: Photo) {
-            binding.imgPhoto.load(photo.url) {
-                placeholder(R.color.image_placeholder)
-            }
-        }
-    }
+    class ViewHolder(binding: ItemGridVerticalBinding) : PhotoListAdapter.ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
 }
 
 class GridVerticalSpanSizeLookup(

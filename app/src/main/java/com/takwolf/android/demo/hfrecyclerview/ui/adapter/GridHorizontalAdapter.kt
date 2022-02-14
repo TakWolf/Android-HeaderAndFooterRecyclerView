@@ -2,10 +2,7 @@ package com.takwolf.android.demo.hfrecyclerview.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import coil.load
-import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemGridHorizontalBinding
-import com.takwolf.android.demo.hfrecyclerview.model.Photo
 
 class GridHorizontalAdapter : PhotoListAdapter<GridHorizontalAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -16,16 +13,5 @@ class GridHorizontalAdapter : PhotoListAdapter<GridHorizontalAdapter.ViewHolder>
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(private val binding: ItemGridHorizontalBinding) : PhotoListAdapter.ViewHolder(binding.root) {
-        init {
-            binding.btnItem.setOnClickListener(onBtnItemClickListener)
-            binding.btnItem.setOnLongClickListener(onBtnItemLongClickListener)
-        }
-
-        fun bind(photo: Photo) {
-            binding.imgPhoto.load(photo.url) {
-                placeholder(R.color.image_placeholder)
-            }
-        }
-    }
+    class ViewHolder(binding: ItemGridHorizontalBinding) : PhotoListAdapter.ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
 }

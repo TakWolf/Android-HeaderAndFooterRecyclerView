@@ -1,9 +1,12 @@
 package com.takwolf.android.demo.hfrecyclerview.ui.adapter
 
 import android.view.View
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.demo.hfrecyclerview.vm.holder.ListLiveHolder
 import java.util.*
@@ -14,25 +17,38 @@ abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<
     var onPhotosSwapListener: OnPhotosSwapListener? = null
     var onPhotoDeleteListener: OnPhotoDeleteListener? = null
 
-    abstract class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        protected val onBtnItemClickListener = View.OnClickListener {
-            (bindingAdapter as? PhotoListAdapter)?.let { adapter ->
-                adapter.onPhotosSwapListener?.let { listener ->
-                    val oldPosition = bindingAdapterPosition
-                    val newPosition = abs(Random.nextInt() % adapter.itemCount)
-                    listener.onPhotosSwap(oldPosition, newPosition)
+    abstract class ViewHolder(
+        itemView: View,
+        btnItem: View,
+        private val imgPhoto: ImageView,
+    ) : RecyclerView.ViewHolder(itemView) {
+        init {
+            btnItem.setOnClickListener {
+                (bindingAdapter as? PhotoListAdapter)?.let { adapter ->
+                    adapter.onPhotosSwapListener?.let { listener ->
+                        val oldPosition = bindingAdapterPosition
+                        val newPosition = abs(Random.nextInt() % adapter.itemCount)
+                        listener.onPhotosSwap(oldPosition, newPosition)
+                    }
                 }
+            }
+
+            btnItem.setOnLongClickListener {
+                (bindingAdapter as? PhotoListAdapter)?.let { adapter ->
+                    adapter.onPhotoDeleteListener?.let { listener ->
+                        val position = bindingAdapterPosition
+                        listener.onPhotoDelete(position)
+                    }
+                }
+                true
             }
         }
 
-        protected val onBtnItemLongClickListener = View.OnLongClickListener {
-            (bindingAdapter as? PhotoListAdapter)?.let { adapter ->
-                adapter.onPhotoDeleteListener?.let { listener ->
-                    val position = bindingAdapterPosition
-                    listener.onPhotoDelete(position)
-                }
+        internal fun bind(photo: Photo) {
+            imgPhoto.load(photo.url) {
+                placeholder(R.color.image_placeholder)
+                error(R.color.image_placeholder)
             }
-            true
         }
     }
 }

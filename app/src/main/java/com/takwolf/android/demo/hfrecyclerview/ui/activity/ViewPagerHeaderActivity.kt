@@ -8,7 +8,7 @@ import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityViewPagerHead
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.LinearVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.ui.widget.BannerPageHeader
 import com.takwolf.android.demo.hfrecyclerview.vm.ExtraListViewModel
-import com.takwolf.android.demo.refreshandloadmore.vm.holder.setupView
+import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
 
 class ViewPagerHeaderActivity : AppCompatActivity() {
     private val viewModel: ExtraListViewModel by viewModels()

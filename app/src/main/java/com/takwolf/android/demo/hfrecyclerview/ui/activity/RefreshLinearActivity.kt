@@ -11,7 +11,7 @@ import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotoDeleteListener
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotosSwapListener
 import com.takwolf.android.demo.hfrecyclerview.ui.widget.LoadMoreFooter
 import com.takwolf.android.demo.hfrecyclerview.vm.PagingViewModel
-import com.takwolf.android.demo.refreshandloadmore.vm.holder.setupView
+import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
 
 class RefreshLinearActivity : AppCompatActivity() {
     private val viewModel: PagingViewModel by viewModels()

@@ -6,7 +6,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.takwolf.android.demo.hfrecyclerview.databinding.HeaderViewPagerBinding
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.BannerPageAdapter
 import com.takwolf.android.demo.hfrecyclerview.vm.ExtraListViewModel
-import com.takwolf.android.demo.refreshandloadmore.vm.holder.setupView
+import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
 
 class BannerPageHeader(recyclerView: HeaderAndFooterRecyclerView) {

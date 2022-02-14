@@ -2,8 +2,6 @@ package com.takwolf.android.demo.hfrecyclerview.vm.holder
 
 import androidx.lifecycle.ViewModel
 import com.takwolf.android.demo.hfrecyclerview.model.Photo
-import com.takwolf.android.demo.refreshandloadmore.vm.holder.PagingLiveHolder
-import com.takwolf.android.demo.refreshandloadmore.vm.holder.ToastLiveHolder
 import kotlinx.coroutines.delay
 
 class PhotoPagingLiveHolder(

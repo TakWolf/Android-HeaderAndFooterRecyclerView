@@ -12,7 +12,7 @@ import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotosSwapListener
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.StaggeredVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.ui.widget.LoadMoreFooter
 import com.takwolf.android.demo.hfrecyclerview.vm.PagingViewModel
-import com.takwolf.android.demo.refreshandloadmore.vm.holder.setupView
+import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
 
 class RefreshStaggeredActivity : AppCompatActivity() {
     private val viewModel: PagingViewModel by viewModels()

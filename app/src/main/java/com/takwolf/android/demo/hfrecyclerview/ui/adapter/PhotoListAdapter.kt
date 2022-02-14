@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.takwolf.android.demo.hfrecyclerview.model.Photo
-import com.takwolf.android.demo.refreshandloadmore.vm.holder.ListLiveHolder
+import com.takwolf.android.demo.hfrecyclerview.vm.holder.ListLiveHolder
 import java.util.*
 import kotlin.math.abs
 import kotlin.random.Random

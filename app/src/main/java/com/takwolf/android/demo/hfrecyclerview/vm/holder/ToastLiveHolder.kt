@@ -1,4 +1,4 @@
-package com.takwolf.android.demo.refreshandloadmore.vm.holder
+package com.takwolf.android.demo.hfrecyclerview.vm.holder
 
 import android.content.Context
 import android.widget.Toast

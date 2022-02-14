@@ -16,11 +16,7 @@ data class Banner(val color: Int = randomColor()) {
         }
 
         fun getList(size: Int = 5): MutableList<Banner> {
-            val list = ArrayList<Banner>()
-            repeat(size) {
-                list.add(Banner())
-            }
-            return list
+            return MutableList(size) { Banner() }
         }
     }
 }

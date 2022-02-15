@@ -19,11 +19,11 @@ class BannerPageHeader(recyclerView: HeaderAndFooterRecyclerView) {
     }
 
     fun setup(owner: LifecycleOwner, viewModel: ExtraListViewModel) {
-        viewModel.bannersHolder.setupView(owner, adapter)
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 viewModel.loadListAt(position)
             }
         })
+        viewModel.bannersHolder.setupView(owner, adapter)
     }
 }

@@ -21,8 +21,6 @@ class RefreshStaggeredActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityRefreshAndLoadMoreBinding.inflate(layoutInflater)
 
-        viewModel.toastHolder.setupView(this, this)
-
         binding.toolbar.setTitle(R.string.refresh_staggered)
         binding.toolbar.setNavigationOnClickListener {
             finish()
@@ -34,9 +32,11 @@ class RefreshStaggeredActivity : AppCompatActivity() {
         val adapter = StaggeredVerticalAdapter()
         adapter.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
         adapter.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
-        viewModel.photosHolder.setupView(this, adapter, binding.refreshLayout, loadMoreFooter)
+        viewModel.photosHolder.setupView(this, binding.refreshLayout, loadMoreFooter, adapter)
         loadMoreFooter.addToRecyclerView(binding.recyclerView)
         binding.recyclerView.adapter = adapter
+
+        viewModel.toastHolder.setupView(this, this)
 
         setContentView(binding.root)
     }

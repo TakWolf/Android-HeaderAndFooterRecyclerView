@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.2")
+    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.3")
 }
 ```
 
@@ -50,7 +50,7 @@ recyclerView.addFooterView(footerView)
 
 ```kotlin
 dependencies {
-    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:loadmorefooter:0.0.2")
+    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:loadmorefooter:0.0.3")
 }
 ```
 

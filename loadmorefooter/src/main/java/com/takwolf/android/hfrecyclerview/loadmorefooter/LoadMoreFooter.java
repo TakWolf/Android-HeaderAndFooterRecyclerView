@@ -1,7 +1,6 @@
 package com.takwolf.android.hfrecyclerview.loadmorefooter;
 
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.IntRange;
@@ -112,52 +111,6 @@ public abstract class LoadMoreFooter {
         }
     };
 
-    private final RecyclerView.AdapterDataObserver innerAdapterDataObserver = new RecyclerView.AdapterDataObserver() {
-        @Override
-        public void onItemRangeInserted(int positionStart, int itemCount) {
-            if (recyclerView != null) {
-                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                if (layoutManager instanceof LinearLayoutManager) {
-                    LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
-                    int firstPosition = linearLayoutManager.findFirstVisibleItemPosition();
-                    RecyclerView.ViewHolder holder = recyclerView.findViewHolderForLayoutPosition(firstPosition);
-                    if (holder != null) {
-                        int offset;
-                        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
-                        if (linearLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
-                            if (recyclerView.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
-                                offset = holder.itemView.getLeft() - layoutParams.leftMargin;
-                            } else {
-                                offset = holder.itemView.getRight() - layoutParams.rightMargin;
-                            }
-                        } else {
-                            offset = holder.itemView.getTop() - layoutParams.topMargin;
-                        }
-                        linearLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
-                    }
-                } else if (layoutManager instanceof StaggeredGridLayoutManager) {
-                    StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
-                    int firstPosition = staggeredGridLayoutManager.findFirstVisibleItemPositions(null)[0];
-                    RecyclerView.ViewHolder holder = recyclerView.findViewHolderForLayoutPosition(firstPosition);
-                    if (holder != null) {
-                        int offset;
-                        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
-                        if (staggeredGridLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
-                            if (recyclerView.getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
-                                offset = holder.itemView.getLeft() - layoutParams.leftMargin;
-                            } else {
-                                offset = holder.itemView.getRight() - layoutParams.rightMargin;
-                            }
-                        } else {
-                            offset = holder.itemView.getTop() - layoutParams.topMargin;
-                        }
-                        staggeredGridLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
-                    }
-                }
-            }
-        }
-    };
-
     public void addToRecyclerView(@NonNull HeaderAndFooterRecyclerView recyclerView) {
         if (this.recyclerView != null) {
             throw new IllegalStateException("LoadMoreFooter has been added.");
@@ -166,12 +119,10 @@ public abstract class LoadMoreFooter {
         onUpdateViews(footerView, state);
         recyclerView.addFooterView(footerView);
         recyclerView.addOnScrollListener(onScrollListener);
-        recyclerView.getProxyAdapter().registerInnerAdapterDataObserver(innerAdapterDataObserver);
     }
 
     public void removeFromRecyclerView() {
         if (recyclerView != null) {
-            recyclerView.getProxyAdapter().unregisterInnerAdapterDataObserver(innerAdapterDataObserver);
             recyclerView.removeOnScrollListener(onScrollListener);
             recyclerView.removeFooterView(footerView);
             recyclerView = null;

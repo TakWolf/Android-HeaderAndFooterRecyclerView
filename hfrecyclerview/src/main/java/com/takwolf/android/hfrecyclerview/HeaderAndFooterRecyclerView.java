@@ -18,6 +18,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.HFRVHack;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
     final List<View> footerViews = new ArrayList<>();
 
     private final ProxyAdapter proxyAdapter = new ProxyAdapter(this);
+
+    private boolean keepScrollPositionOnItemInserted = true;
 
     public HeaderAndFooterRecyclerView(@NonNull Context context) {
         super(context);
@@ -212,6 +217,55 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
         inspectLayoutManager(layoutManager);
         super.setLayoutManager(layoutManager);
         recoverLayoutManager(oldLayoutManager);
+    }
+
+    public boolean isKeepScrollPositionOnItemInserted() {
+        return keepScrollPositionOnItemInserted;
+    }
+
+    public void setKeepScrollPositionOnItemInserted(boolean keepScrollPositionOnItemInserted) {
+        this.keepScrollPositionOnItemInserted = keepScrollPositionOnItemInserted;
+    }
+
+    void keepCurrentScrollPositionWithOffset() {
+        RecyclerView.LayoutManager layoutManager = getLayoutManager();
+        if (layoutManager instanceof LinearLayoutManager) {
+            LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+            int firstPosition = linearLayoutManager.findFirstVisibleItemPosition();
+            RecyclerView.ViewHolder holder = findViewHolderForLayoutPosition(firstPosition);
+            if (holder != null) {
+                int offset;
+                ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
+                if (linearLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
+                    if (getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                        offset = holder.itemView.getLeft() - layoutParams.leftMargin;
+                    } else {
+                        offset = holder.itemView.getRight() - layoutParams.rightMargin;
+                    }
+                } else {
+                    offset = holder.itemView.getTop() - layoutParams.topMargin;
+                }
+                linearLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
+            }
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+            StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
+            int firstPosition = staggeredGridLayoutManager.findFirstVisibleItemPositions(null)[0];
+            RecyclerView.ViewHolder holder = findViewHolderForLayoutPosition(firstPosition);
+            if (holder != null) {
+                int offset;
+                ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
+                if (staggeredGridLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
+                    if (getLayoutDirection() == View.LAYOUT_DIRECTION_LTR) {
+                        offset = holder.itemView.getLeft() - layoutParams.leftMargin;
+                    } else {
+                        offset = holder.itemView.getRight() - layoutParams.rightMargin;
+                    }
+                } else {
+                    offset = holder.itemView.getTop() - layoutParams.topMargin;
+                }
+                staggeredGridLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
+            }
+        }
     }
 
     @Override

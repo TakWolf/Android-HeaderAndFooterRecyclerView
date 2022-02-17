@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RestrictTo;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.annotation.Retention;
@@ -31,9 +30,6 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @SuppressWarnings("rawtypes")
     @Nullable
     private RecyclerView.Adapter adapter;
-
-    @NonNull
-    private final AdapterDataObservable innerObservable = new AdapterDataObservable();
 
     ProxyAdapter(@NonNull HeaderAndFooterRecyclerView recyclerView) {
         this.recyclerView = recyclerView;
@@ -69,16 +65,6 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (getStateRestorationPolicy() != stateRestorationPolicy) {
             super.setStateRestorationPolicy(stateRestorationPolicy);
         }
-    }
-
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    public void registerInnerAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
-        innerObservable.registerObserver(observer);
-    }
-
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    public void unregisterInnerAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {
-        innerObservable.unregisterObserver(observer);
     }
 
     @Override
@@ -156,31 +142,29 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         @Override
         public void onChanged() {
             notifyDataSetChanged();
-            innerObservable.onChanged();
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount) {
             notifyItemRangeChanged(positionStart + getPositionOffset(), itemCount);
-            innerObservable.onItemRangeChanged(positionStart, itemCount);
         }
 
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount, @Nullable Object payload) {
             notifyItemRangeChanged(positionStart + getPositionOffset(), itemCount, payload);
-            innerObservable.onItemRangeChanged(positionStart, itemCount, payload);
         }
 
         @Override
         public void onItemRangeInserted(int positionStart, int itemCount) {
             notifyItemRangeInserted(positionStart + getPositionOffset(), itemCount);
-            innerObservable.onItemRangeInserted(positionStart, itemCount);
+            if (recyclerView.isKeepScrollPositionOnItemInserted()) {
+                recyclerView.keepCurrentScrollPositionWithOffset();
+            }
         }
 
         @Override
         public void onItemRangeRemoved(int positionStart, int itemCount) {
             notifyItemRangeRemoved(positionStart + getPositionOffset(), itemCount);
-            innerObservable.onItemRangeRemoved(positionStart, itemCount);
         }
 
         @Override
@@ -189,7 +173,6 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 throw new IllegalArgumentException("Moving more than 1 item is not supported yet");
             }
             notifyItemMoved(fromPosition + getPositionOffset(), toPosition + getPositionOffset());
-            innerObservable.onItemRangeMoved(fromPosition, toPosition, itemCount);
         }
 
         @Override
@@ -197,7 +180,6 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             if (adapter != null) {
                 setStateRestorationPolicy(adapter.getStateRestorationPolicy());
             }
-            innerObservable.onStateRestorationPolicyChanged();
         }
     };
 

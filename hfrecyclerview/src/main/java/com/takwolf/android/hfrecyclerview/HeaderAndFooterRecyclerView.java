@@ -6,11 +6,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.AttrRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -80,6 +82,13 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
         proxyAdapter.notifyHeaderViewAdded(view, index);
     }
 
+    @NonNull
+    public View addHeaderView(@NonNull LayoutInflater inflater, @LayoutRes int resource) {
+        View view = inflater.inflate(resource, getHeaderViewContainer(), false);
+        addHeaderView(view);
+        return view;
+    }
+
     @Nullable
     public View getHeaderViewAt(int index) {
         if (index < 0 || index >= headerViews.size()) {
@@ -111,6 +120,13 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
     public void addFooterView(@NonNull View view, int index) {
         footerViews.add(index, view);
         proxyAdapter.notifyFooterViewAdded(view, index);
+    }
+
+    @NonNull
+    public View addFooterView(@NonNull LayoutInflater inflater, @LayoutRes int resource) {
+        View view = inflater.inflate(resource, getFooterViewContainer(), false);
+        addFooterView(view);
+        return view;
     }
 
     @Nullable

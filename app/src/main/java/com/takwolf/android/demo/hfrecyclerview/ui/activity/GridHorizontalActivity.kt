@@ -26,8 +26,8 @@ class GridHorizontalActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.layoutManager = GridLayoutManager(this, 3, RecyclerView.HORIZONTAL, false)
-        viewModel.extraHolder.setupHorizontal(binding.recyclerView, binding.hfDashboard)
-        val adapter = GridHorizontalAdapter()
+        viewModel.extraHolder.setupHorizontal(layoutInflater, binding.recyclerView, binding.hfDashboard)
+        val adapter = GridHorizontalAdapter(layoutInflater)
         adapter.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
         adapter.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
         viewModel.photosHolder.setupView(this, adapter)

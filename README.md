@@ -97,8 +97,8 @@ dependencies {
 ```kotlin
 class LoadMoreFooter(private val binding: FooterLoadMoreBinding) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {
     companion object {
-        fun create(recyclerView: HeaderAndFooterRecyclerView): LoadMoreFooter {
-            val binding = FooterLoadMoreBinding.inflate(LayoutInflater.from(recyclerView.context), recyclerView.footerViewContainer, false)
+        fun create(layoutInflater: LayoutInflater, recyclerView: HeaderAndFooterRecyclerView): LoadMoreFooter {
+            val binding = FooterLoadMoreBinding.inflate(layoutInflater, recyclerView.footerViewContainer, false)
             return LoadMoreFooter(binding)
         }
     }
@@ -150,7 +150,7 @@ class LoadMoreFooter(private val binding: FooterLoadMoreBinding) : com.takwolf.a
 最后挂载到 `RecyclerView` 上：
 
 ```kotlin
-val loadMoreFooter = LoadMoreFooter.create(binding.recyclerView)
+val loadMoreFooter = LoadMoreFooter.create(layoutInflater, binding.recyclerView)
 loadMoreFooter.setOnLoadMoreListener { 
     // do load more here
 }

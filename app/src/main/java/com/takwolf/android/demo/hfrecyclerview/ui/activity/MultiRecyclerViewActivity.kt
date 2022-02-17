@@ -27,8 +27,8 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
 
         binding.recyclerViewLeft.setRecycledViewPool(recycledViewPool)
         binding.recyclerViewLeft.layoutManager = LinearLayoutManager(this)
-        viewModel.extraHolder1.setupVertical(binding.recyclerViewLeft)
-        val adapter1 = LinearVerticalAdapter()
+        viewModel.extraHolder1.setupVertical(layoutInflater, binding.recyclerViewLeft)
+        val adapter1 = LinearVerticalAdapter(layoutInflater)
         adapter1.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder1)
         adapter1.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder1)
         viewModel.photosHolder1.setupView(this, adapter1)
@@ -36,8 +36,8 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
 
         binding.recyclerViewRight.setRecycledViewPool(recycledViewPool)
         binding.recyclerViewRight.layoutManager = LinearLayoutManager(this)
-        viewModel.extraHolder2.setupVertical(binding.recyclerViewRight)
-        val adapter2 = LinearVerticalAdapter()
+        viewModel.extraHolder2.setupVertical(layoutInflater, binding.recyclerViewRight)
+        val adapter2 = LinearVerticalAdapter(layoutInflater)
         adapter2.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder2)
         adapter2.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder2)
         viewModel.photosHolder2.setupView(this, adapter2)

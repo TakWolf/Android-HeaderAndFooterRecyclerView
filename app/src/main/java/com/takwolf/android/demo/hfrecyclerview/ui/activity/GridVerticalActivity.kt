@@ -28,8 +28,8 @@ class GridVerticalActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2).apply {
             spanSizeLookup = GridVerticalSpanSizeLookup(this, binding.recyclerView.proxyAdapter)
         }
-        viewModel.extraHolder.setupVertical(binding.recyclerView, binding.hfDashboard)
-        val adapter = GridVerticalAdapter()
+        viewModel.extraHolder.setupVertical(layoutInflater, binding.recyclerView, binding.hfDashboard)
+        val adapter = GridVerticalAdapter(layoutInflater)
         adapter.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
         adapter.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
         viewModel.photosHolder.setupView(this, adapter)

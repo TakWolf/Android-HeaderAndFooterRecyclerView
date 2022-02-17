@@ -10,10 +10,10 @@ class ExtraLiveHolder {
     private val footers = Banner.getList(2)
 
     private fun addVerticalHeader(
+        layoutInflater: LayoutInflater,
         recyclerView: HeaderAndFooterRecyclerView,
         banner: Banner,
     ) {
-        val layoutInflater = LayoutInflater.from(recyclerView.context)
         val headerBinding = HeaderVerticalBinding.inflate(layoutInflater, recyclerView.headerViewContainer, false)
         headerBinding.tvName.setBackgroundColor(banner.color)
         headerBinding.btnItem.setOnLongClickListener {
@@ -25,10 +25,10 @@ class ExtraLiveHolder {
     }
 
     private fun addVerticalFooter(
+        layoutInflater: LayoutInflater,
         recyclerView: HeaderAndFooterRecyclerView,
         banner: Banner,
     ) {
-        val layoutInflater = LayoutInflater.from(recyclerView.context)
         val footerBinding = FooterVerticalBinding.inflate(layoutInflater, recyclerView.footerViewContainer, false)
         footerBinding.tvName.setBackgroundColor(banner.color)
         footerBinding.btnItem.setOnLongClickListener {
@@ -40,10 +40,10 @@ class ExtraLiveHolder {
     }
 
     private fun addHorizontalHeader(
+        layoutInflater: LayoutInflater,
         recyclerView: HeaderAndFooterRecyclerView,
         banner: Banner,
     ) {
-        val layoutInflater = LayoutInflater.from(recyclerView.context)
         val headerBinding = HeaderHorizontalBinding.inflate(layoutInflater, recyclerView.headerViewContainer, false)
         headerBinding.tvName.setBackgroundColor(banner.color)
         headerBinding.btnItem.setOnLongClickListener {
@@ -55,10 +55,10 @@ class ExtraLiveHolder {
     }
 
     private fun addHorizontalFooter(
+        layoutInflater: LayoutInflater,
         recyclerView: HeaderAndFooterRecyclerView,
         banner: Banner,
     ) {
-        val layoutInflater = LayoutInflater.from(recyclerView.context)
         val footerBinding = FooterHorizontalBinding.inflate(layoutInflater, recyclerView.footerViewContainer, false)
         footerBinding.tvName.setBackgroundColor(banner.color)
         footerBinding.btnItem.setOnLongClickListener {
@@ -70,20 +70,21 @@ class ExtraLiveHolder {
     }
 
     fun setupVertical(
+        layoutInflater: LayoutInflater,
         recyclerView: HeaderAndFooterRecyclerView,
         binding: WidgetHfDashboardBinding? = null,
     ) {
         for (banner in headers) {
-            addVerticalHeader(recyclerView, banner)
+            addVerticalHeader(layoutInflater, recyclerView, banner)
         }
         for (banner in footers) {
-            addVerticalFooter(recyclerView, banner)
+            addVerticalFooter(layoutInflater, recyclerView, banner)
         }
         binding?.let {
             it.btnAddHeader.setOnClickListener {
                 val banner = Banner()
                 headers.add(banner)
-                addVerticalHeader(recyclerView, banner)
+                addVerticalHeader(layoutInflater, recyclerView, banner)
             }
             it.btnRemoveHeader.setOnClickListener {
                 if (headers.isNotEmpty()) {
@@ -94,7 +95,7 @@ class ExtraLiveHolder {
             it.btnAddFooter.setOnClickListener {
                 val banner = Banner()
                 footers.add(banner)
-                addVerticalFooter(recyclerView, banner)
+                addVerticalFooter(layoutInflater, recyclerView, banner)
             }
             it.btnRemoveFooter.setOnClickListener {
                 if (footers.isNotEmpty()) {
@@ -106,20 +107,21 @@ class ExtraLiveHolder {
     }
 
     fun setupHorizontal(
+        layoutInflater: LayoutInflater,
         recyclerView: HeaderAndFooterRecyclerView,
         binding: WidgetHfDashboardBinding? = null,
     ) {
         for (banner in headers) {
-            addHorizontalHeader(recyclerView, banner)
+            addHorizontalHeader(layoutInflater, recyclerView, banner)
         }
         for (banner in footers) {
-            addHorizontalFooter(recyclerView, banner)
+            addHorizontalFooter(layoutInflater, recyclerView, banner)
         }
         binding?.let {
             it.btnAddHeader.setOnClickListener {
                 val banner = Banner()
                 headers.add(banner)
-                addHorizontalHeader(recyclerView, banner)
+                addHorizontalHeader(layoutInflater, recyclerView, banner)
             }
             it.btnRemoveHeader.setOnClickListener {
                 if (headers.isNotEmpty()) {
@@ -130,7 +132,7 @@ class ExtraLiveHolder {
             it.btnAddFooter.setOnClickListener {
                 val banner = Banner()
                 footers.add(banner)
-                addHorizontalFooter(recyclerView, banner)
+                addHorizontalFooter(layoutInflater, recyclerView, banner)
             }
             it.btnRemoveFooter.setOnClickListener {
                 if (footers.isNotEmpty()) {

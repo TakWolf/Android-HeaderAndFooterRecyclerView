@@ -26,8 +26,8 @@ class LinearHorizontalActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        viewModel.extraHolder.setupHorizontal(binding.recyclerView, binding.hfDashboard)
-        val adapter = LinearHorizontalAdapter()
+        viewModel.extraHolder.setupHorizontal(layoutInflater, binding.recyclerView, binding.hfDashboard)
+        val adapter = LinearHorizontalAdapter(layoutInflater)
         adapter.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
         adapter.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
         viewModel.photosHolder.setupView(this, adapter)

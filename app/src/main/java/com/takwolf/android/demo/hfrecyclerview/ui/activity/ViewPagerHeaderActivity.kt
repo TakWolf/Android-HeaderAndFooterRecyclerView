@@ -22,9 +22,9 @@ class ViewPagerHeaderActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        val bannerPageHeader = BannerPageHeader(binding.recyclerView)
+        val bannerPageHeader = BannerPageHeader(layoutInflater, binding.recyclerView)
         bannerPageHeader.setup(this, viewModel)
-        val adapter = LinearVerticalAdapter()
+        val adapter = LinearVerticalAdapter(layoutInflater)
         viewModel.photosHolder.setupView(this, adapter)
         binding.recyclerView.adapter = adapter
 

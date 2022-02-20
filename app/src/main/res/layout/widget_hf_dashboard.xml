@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <Button style="?android:attr/buttonBarButtonStyle"
+    <Button style="?android:buttonBarButtonStyle"
         android:id="@+id/btn_add_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -12,7 +12,7 @@
         android:text="@string/add_header"
         android:textAllCaps="false" />
 
-    <Button style="?android:attr/buttonBarButtonStyle"
+    <Button style="?android:buttonBarButtonStyle"
         android:id="@+id/btn_remove_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:text="@string/remove_header"
         android:textAllCaps="false" />
 
-    <Button style="?android:attr/buttonBarButtonStyle"
+    <Button style="?android:buttonBarButtonStyle"
         android:id="@+id/btn_add_footer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:text="@string/add_footer"
         android:textAllCaps="false" />
 
-    <Button style="?android:attr/buttonBarButtonStyle"
+    <Button style="?android:buttonBarButtonStyle"
         android:id="@+id/btn_remove_footer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

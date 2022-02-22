@@ -27,9 +27,10 @@ class StaggeredHorizontalActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(3, RecyclerView.HORIZONTAL)
         viewModel.extraHolder.setupHorizontal(layoutInflater, binding.recyclerView, binding.hfDashboard)
-        val adapter = StaggeredHorizontalAdapter(layoutInflater)
-        adapter.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
-        adapter.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        val adapter = StaggeredHorizontalAdapter(layoutInflater).apply {
+            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
+            onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        }
         viewModel.photosHolder.setupView(this, adapter)
         binding.recyclerView.adapter = adapter
 

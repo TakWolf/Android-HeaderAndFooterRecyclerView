@@ -28,9 +28,10 @@ class RefreshLinearActivity : AppCompatActivity() {
         binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val loadMoreFooter = LoadMoreFooter.create(layoutInflater, binding.recyclerView)
-        val adapter = LinearVerticalAdapter(layoutInflater)
-        adapter.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
-        adapter.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        val adapter = LinearVerticalAdapter(layoutInflater).apply {
+            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
+            onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        }
         viewModel.photosHolder.setupView(this, binding.refreshLayout, loadMoreFooter, adapter)
         loadMoreFooter.addToRecyclerView(binding.recyclerView)
         binding.recyclerView.adapter = adapter

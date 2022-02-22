@@ -26,9 +26,10 @@ class LinearVerticalActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         viewModel.extraHolder.setupVertical(layoutInflater, binding.recyclerView, binding.hfDashboard)
-        val adapter = LinearVerticalAdapter(layoutInflater)
-        adapter.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
-        adapter.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        val adapter = LinearVerticalAdapter(layoutInflater).apply {
+            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
+            onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        }
         viewModel.photosHolder.setupView(this, adapter)
         binding.recyclerView.adapter = adapter
 

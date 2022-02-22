@@ -27,9 +27,10 @@ class StaggeredVerticalActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
         viewModel.extraHolder.setupVertical(layoutInflater, binding.recyclerView, binding.hfDashboard)
-        val adapter = StaggeredVerticalAdapter(layoutInflater)
-        adapter.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
-        adapter.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        val adapter = StaggeredVerticalAdapter(layoutInflater).apply {
+            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
+            onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        }
         viewModel.photosHolder.setupView(this, adapter)
         binding.recyclerView.adapter = adapter
 

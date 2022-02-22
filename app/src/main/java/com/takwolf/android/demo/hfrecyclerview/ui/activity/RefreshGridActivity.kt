@@ -28,9 +28,10 @@ class RefreshGridActivity : AppCompatActivity() {
         binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
         val loadMoreFooter = LoadMoreFooter.create(layoutInflater, binding.recyclerView)
-        val adapter = GridVerticalAdapter(layoutInflater)
-        adapter.onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
-        adapter.onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        val adapter = GridVerticalAdapter(layoutInflater).apply {
+            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
+            onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        }
         viewModel.photosHolder.setupView(this, binding.refreshLayout, loadMoreFooter, adapter)
         loadMoreFooter.addToRecyclerView(binding.recyclerView)
         binding.recyclerView.adapter = adapter

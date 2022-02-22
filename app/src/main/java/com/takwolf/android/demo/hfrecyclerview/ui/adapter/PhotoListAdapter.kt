@@ -74,7 +74,7 @@ class OnPhotosSwapListener(private val listHolder: ListLiveHolder<Photo>) {
 
 class OnPhotoDeleteListener(private val listHolder: ListLiveHolder<Photo>) {
     fun onPhotoDelete(position: Int) {
-        listHolder.entitiesData.value?.let { photos ->
+        listHolder.entitiesData.value?.toMutableList()?.let { photos ->
             photos.removeAt(position)
             listHolder.entitiesData.value = photos
         }

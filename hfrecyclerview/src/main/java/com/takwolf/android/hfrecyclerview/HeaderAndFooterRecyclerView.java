@@ -282,18 +282,18 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
 
     @Override
     protected Parcelable onSaveInstanceState() {
-        SavedState state = new SavedState(super.onSaveInstanceState());
+        SavedState savedState = new SavedState(super.onSaveInstanceState());
         for (View view : headerViews) {
             SparseArray<Parcelable> container = new SparseArray<>();
             view.saveHierarchyState(container);
-            state.headerStates.add(container);
+            savedState.headerStates.add(container);
         }
         for (View view : footerViews) {
             SparseArray<Parcelable> container = new SparseArray<>();
             view.saveHierarchyState(container);
-            state.footerStates.add(container);
+            savedState.footerStates.add(container);
         }
-        return state;
+        return savedState;
     }
 
     @Override

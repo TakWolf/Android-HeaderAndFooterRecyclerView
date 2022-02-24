@@ -29,13 +29,13 @@ class RefreshStaggeredActivity : AppCompatActivity() {
         binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
         val loadMoreFooter = LoadMoreFooter.create(layoutInflater, binding.recyclerView)
+        loadMoreFooter.addToRecyclerView(binding.recyclerView)
         val adapter = StaggeredVerticalAdapter(layoutInflater).apply {
             onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
             onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
         }
-        viewModel.photosHolder.setupView(this, binding.refreshLayout, loadMoreFooter, adapter)
-        loadMoreFooter.addToRecyclerView(binding.recyclerView)
         binding.recyclerView.adapter = adapter
+        viewModel.photosHolder.setupView(this, binding.refreshLayout, loadMoreFooter, adapter)
 
         viewModel.toastHolder.setupView(this, this)
 

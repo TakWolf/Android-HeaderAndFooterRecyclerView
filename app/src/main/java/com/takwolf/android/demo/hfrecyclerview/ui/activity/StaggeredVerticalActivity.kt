@@ -31,8 +31,8 @@ class StaggeredVerticalActivity : AppCompatActivity() {
             onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
             onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
         }
-        viewModel.photosHolder.setupView(this, adapter)
         binding.recyclerView.adapter = adapter
+        viewModel.photosHolder.setupView(this, adapter)
 
         setContentView(binding.root)
     }

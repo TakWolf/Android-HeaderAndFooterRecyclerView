@@ -44,7 +44,6 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("io.coil-kt:coil:1.4.0")
-    implementation("com.github.TakWolf:Android-AspectRatioLayout:0.0.1")
     implementation("com.github.hadilq:live-event:1.3.0")
     implementation(project(":hfrecyclerview"))
     implementation(project(":loadmorefooter"))

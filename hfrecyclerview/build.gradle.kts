@@ -6,11 +6,10 @@ plugins {
 
 android {
     namespace = "com.takwolf.android.hfrecyclerview"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
 
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -26,7 +25,7 @@ android {
 }
 
 dependencies {
-    compileOnly("androidx.recyclerview:recyclerview:1.2.1")
+    compileOnly("androidx.recyclerview:recyclerview:1.3.0")
 }
 
 tasks {

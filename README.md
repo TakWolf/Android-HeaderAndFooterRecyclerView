@@ -1,6 +1,7 @@
 # Android - HeaderAndFooterRecyclerView
 
 [![Platform](https://img.shields.io/badge/platform-Android-brightgreen)](https://developer.android.com)
+[![API](https://img.shields.io/badge/API-21%2B-brightgreen)](https://android-arsenal.com/api?level=21)
 [![License](https://img.shields.io/github/license/TakWolf/Android-HeaderAndFooterRecyclerView)](https://www.apache.org/licenses/LICENSE-2.0)
 [![JitPack](https://jitpack.io/v/TakWolf/Android-HeaderAndFooterRecyclerView.svg)](https://jitpack.io/#TakWolf/Android-HeaderAndFooterRecyclerView)
 
@@ -20,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.0")
     implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.3")
 }
 ```

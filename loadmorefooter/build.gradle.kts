@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    compileOnly("androidx.recyclerview:recyclerview:1.3.1")
+    compileOnly("androidx.recyclerview:recyclerview:1.3.2")
     api(project(":hfrecyclerview"))
 }
 

@@ -321,8 +321,8 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
     }
 
     private static class SavedState extends BaseSavedState {
-        List<SparseArray<Parcelable>> headerStates = new ArrayList<>();
-        List<SparseArray<Parcelable>> footerStates = new ArrayList<>();
+        private final List<SparseArray<Parcelable>> headerStates = new ArrayList<>();
+        private final List<SparseArray<Parcelable>> footerStates = new ArrayList<>();
 
         public SavedState(Parcelable superState) {
             super(superState);

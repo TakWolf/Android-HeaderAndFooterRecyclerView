@@ -1,13 +1,17 @@
 package com.takwolf.android.demo.hfrecyclerview.vm.holder
 
 import android.view.LayoutInflater
-import com.takwolf.android.demo.hfrecyclerview.databinding.*
+import com.takwolf.android.demo.hfrecyclerview.databinding.FooterHorizontalBinding
+import com.takwolf.android.demo.hfrecyclerview.databinding.FooterVerticalBinding
+import com.takwolf.android.demo.hfrecyclerview.databinding.HeaderHorizontalBinding
+import com.takwolf.android.demo.hfrecyclerview.databinding.HeaderVerticalBinding
+import com.takwolf.android.demo.hfrecyclerview.databinding.WidgetHfDashboardBinding
 import com.takwolf.android.demo.hfrecyclerview.model.Banner
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
 
 class ExtraLiveHolder {
-    private val headers = Banner.getList(2)
-    private val footers = Banner.getList(2)
+    private val headers = Banner.getList(2).toMutableList()
+    private val footers = Banner.getList(2).toMutableList()
 
     private fun addVerticalHeader(
         layoutInflater: LayoutInflater,

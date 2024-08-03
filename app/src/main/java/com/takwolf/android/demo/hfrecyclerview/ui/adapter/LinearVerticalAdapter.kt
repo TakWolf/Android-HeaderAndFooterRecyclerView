@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemLinearVerticalBinding
 
-class LinearVerticalAdapter(private val layoutInflater: LayoutInflater) : PhotoListAdapter<LinearVerticalAdapter.ViewHolder>() {
+class LinearVerticalAdapter(
+    private val layoutInflater: LayoutInflater,
+) : PhotoListAdapter<LinearVerticalAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemLinearVerticalBinding.inflate(layoutInflater, parent, false))
     }

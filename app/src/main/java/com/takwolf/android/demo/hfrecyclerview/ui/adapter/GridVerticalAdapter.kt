@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemGridVerticalBinding
 import com.takwolf.android.hfrecyclerview.ProxyAdapter
 
-class GridVerticalAdapter(private val layoutInflater: LayoutInflater) : PhotoListAdapter<GridVerticalAdapter.ViewHolder>() {
+class GridVerticalAdapter(
+    private val layoutInflater: LayoutInflater,
+) : PhotoListAdapter<GridVerticalAdapter.ViewHolder>() {
     companion object {
         const val TYPE_NORMAL = 0
         const val TYPE_FULL_SPAN = 1

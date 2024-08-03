@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemStaggeredVerticalBinding
 
-class StaggeredVerticalAdapter(private val layoutInflater: LayoutInflater) : PhotoListAdapter<StaggeredVerticalAdapter.ViewHolder>() {
+class StaggeredVerticalAdapter(
+    private val layoutInflater: LayoutInflater,
+) : PhotoListAdapter<StaggeredVerticalAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemStaggeredVerticalBinding.inflate(layoutInflater, parent, false))
     }

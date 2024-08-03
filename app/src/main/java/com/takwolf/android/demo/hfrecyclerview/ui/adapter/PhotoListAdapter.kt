@@ -9,7 +9,7 @@ import coil.load
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.demo.hfrecyclerview.vm.holder.ListLiveHolder
-import java.util.*
+import java.util.Collections
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -63,7 +63,9 @@ private object PhotoDiffItemCallback : DiffUtil.ItemCallback<Photo>() {
     }
 }
 
-class OnPhotosSwapListener(private val listHolder: ListLiveHolder<Photo>) {
+class OnPhotosSwapListener(
+    private val listHolder: ListLiveHolder<Photo>,
+) {
     fun onPhotosSwap(oldPosition: Int, newPosition: Int) {
         listHolder.entitiesData.value?.let { photos ->
             Collections.swap(photos, oldPosition, newPosition)
@@ -72,7 +74,9 @@ class OnPhotosSwapListener(private val listHolder: ListLiveHolder<Photo>) {
     }
 }
 
-class OnPhotoDeleteListener(private val listHolder: ListLiveHolder<Photo>) {
+class OnPhotoDeleteListener(
+    private val listHolder: ListLiveHolder<Photo>,
+) {
     fun onPhotoDelete(position: Int) {
         listHolder.entitiesData.value?.toMutableList()?.let { photos ->
             photos.removeAt(position)

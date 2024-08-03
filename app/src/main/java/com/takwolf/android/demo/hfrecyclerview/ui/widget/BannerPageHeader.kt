@@ -10,7 +10,10 @@ import com.takwolf.android.demo.hfrecyclerview.vm.ExtraListViewModel
 import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
 
-class BannerPageHeader(layoutInflater: LayoutInflater, recyclerView: HeaderAndFooterRecyclerView) {
+class BannerPageHeader(
+    layoutInflater: LayoutInflater,
+    recyclerView: HeaderAndFooterRecyclerView,
+) {
     val binding = HeaderViewPagerBinding.bind(recyclerView.addHeaderView(layoutInflater, R.layout.header_view_pager))
     val adapter = BannerPageAdapter(layoutInflater)
 

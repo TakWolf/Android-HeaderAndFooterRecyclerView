@@ -1,6 +1,6 @@
 package com.takwolf.android.demo.hfrecyclerview.model
 
-import java.util.*
+import java.util.UUID
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -32,8 +32,8 @@ data class Photo(
             "https://static.takwolf.com/app-test/minami-kotori/19.jpg",
         )
 
-        fun getList(size: Int = 100): MutableList<Photo> {
-            return MutableList(size) {
+        fun getList(size: Int = 100): List<Photo> {
+            return List(size) {
                 Photo(UUID.randomUUID().toString(), URLS[abs(Random.nextInt() % URLS.size)])
             }
         }

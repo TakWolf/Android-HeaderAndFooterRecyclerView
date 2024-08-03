@@ -6,7 +6,9 @@ import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.FooterLoadMoreBinding
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
 
-class LoadMoreFooter(private val binding: FooterLoadMoreBinding) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {
+class LoadMoreFooter(
+    private val binding: FooterLoadMoreBinding,
+) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {
     companion object {
         fun create(layoutInflater: LayoutInflater, recyclerView: HeaderAndFooterRecyclerView): LoadMoreFooter {
             val binding = FooterLoadMoreBinding.inflate(layoutInflater, recyclerView.footerViewContainer, false)

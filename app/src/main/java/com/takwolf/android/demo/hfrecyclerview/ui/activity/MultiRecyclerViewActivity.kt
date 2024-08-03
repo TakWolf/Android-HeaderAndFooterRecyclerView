@@ -18,6 +18,7 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMultiRecyclerViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.toolbar.setNavigationOnClickListener {
             finish()
@@ -56,7 +57,5 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
             binding.recyclerViewLeft.swapAdapter(binding.recyclerViewRight.adapter, false)
             binding.recyclerViewRight.swapAdapter(adapter, false)
         }
-
-        setContentView(binding.root)
     }
 }

@@ -19,6 +19,7 @@ class RefreshLinearActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityRefreshAndLoadMoreBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.toolbar.setTitle(R.string.refresh_linear)
         binding.toolbar.setNavigationOnClickListener {
@@ -37,7 +38,5 @@ class RefreshLinearActivity : AppCompatActivity() {
         viewModel.photosHolder.setupView(this, binding.refreshLayout, loadMoreFooter, adapter)
 
         viewModel.toastHolder.setupView(this, this)
-
-        setContentView(binding.root)
     }
 }

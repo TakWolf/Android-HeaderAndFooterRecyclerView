@@ -19,6 +19,7 @@ class GridVerticalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityRecyclerViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.toolbar.setTitle(R.string.grid_vertical)
         binding.toolbar.setNavigationOnClickListener {
@@ -35,7 +36,5 @@ class GridVerticalActivity : AppCompatActivity() {
         }
         binding.recyclerView.adapter = adapter
         viewModel.photosHolder.setupView(this, adapter)
-
-        setContentView(binding.root)
     }
 }

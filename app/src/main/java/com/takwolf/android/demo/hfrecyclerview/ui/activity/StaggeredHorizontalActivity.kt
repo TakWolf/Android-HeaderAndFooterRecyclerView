@@ -19,6 +19,7 @@ class StaggeredHorizontalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityRecyclerViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.toolbar.setTitle(R.string.staggered_horizontal)
         binding.toolbar.setNavigationOnClickListener {
@@ -33,7 +34,5 @@ class StaggeredHorizontalActivity : AppCompatActivity() {
         }
         binding.recyclerView.adapter = adapter
         viewModel.photosHolder.setupView(this, adapter)
-
-        setContentView(binding.root)
     }
 }

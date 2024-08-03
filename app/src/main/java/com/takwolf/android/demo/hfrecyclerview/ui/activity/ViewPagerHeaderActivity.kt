@@ -16,6 +16,7 @@ class ViewPagerHeaderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityViewPagerHeaderBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.toolbar.setNavigationOnClickListener {
             finish()
@@ -27,7 +28,5 @@ class ViewPagerHeaderActivity : AppCompatActivity() {
         val adapter = LinearVerticalAdapter(layoutInflater)
         binding.recyclerView.adapter = adapter
         viewModel.photosHolder.setupView(this, adapter)
-
-        setContentView(binding.root)
     }
 }

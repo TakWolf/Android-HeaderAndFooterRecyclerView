@@ -9,7 +9,6 @@ import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRecyclerViewBinding
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.LinearHorizontalAdapter
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotoDeleteListener
-import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotosSwapListener
 import com.takwolf.android.demo.hfrecyclerview.vm.SingleListViewModel
 import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
 
@@ -29,7 +28,6 @@ class LinearHorizontalActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         viewModel.extraHolder.setupHorizontal(layoutInflater, binding.recyclerView, binding.hfDashboard)
         val adapter = LinearHorizontalAdapter(layoutInflater).apply {
-            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
             onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
         }
         binding.recyclerView.adapter = adapter

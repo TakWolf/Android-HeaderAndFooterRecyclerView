@@ -9,12 +9,8 @@ import coil.load
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.demo.hfrecyclerview.vm.holder.ListLiveHolder
-import java.util.Collections
-import kotlin.math.abs
-import kotlin.random.Random
 
 abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<Photo, VH>(PhotoDiffItemCallback) {
-    var onPhotosSwapListener: OnPhotosSwapListener? = null
     var onPhotoDeleteListener: OnPhotoDeleteListener? = null
 
     abstract class ViewHolder(
@@ -23,16 +19,6 @@ abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<
         private val imgPhoto: ImageView,
     ) : RecyclerView.ViewHolder(itemView) {
         init {
-            btnItem.setOnClickListener {
-                (bindingAdapter as? PhotoListAdapter)?.let { adapter ->
-                    adapter.onPhotosSwapListener?.let { listener ->
-                        val oldPosition = bindingAdapterPosition
-                        val newPosition = abs(Random.nextInt() % adapter.itemCount)
-                        listener.onPhotosSwap(oldPosition, newPosition)
-                    }
-                }
-            }
-
             btnItem.setOnLongClickListener {
                 (bindingAdapter as? PhotoListAdapter)?.let { adapter ->
                     adapter.onPhotoDeleteListener?.let { listener ->
@@ -60,17 +46,6 @@ private object PhotoDiffItemCallback : DiffUtil.ItemCallback<Photo>() {
 
     override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean {
         return oldItem == newItem
-    }
-}
-
-class OnPhotosSwapListener(
-    private val listHolder: ListLiveHolder<Photo>,
-) {
-    fun onPhotosSwap(oldPosition: Int, newPosition: Int) {
-        listHolder.entitiesData.value?.let { photos ->
-            Collections.swap(photos, oldPosition, newPosition)
-            listHolder.entitiesData.value = photos
-        }
     }
 }
 

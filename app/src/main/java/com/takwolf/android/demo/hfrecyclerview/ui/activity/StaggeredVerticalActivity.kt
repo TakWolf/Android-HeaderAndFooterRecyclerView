@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRecyclerViewBinding
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotoDeleteListener
-import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotosSwapListener
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.StaggeredVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.vm.SingleListViewModel
 import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
@@ -29,7 +28,6 @@ class StaggeredVerticalActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
         viewModel.extraHolder.setupVertical(layoutInflater, binding.recyclerView, binding.hfDashboard)
         val adapter = StaggeredVerticalAdapter(layoutInflater).apply {
-            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
             onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
         }
         binding.recyclerView.adapter = adapter

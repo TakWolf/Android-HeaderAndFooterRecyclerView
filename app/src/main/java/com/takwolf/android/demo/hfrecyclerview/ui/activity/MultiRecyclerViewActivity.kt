@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityMultiRecyclerViewBinding
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.LinearVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotoDeleteListener
-import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotosSwapListener
 import com.takwolf.android.demo.hfrecyclerview.vm.MultiListViewModel
 import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
 
@@ -30,7 +29,6 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
         binding.recyclerViewLeft.layoutManager = LinearLayoutManager(this)
         viewModel.extraHolder1.setupVertical(layoutInflater, binding.recyclerViewLeft)
         val adapter1 = LinearVerticalAdapter(layoutInflater).apply {
-            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder1)
             onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder1)
         }
         binding.recyclerViewLeft.adapter = adapter1
@@ -40,7 +38,6 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
         binding.recyclerViewRight.layoutManager = LinearLayoutManager(this)
         viewModel.extraHolder2.setupVertical(layoutInflater, binding.recyclerViewRight)
         val adapter2 = LinearVerticalAdapter(layoutInflater).apply {
-            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder2)
             onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder2)
         }
         binding.recyclerViewRight.adapter = adapter2

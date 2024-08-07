@@ -8,7 +8,6 @@ import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRefreshAndLoadMoreBinding
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.LinearVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotoDeleteListener
-import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotosSwapListener
 import com.takwolf.android.demo.hfrecyclerview.ui.widget.LoadMoreFooter
 import com.takwolf.android.demo.hfrecyclerview.vm.PagingViewModel
 import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
@@ -31,7 +30,6 @@ class RefreshLinearActivity : AppCompatActivity() {
         val loadMoreFooter = LoadMoreFooter.create(layoutInflater, binding.recyclerView)
         loadMoreFooter.addToRecyclerView(binding.recyclerView)
         val adapter = LinearVerticalAdapter(layoutInflater).apply {
-            onPhotosSwapListener = OnPhotosSwapListener(viewModel.photosHolder)
             onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
         }
         binding.recyclerView.adapter = adapter

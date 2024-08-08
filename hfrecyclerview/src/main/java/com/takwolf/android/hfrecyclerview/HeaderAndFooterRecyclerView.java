@@ -88,9 +88,16 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
     }
 
     @NonNull
-    public View addHeaderView(@NonNull LayoutInflater inflater, @LayoutRes int resource) {
-        View view = inflater.inflate(resource, getHeaderViewContainer(), false);
+    public View addHeaderView(@LayoutRes int layoutId) {
+        View view = LayoutInflater.from(getContext()).inflate(layoutId, getHeaderViewContainer(), false);
         addHeaderView(view);
+        return view;
+    }
+
+    @NonNull
+    public View addHeaderView(@LayoutRes int layoutId, int index) {
+        View view = LayoutInflater.from(getContext()).inflate(layoutId, getHeaderViewContainer(), false);
+        addHeaderView(view, index);
         return view;
     }
 
@@ -128,9 +135,16 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
     }
 
     @NonNull
-    public View addFooterView(@NonNull LayoutInflater inflater, @LayoutRes int resource) {
-        View view = inflater.inflate(resource, getFooterViewContainer(), false);
+    public View addFooterView(@LayoutRes int layoutId) {
+        View view = LayoutInflater.from(getContext()).inflate(layoutId, getFooterViewContainer(), false);
         addFooterView(view);
+        return view;
+    }
+
+    @NonNull
+    public View addFooterView(@LayoutRes int layoutId, int index) {
+        View view = LayoutInflater.from(getContext()).inflate(layoutId, getFooterViewContainer(), false);
+        addFooterView(view, index);
         return view;
     }
 

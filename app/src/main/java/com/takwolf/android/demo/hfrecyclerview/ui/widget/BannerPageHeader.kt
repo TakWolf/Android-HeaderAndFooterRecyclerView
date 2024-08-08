@@ -14,7 +14,7 @@ class BannerPageHeader(
     layoutInflater: LayoutInflater,
     recyclerView: HeaderAndFooterRecyclerView,
 ) {
-    val binding = HeaderViewPagerBinding.bind(recyclerView.addHeaderView(layoutInflater, R.layout.header_view_pager))
+    val binding = HeaderViewPagerBinding.bind(recyclerView.addHeaderView(R.layout.header_view_pager))
     val adapter = BannerPageAdapter(layoutInflater)
 
     init {

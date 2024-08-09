@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.takwolf.android.hfrecyclerview"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 21

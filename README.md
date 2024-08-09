@@ -96,10 +96,12 @@ dependencies {
 [LoadMoreFooter.kt](app/src/main/java/com/takwolf/android/demo/hfrecyclerview/ui/widget/LoadMoreFooter.kt)
 
 ```kotlin
-class LoadMoreFooter(private val binding: FooterLoadMoreBinding) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {
+class LoadMoreFooter private constructor(
+    private val binding: FooterLoadMoreBinding,
+) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {
     companion object {
-        fun create(layoutInflater: LayoutInflater, recyclerView: HeaderAndFooterRecyclerView): LoadMoreFooter {
-            val binding = FooterLoadMoreBinding.inflate(layoutInflater, recyclerView.footerViewContainer, false)
+        fun create(recyclerView: HeaderAndFooterRecyclerView): LoadMoreFooter {
+            val binding = FooterLoadMoreBinding.inflate(LayoutInflater.from(recyclerView.context), recyclerView.footerViewContainer, false)
             return LoadMoreFooter(binding)
         }
     }
@@ -151,7 +153,7 @@ class LoadMoreFooter(private val binding: FooterLoadMoreBinding) : com.takwolf.a
 最后挂载到 `RecyclerView` 上：
 
 ```kotlin
-val loadMoreFooter = LoadMoreFooter.create(layoutInflater, binding.recyclerView)
+val loadMoreFooter = LoadMoreFooter.create(binding.recyclerView)
 loadMoreFooter.setOnLoadMoreListener { 
     // do load more here
 }
@@ -159,8 +161,6 @@ loadMoreFooter.addToRecyclerView(binding.recyclerView)
 ```
 
 通过 `loadMoreFooter.state` 来改变组件状态。
-
-在 [Android-RefreshAndLoadMore-Demo](https://github.com/TakWolf/Android-RefreshAndLoadMore-Demo) 提供了一个更详细的例子用于演示下拉刷新和加载更多。
 
 ## License
 

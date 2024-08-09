@@ -5,7 +5,7 @@
     android:layout_height="200dp"
     android:padding="1dp"
     android:foreground="?selectableItemBackground"
-    android:background="@color/brown_200">
+    android:background="@color/footer">
 
     <TextView
         android:id="@+id/tv_name"

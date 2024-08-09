@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemPageBinding
-import com.takwolf.android.demo.hfrecyclerview.model.entity.Banner
+import com.takwolf.android.demo.hfrecyclerview.model.Banner
 
 class BannerPageAdapter : ListAdapter<Banner, BannerPageAdapter.ViewHolder>(BannerDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

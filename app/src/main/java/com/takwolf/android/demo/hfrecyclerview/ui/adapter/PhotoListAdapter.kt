@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.takwolf.android.demo.hfrecyclerview.R
-import com.takwolf.android.demo.hfrecyclerview.model.entity.Photo
+import com.takwolf.android.demo.hfrecyclerview.model.Photo
 
 abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<Photo, VH>(PhotoDiffItemCallback) {
     var onPhotoDeleteListener: ((position: Int) -> Unit)? = null

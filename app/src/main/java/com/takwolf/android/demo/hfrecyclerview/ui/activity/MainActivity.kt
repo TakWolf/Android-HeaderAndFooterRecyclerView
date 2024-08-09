@@ -50,9 +50,5 @@ class MainActivity : AppCompatActivity() {
         binding.btnMultiRecyclerView.setOnClickListener {
             startActivity(Intent(this, MultiRecyclerViewActivity::class.java))
         }
-
-        binding.btnViewPagerHeader.setOnClickListener {
-            startActivity(Intent(this, ViewPagerHeaderActivity::class.java))
-        }
     }
 }

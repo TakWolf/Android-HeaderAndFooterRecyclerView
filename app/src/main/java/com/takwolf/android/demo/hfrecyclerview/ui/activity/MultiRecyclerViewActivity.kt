@@ -4,15 +4,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityMultiRecyclerViewBinding
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.LinearVerticalAdapter
-import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotoDeleteListener
-import com.takwolf.android.demo.hfrecyclerview.vm.MultiListViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
+import com.takwolf.android.demo.hfrecyclerview.vm.MultiPhotoListViewModel
 
 class MultiRecyclerViewActivity : AppCompatActivity() {
-    private val viewModel: MultiListViewModel by viewModels()
+    private val viewModel: MultiPhotoListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,25 +21,39 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
             finish()
         }
 
-        val recycledViewPool = RecyclerView.RecycledViewPool()
-
-        binding.recyclerViewLeft.setRecycledViewPool(recycledViewPool)
         binding.recyclerViewLeft.layoutManager = LinearLayoutManager(this)
-        viewModel.extraHolder1.setupVertical(layoutInflater, binding.recyclerViewLeft)
-        val adapter1 = LinearVerticalAdapter(layoutInflater).apply {
-            onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder1)
-        }
-        binding.recyclerViewLeft.adapter = adapter1
-        viewModel.photosHolder1.setupView(this, adapter1)
+        binding.recyclerViewLeft.addHeaderView(R.layout.header_vertical)
+        binding.recyclerViewLeft.addFooterView(R.layout.footer_vertical)
+        val adapter1 = LinearVerticalAdapter().apply {
+            onPhotoDeleteListener = { position ->
+                viewModel.photos1.value?.toMutableList()?.let { photos ->
+                    photos.removeAt(position)
+                    viewModel.photos1.value = photos
+                }
+            }
 
-        binding.recyclerViewRight.setRecycledViewPool(recycledViewPool)
-        binding.recyclerViewRight.layoutManager = LinearLayoutManager(this)
-        viewModel.extraHolder2.setupVertical(layoutInflater, binding.recyclerViewRight)
-        val adapter2 = LinearVerticalAdapter(layoutInflater).apply {
-            onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder2)
+            binding.recyclerViewLeft.adapter = this
         }
-        binding.recyclerViewRight.adapter = adapter2
-        viewModel.photosHolder2.setupView(this, adapter2)
+        viewModel.photos1.observe(this) { photos ->
+            adapter1.submitList(photos)
+        }
+
+        binding.recyclerViewRight.layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewRight.addHeaderView(R.layout.header_vertical)
+        binding.recyclerViewRight.addFooterView(R.layout.footer_vertical)
+        val adapter2 = LinearVerticalAdapter().apply {
+            onPhotoDeleteListener = { position ->
+                viewModel.photos2.value?.toMutableList()?.let { photos ->
+                    photos.removeAt(position)
+                    viewModel.photos2.value = photos
+                }
+            }
+
+            binding.recyclerViewRight.adapter = this
+        }
+        viewModel.photos2.observe(this) { photos ->
+            adapter2.submitList(photos)
+        }
 
         binding.btnReplaceAdapters.setOnClickListener {
             val adapter = binding.recyclerViewLeft.adapter

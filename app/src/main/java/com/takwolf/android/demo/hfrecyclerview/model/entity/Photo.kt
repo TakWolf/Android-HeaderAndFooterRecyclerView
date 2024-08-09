@@ -1,4 +1,4 @@
-package com.takwolf.android.demo.hfrecyclerview.model
+package com.takwolf.android.demo.hfrecyclerview.model.entity
 
 import java.util.UUID
 import kotlin.math.abs
@@ -32,10 +32,8 @@ data class Photo(
             "https://static.takwolf.com/app-test/minami-kotori/19.jpg",
         )
 
-        fun getList(size: Int = 100): List<Photo> {
-            return List(size) {
-                Photo(UUID.randomUUID().toString(), URLS[abs(Random.nextInt() % URLS.size)])
-            }
+        fun new(): Photo {
+            return Photo(UUID.randomUUID().toString(), URLS[abs(Random.nextInt() % URLS.size)])
         }
     }
 }

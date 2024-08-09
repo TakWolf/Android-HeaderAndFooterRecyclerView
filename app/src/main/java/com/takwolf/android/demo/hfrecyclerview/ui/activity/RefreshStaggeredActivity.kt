@@ -7,14 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRefreshAndLoadMoreBinding
-import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotoDeleteListener
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.StaggeredVerticalAdapter
+import com.takwolf.android.demo.hfrecyclerview.ui.widget.BannerPageHeader
 import com.takwolf.android.demo.hfrecyclerview.ui.widget.LoadMoreFooter
-import com.takwolf.android.demo.hfrecyclerview.vm.PagingViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
+import com.takwolf.android.demo.hfrecyclerview.vm.PhotoPagingViewModel
 
 class RefreshStaggeredActivity : AppCompatActivity() {
-    private val viewModel: PagingViewModel by viewModels()
+    private val viewModel: PhotoPagingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +27,28 @@ class RefreshStaggeredActivity : AppCompatActivity() {
 
         binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
-        val loadMoreFooter = LoadMoreFooter.create(layoutInflater, binding.recyclerView)
-        loadMoreFooter.addToRecyclerView(binding.recyclerView)
-        val adapter = StaggeredVerticalAdapter(layoutInflater).apply {
-            onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        val bannerPageHeader = BannerPageHeader(binding.recyclerView).apply {
+            addToRecyclerView(binding.recyclerView)
         }
-        binding.recyclerView.adapter = adapter
-        viewModel.photosHolder.setupView(this, binding.refreshLayout, loadMoreFooter, adapter)
+        val loadMoreFooter = LoadMoreFooter.create(binding.recyclerView).apply {
+            addToRecyclerView(binding.recyclerView)
+        }
+        viewModel.pagingSource.setupViews(this, binding.refreshLayout, loadMoreFooter)
+        val adapter = StaggeredVerticalAdapter().apply {
+            onPhotoDeleteListener = { position ->
+                viewModel.photos.value?.toMutableList()?.let { photos ->
+                    photos.removeAt(position)
+                    viewModel.photos.value = photos
+                }
+            }
 
-        viewModel.toastHolder.setupView(this, this)
+            binding.recyclerView.adapter = this
+        }
+        viewModel.banners.observe(this) { banners ->
+            bannerPageHeader.adapter.submitList(banners)
+        }
+        viewModel.photos.observe(this) { photos ->
+            adapter.submitList(photos)
+        }
     }
 }

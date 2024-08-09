@@ -7,11 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.takwolf.android.demo.hfrecyclerview.R
-import com.takwolf.android.demo.hfrecyclerview.model.Photo
-import com.takwolf.android.demo.hfrecyclerview.vm.holder.ListLiveHolder
+import com.takwolf.android.demo.hfrecyclerview.model.entity.Photo
 
 abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<Photo, VH>(PhotoDiffItemCallback) {
-    var onPhotoDeleteListener: OnPhotoDeleteListener? = null
+    var onPhotoDeleteListener: ((position: Int) -> Unit)? = null
 
     abstract class ViewHolder(
         itemView: View,
@@ -21,10 +20,7 @@ abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<
         init {
             btnItem.setOnLongClickListener {
                 (bindingAdapter as? PhotoListAdapter)?.let { adapter ->
-                    adapter.onPhotoDeleteListener?.let { listener ->
-                        val position = bindingAdapterPosition
-                        listener.onPhotoDelete(position)
-                    }
+                    adapter.onPhotoDeleteListener?.invoke(bindingAdapterPosition)
                 }
                 true
             }
@@ -46,16 +42,5 @@ private object PhotoDiffItemCallback : DiffUtil.ItemCallback<Photo>() {
 
     override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean {
         return oldItem == newItem
-    }
-}
-
-class OnPhotoDeleteListener(
-    private val listHolder: ListLiveHolder<Photo>,
-) {
-    fun onPhotoDelete(position: Int) {
-        listHolder.entitiesData.value?.toMutableList()?.let { photos ->
-            photos.removeAt(position)
-            listHolder.entitiesData.value = photos
-        }
     }
 }

@@ -1,12 +1,14 @@
-package com.takwolf.android.demo.hfrecyclerview.model
+package com.takwolf.android.demo.hfrecyclerview.model.entity
 
 import android.graphics.Color
 import androidx.annotation.ColorInt
+import java.util.UUID
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
 data class Banner(
-    val color: Int = randomColor(),
+    val id: String,
+    val color: Int,
 ) {
     companion object {
         @ColorInt
@@ -17,10 +19,8 @@ data class Banner(
             return Color.rgb(red, green, blue)
         }
 
-        fun getList(size: Int = 5): List<Banner> {
-            return List(size) {
-                Banner()
-            }
+        fun new(): Banner {
+            return Banner(UUID.randomUUID().toString(), randomColor())
         }
     }
 }

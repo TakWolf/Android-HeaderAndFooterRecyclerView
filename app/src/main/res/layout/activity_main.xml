@@ -108,14 +108,6 @@
                 android:text="@string/multi_recyclerView"
                 android:textAllCaps="false" />
 
-            <Button
-                android:id="@+id/btn_view_pager_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/view_pager_header"
-                android:textAllCaps="false" />
-
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

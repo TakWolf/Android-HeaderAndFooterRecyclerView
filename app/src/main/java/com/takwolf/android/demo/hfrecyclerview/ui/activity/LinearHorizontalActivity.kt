@@ -8,12 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityRecyclerViewBinding
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.LinearHorizontalAdapter
-import com.takwolf.android.demo.hfrecyclerview.ui.adapter.OnPhotoDeleteListener
-import com.takwolf.android.demo.hfrecyclerview.vm.SingleListViewModel
-import com.takwolf.android.demo.hfrecyclerview.vm.holder.setupView
+import com.takwolf.android.demo.hfrecyclerview.vm.PhotoListViewModel
 
 class LinearHorizontalActivity : AppCompatActivity() {
-    private val viewModel: SingleListViewModel by viewModels()
+    private val viewModel: PhotoListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +24,20 @@ class LinearHorizontalActivity : AppCompatActivity() {
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        viewModel.extraHolder.setupHorizontal(layoutInflater, binding.recyclerView, binding.hfDashboard)
-        val adapter = LinearHorizontalAdapter(layoutInflater).apply {
-            onPhotoDeleteListener = OnPhotoDeleteListener(viewModel.photosHolder)
+        binding.recyclerView.addHeaderView(R.layout.header_horizontal)
+        binding.recyclerView.addFooterView(R.layout.footer_horizontal)
+        val adapter = LinearHorizontalAdapter().apply {
+            onPhotoDeleteListener = { position ->
+                viewModel.photos.value?.toMutableList()?.let { photos ->
+                    photos.removeAt(position)
+                    viewModel.photos.value = photos
+                }
+            }
+
+            binding.recyclerView.adapter = this
         }
-        binding.recyclerView.adapter = adapter
-        viewModel.photosHolder.setupView(this, adapter)
+        viewModel.photos.observe(this) { photos ->
+            adapter.submitList(photos)
+        }
     }
 }

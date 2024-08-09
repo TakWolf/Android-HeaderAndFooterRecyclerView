@@ -6,13 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemPageBinding
-import com.takwolf.android.demo.hfrecyclerview.model.Banner
+import com.takwolf.android.demo.hfrecyclerview.model.entity.Banner
 
-class BannerPageAdapter(
-    private val layoutInflater: LayoutInflater,
-) : ListAdapter<Banner, BannerPageAdapter.ViewHolder>(ColorInfoDiffItemCallback) {
+class BannerPageAdapter : ListAdapter<Banner, BannerPageAdapter.ViewHolder>(BannerDiffItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemPageBinding.inflate(layoutInflater, parent, false))
+        val binding = ItemPageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,7 +26,7 @@ class BannerPageAdapter(
     }
 }
 
-private object ColorInfoDiffItemCallback : DiffUtil.ItemCallback<Banner>() {
+private object BannerDiffItemCallback : DiffUtil.ItemCallback<Banner>() {
     override fun areItemsTheSame(oldItem: Banner, newItem: Banner): Boolean {
         return oldItem.color == newItem.color
     }

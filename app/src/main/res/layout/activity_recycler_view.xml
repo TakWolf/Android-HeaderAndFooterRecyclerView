@@ -15,18 +15,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="?homeAsUpIndicator" />
 
-    <include layout="@layout/widget_hf_dashboard"
-        android:id="@+id/hf_dashboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
     <com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constrainedHeight="true"
-        app:layout_constraintTop_toBottomOf="@id/hf_dashboard"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

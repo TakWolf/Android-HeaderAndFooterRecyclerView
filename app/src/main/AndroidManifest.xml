@@ -38,8 +38,6 @@
 
         <activity android:name=".ui.activity.MultiRecyclerViewActivity" />
 
-        <activity android:name=".ui.activity.ViewPagerHeaderActivity" />
-
     </application>
 
 </manifest>

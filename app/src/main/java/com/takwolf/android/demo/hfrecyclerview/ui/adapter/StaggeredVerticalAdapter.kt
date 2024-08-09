@@ -4,16 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemStaggeredVerticalBinding
 
-class StaggeredVerticalAdapter(
-    private val layoutInflater: LayoutInflater,
-) : PhotoListAdapter<StaggeredVerticalAdapter.ViewHolder>() {
+class StaggeredVerticalAdapter : PhotoListAdapter<StaggeredVerticalAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemStaggeredVerticalBinding.inflate(layoutInflater, parent, false))
+        val binding = ItemStaggeredVerticalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(binding: ItemStaggeredVerticalBinding) : PhotoListAdapter.ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
+    class ViewHolder(
+        binding: ItemStaggeredVerticalBinding,
+    ) : PhotoListAdapter.ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
 }

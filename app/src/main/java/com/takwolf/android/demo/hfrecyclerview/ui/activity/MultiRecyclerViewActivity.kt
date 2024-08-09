@@ -3,11 +3,15 @@ package com.takwolf.android.demo.hfrecyclerview.ui.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityMultiRecyclerViewBinding
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.LinearVerticalAdapter
 import com.takwolf.android.demo.hfrecyclerview.vm.MultiPhotoListViewModel
+import kotlinx.coroutines.launch
 
 class MultiRecyclerViewActivity : AppCompatActivity() {
     private val viewModel: MultiPhotoListViewModel by viewModels()
@@ -26,7 +30,7 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
         binding.recyclerViewLeft.addFooterView(R.layout.footer_vertical)
         val adapter1 = LinearVerticalAdapter().apply {
             onPhotoDeleteListener = { position ->
-                viewModel.photos1.value?.toMutableList()?.let { photos ->
+                viewModel.photos1.value.toMutableList().let { photos ->
                     photos.removeAt(position)
                     viewModel.photos1.value = photos
                 }
@@ -34,8 +38,12 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
 
             binding.recyclerViewLeft.adapter = this
         }
-        viewModel.photos1.observe(this) { photos ->
-            adapter1.submitList(photos)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.photos1.collect { photos ->
+                    adapter1.submitList(photos)
+                }
+            }
         }
 
         binding.recyclerViewRight.layoutManager = LinearLayoutManager(this)
@@ -43,7 +51,7 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
         binding.recyclerViewRight.addFooterView(R.layout.footer_vertical)
         val adapter2 = LinearVerticalAdapter().apply {
             onPhotoDeleteListener = { position ->
-                viewModel.photos2.value?.toMutableList()?.let { photos ->
+                viewModel.photos2.value.toMutableList().let { photos ->
                     photos.removeAt(position)
                     viewModel.photos2.value = photos
                 }
@@ -51,8 +59,12 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
 
             binding.recyclerViewRight.adapter = this
         }
-        viewModel.photos2.observe(this) { photos ->
-            adapter2.submitList(photos)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.photos2.collect { photos ->
+                    adapter2.submitList(photos)
+                }
+            }
         }
 
         binding.btnReplaceAdapters.setOnClickListener {

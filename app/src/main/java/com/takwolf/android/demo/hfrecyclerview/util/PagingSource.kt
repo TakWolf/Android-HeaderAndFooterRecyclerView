@@ -1,9 +1,13 @@
 package com.takwolf.android.demo.hfrecyclerview.util
 
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 
 class PagingSource(
     private val doRefresh: PagingSource.(dataVersion: Int) -> Unit,
@@ -11,8 +15,8 @@ class PagingSource(
 ) {
     private var dataVersion = 0
 
-    private val refreshState = MutableLiveData(false)
-    private val loadMoreState = MutableLiveData(LoadMoreFooter.STATE_DISABLED)
+    private val refreshState = MutableStateFlow(false)
+    private val loadMoreState = MutableStateFlow(LoadMoreFooter.STATE_DISABLED)
 
     fun setupViews(
         owner: LifecycleOwner,
@@ -25,11 +29,19 @@ class PagingSource(
         loadMoreFooter.setOnLoadMoreListener {
             loadMore()
         }
-        refreshState.observe(owner) { isRefreshing ->
-            refreshLayout.isRefreshing = isRefreshing
+        owner.lifecycleScope.launch {
+            owner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                refreshState.collect { isRefreshing ->
+                    refreshLayout.isRefreshing = isRefreshing
+                }
+            }
         }
-        loadMoreState.observe(owner) { state ->
-            loadMoreFooter.state = state
+        owner.lifecycleScope.launch {
+            owner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                loadMoreState.collect { state ->
+                    loadMoreFooter.state = state
+                }
+            }
         }
     }
 
@@ -38,8 +50,7 @@ class PagingSource(
     }
 
     fun refresh() {
-        val isRefreshing = refreshState.value ?: false
-        if (isRefreshing) {
+        if (refreshState.value) {
             return
         }
         refreshState.value = true
@@ -67,8 +78,9 @@ class PagingSource(
     }
 
     fun loadMore() {
-        val state = loadMoreState.value ?: LoadMoreFooter.STATE_DISABLED
-        if (state == LoadMoreFooter.STATE_DISABLED || state == LoadMoreFooter.STATE_LOADING || state == LoadMoreFooter.STATE_FINISHED) {
+        if (loadMoreState.value == LoadMoreFooter.STATE_DISABLED ||
+            loadMoreState.value == LoadMoreFooter.STATE_LOADING ||
+            loadMoreState.value == LoadMoreFooter.STATE_FINISHED) {
             return
         }
         loadMoreState.value = LoadMoreFooter.STATE_LOADING

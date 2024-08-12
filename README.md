@@ -113,33 +113,33 @@ class LoadMoreFooter private constructor(
         preloadOffset = 1
     }
 
-    override fun onUpdateViews(footerView: View, @State state: Int) {
+    override fun onUpdateViews() {
         when (state) {
-            STATE_DISABLED -> {
+            State.DISABLED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.INVISIBLE
                 binding.tvText.text = null
                 binding.tvText.isClickable = false
             }
-            STATE_LOADING -> {
-                binding.loadingBar.visibility = View.VISIBLE
-                binding.tvText.visibility = View.INVISIBLE
-                binding.tvText.text = null
-                binding.tvText.isClickable = false
-            }
-            STATE_FINISHED -> {
-                binding.loadingBar.visibility = View.INVISIBLE
-                binding.tvText.visibility = View.VISIBLE
-                binding.tvText.setText(R.string.load_more_finished)
-                binding.tvText.isClickable = false
-            }
-            STATE_ENDLESS -> {
+            State.IDLE -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
                 binding.tvText.text = null
                 binding.tvText.isClickable = true
             }
-            STATE_FAILED -> {
+            State.LOADING -> {
+                binding.loadingBar.visibility = View.VISIBLE
+                binding.tvText.visibility = View.INVISIBLE
+                binding.tvText.text = null
+                binding.tvText.isClickable = false
+            }
+            State.FINISHED -> {
+                binding.loadingBar.visibility = View.INVISIBLE
+                binding.tvText.visibility = View.VISIBLE
+                binding.tvText.setText(R.string.load_more_finished)
+                binding.tvText.isClickable = false
+            }
+            State.FAILED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
                 binding.tvText.setText(R.string.load_more_failed)
@@ -154,7 +154,7 @@ class LoadMoreFooter private constructor(
 
 ```kotlin
 val loadMoreFooter = LoadMoreFooter.create(binding.recyclerView)
-loadMoreFooter.setOnLoadMoreListener { 
+loadMoreFooter.onLoadMoreListener = LoadMoreFooter.OnLoadMoreListener {
     // do load more here
 }
 loadMoreFooter.addToRecyclerView(binding.recyclerView)

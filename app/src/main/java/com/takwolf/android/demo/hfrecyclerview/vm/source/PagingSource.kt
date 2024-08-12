@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 abstract class PagingSource {
     private val refreshState = MutableStateFlow(false)
-    private val loadMoreState = MutableStateFlow(LoadMoreFooter.STATE_DISABLED)
+    private val loadMoreState = MutableStateFlow(LoadMoreFooter.State.DISABLED)
 
     private var dataVersion = 0
 
@@ -33,7 +33,7 @@ abstract class PagingSource {
         if (checkDataVersion(dataVersion)) {
             this.dataVersion += 1
             refreshState.value = false
-            loadMoreState.value = if (isFinished) LoadMoreFooter.STATE_FINISHED else LoadMoreFooter.STATE_ENDLESS
+            loadMoreState.value = if (isFinished) LoadMoreFooter.State.FINISHED else LoadMoreFooter.State.IDLE
             return true
         } else {
             return false
@@ -50,12 +50,12 @@ abstract class PagingSource {
     }
 
     fun loadMore() {
-        if (loadMoreState.value == LoadMoreFooter.STATE_DISABLED ||
-            loadMoreState.value == LoadMoreFooter.STATE_LOADING ||
-            loadMoreState.value == LoadMoreFooter.STATE_FINISHED) {
+        if (loadMoreState.value == LoadMoreFooter.State.DISABLED ||
+            loadMoreState.value == LoadMoreFooter.State.LOADING ||
+            loadMoreState.value == LoadMoreFooter.State.FINISHED) {
             return
         }
-        loadMoreState.value = LoadMoreFooter.STATE_LOADING
+        loadMoreState.value = LoadMoreFooter.State.LOADING
         doLoadMore(dataVersion)
     }
 
@@ -63,7 +63,7 @@ abstract class PagingSource {
 
     protected fun onLoadMoreSuccess(dataVersion: Int, isFinished: Boolean): Boolean {
         if (checkDataVersion(dataVersion)) {
-            loadMoreState.value = if (isFinished) LoadMoreFooter.STATE_FINISHED else LoadMoreFooter.STATE_ENDLESS
+            loadMoreState.value = if (isFinished) LoadMoreFooter.State.FINISHED else LoadMoreFooter.State.IDLE
             return true
         } else {
             return false
@@ -72,7 +72,7 @@ abstract class PagingSource {
 
     protected fun onLoadMoreFailure(dataVersion: Int): Boolean {
         if (checkDataVersion(dataVersion)) {
-            loadMoreState.value = LoadMoreFooter.STATE_FAILED
+            loadMoreState.value = LoadMoreFooter.State.FAILED
             return true
         } else {
             return false
@@ -87,7 +87,7 @@ abstract class PagingSource {
         refreshLayout.setOnRefreshListener {
             refresh()
         }
-        loadMoreFooter.setOnLoadMoreListener {
+        loadMoreFooter.onLoadMoreListener = LoadMoreFooter.OnLoadMoreListener {
             loadMore()
         }
         owner.lifecycleScope.launch {

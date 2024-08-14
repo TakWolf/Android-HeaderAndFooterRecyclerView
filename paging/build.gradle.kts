@@ -42,7 +42,7 @@ publishing {
     publications {
         register<MavenPublication>("release") {
             groupId = "com.takwolf.android.hfrecyclerview"
-            artifactId = "loadmorefooter"
+            artifactId = "paging"
             version = "0.0.4"
 
             afterEvaluate {

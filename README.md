@@ -22,9 +22,9 @@ repositories {
 
 dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.5")
+    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.6")
     // 可选。分页组件。
-    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:paging:0.0.5")
+    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:paging:0.0.6")
 }
 ```
 

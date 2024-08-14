@@ -36,8 +36,6 @@
 
         <activity android:name=".ui.activity.RefreshStaggeredActivity" />
 
-        <activity android:name=".ui.activity.MultiRecyclerViewActivity" />
-
     </application>
 
 </manifest>

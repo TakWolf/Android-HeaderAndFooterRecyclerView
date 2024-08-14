@@ -46,9 +46,5 @@ class MainActivity : AppCompatActivity() {
         binding.btnRefreshStaggered.setOnClickListener {
             startActivity(Intent(this, RefreshStaggeredActivity::class.java))
         }
-
-        binding.btnMultiRecyclerView.setOnClickListener {
-            startActivity(Intent(this, MultiRecyclerViewActivity::class.java))
-        }
     }
 }

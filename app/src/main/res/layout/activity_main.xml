@@ -100,14 +100,6 @@
                 android:text="@string/refresh_staggered"
                 android:textAllCaps="false" />
 
-            <Button
-                android:id="@+id/btn_multi_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/multi_recyclerView"
-                android:textAllCaps="false" />
-
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

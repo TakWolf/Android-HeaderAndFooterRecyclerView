@@ -34,27 +34,15 @@ abstract class LoadMoreFooter(val view: View) {
 
         private fun handleOnScrolled() {
             recyclerView?.let { recyclerView ->
-                if (!recyclerView.canScrollVertically(1)) {
-                    checkDoLoadMore()
-                } else if (preloadOffset > 0) {
-                    recyclerView.layoutManager?.also { layoutManager ->
-                        when (layoutManager) {
-                            is LinearLayoutManager -> {
-                                val lastPosition = layoutManager.findLastVisibleItemPosition()
-                                if (lastPosition >= recyclerView.proxyAdapter.itemCount - preloadOffset) {
-                                    checkDoLoadMore()
-                                }
-                            }
-                            is StaggeredGridLayoutManager -> {
-                                val lastPositions = layoutManager.findLastVisibleItemPositions(null)
-                                for (lastPosition in lastPositions) {
-                                    if (lastPosition >= recyclerView.proxyAdapter.itemCount - preloadOffset) {
-                                        checkDoLoadMore()
-                                        break
-                                    }
-                                }
-                            }
-                        }
+                recyclerView.layoutManager?.let { layoutManager ->
+                    when (layoutManager) {
+                        is LinearLayoutManager -> layoutManager.findLastCompletelyVisibleItemPosition()
+                        is StaggeredGridLayoutManager -> layoutManager.findLastCompletelyVisibleItemPositions(null).max()
+                        else -> null
+                    }
+                }?.let { lastPosition ->
+                    if (lastPosition >= recyclerView.proxyAdapter.itemCount - 1 - preloadOffset) {
+                        checkDoLoadMore()
                     }
                 }
             }

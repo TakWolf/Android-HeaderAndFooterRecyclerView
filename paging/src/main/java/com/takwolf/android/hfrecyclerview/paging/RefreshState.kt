@@ -1,4 +1,4 @@
-package com.takwolf.android.hfrecyclerview.loadmorefooter
+package com.takwolf.android.hfrecyclerview.paging
 
 enum class RefreshState {
     IDLE,

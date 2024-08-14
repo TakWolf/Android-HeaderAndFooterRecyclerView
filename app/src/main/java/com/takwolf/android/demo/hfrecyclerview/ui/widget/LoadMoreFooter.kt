@@ -5,11 +5,11 @@ import android.view.View
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.FooterLoadMoreBinding
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
-import com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreState
+import com.takwolf.android.hfrecyclerview.paging.LoadMoreState
 
 class LoadMoreFooter private constructor(
     private val binding: FooterLoadMoreBinding,
-) : com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter(binding.root) {
+) : com.takwolf.android.hfrecyclerview.paging.LoadMoreFooter(binding.root) {
     companion object {
         fun create(recyclerView: HeaderAndFooterRecyclerView): LoadMoreFooter {
             val binding = FooterLoadMoreBinding.inflate(LayoutInflater.from(recyclerView.context), recyclerView.footerViewContainer, false)

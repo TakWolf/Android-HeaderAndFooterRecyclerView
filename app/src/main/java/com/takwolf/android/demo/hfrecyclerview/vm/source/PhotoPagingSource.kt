@@ -8,7 +8,7 @@ import com.takwolf.android.demo.hfrecyclerview.model.Banner
 import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.BannerPageAdapter
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.PhotoListAdapter
-import com.takwolf.android.hfrecyclerview.loadmorefooter.PagingSource
+import com.takwolf.android.hfrecyclerview.paging.PagingSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

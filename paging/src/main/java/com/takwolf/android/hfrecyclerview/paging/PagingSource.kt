@@ -1,4 +1,4 @@
-package com.takwolf.android.hfrecyclerview.loadmorefooter
+package com.takwolf.android.hfrecyclerview.paging
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner

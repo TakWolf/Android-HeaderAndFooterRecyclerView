@@ -14,7 +14,7 @@ class MultiPhotoListViewModel : ViewModel() {
     private val photos1 = MutableStateFlow(Photo.newList(20))
     private val photos2 = MutableStateFlow(Photo.newList(20))
 
-    fun <VH : PhotoListAdapter.ViewHolder> setupViews(
+    fun <VH : PhotoListAdapter.ViewHolder> setupAdapters(
         owner: LifecycleOwner,
         adapter1: PhotoListAdapter<VH>,
         adapter2: PhotoListAdapter<VH>,

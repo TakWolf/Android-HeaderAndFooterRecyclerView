@@ -25,6 +25,7 @@ class RefreshGridActivity : AppCompatActivity() {
         }
 
         binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
+        viewModel.pagingSource.setupSwipeRefreshLayout(this, binding.refreshLayout)
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
         val bannerPageHeader = BannerPageHeader(binding.recyclerView).apply {
             addToRecyclerView(binding.recyclerView)
@@ -32,9 +33,9 @@ class RefreshGridActivity : AppCompatActivity() {
         val loadMoreFooter = LoadMoreFooter.create(binding.recyclerView).apply {
             addToRecyclerView(binding.recyclerView)
         }
-        val adapter = GridVerticalAdapter().apply {
-            binding.recyclerView.adapter = this
-        }
-        viewModel.setupViews(this, binding.refreshLayout, loadMoreFooter, bannerPageHeader.adapter, adapter)
+        viewModel.pagingSource.setupLoadMoreFooter(this, loadMoreFooter)
+        val adapter = GridVerticalAdapter()
+        binding.recyclerView.adapter = adapter
+        viewModel.pagingSource.setupAdapters(this, bannerPageHeader.adapter, adapter)
     }
 }

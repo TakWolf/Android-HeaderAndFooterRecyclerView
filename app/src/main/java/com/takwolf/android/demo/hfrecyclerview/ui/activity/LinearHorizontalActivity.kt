@@ -26,9 +26,8 @@ class LinearHorizontalActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         binding.recyclerView.addHeaderView(R.layout.header_horizontal)
         binding.recyclerView.addFooterView(R.layout.footer_horizontal)
-        val adapter = LinearHorizontalAdapter().apply {
-            binding.recyclerView.adapter = this
-        }
-        viewModel.setupViews(this, adapter)
+        val adapter = LinearHorizontalAdapter()
+        binding.recyclerView.adapter = adapter
+        viewModel.setupAdapter(this, adapter)
     }
 }

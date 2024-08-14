@@ -5,6 +5,7 @@ import android.view.View
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.FooterLoadMoreBinding
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
+import com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreState
 
 class LoadMoreFooter private constructor(
     private val binding: FooterLoadMoreBinding,
@@ -25,31 +26,31 @@ class LoadMoreFooter private constructor(
 
     override fun onUpdateViews() {
         when (state) {
-            State.DISABLED -> {
+            LoadMoreState.DISABLED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.INVISIBLE
                 binding.tvText.text = null
                 binding.tvText.isClickable = false
             }
-            State.IDLE -> {
+            LoadMoreState.IDLE -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
                 binding.tvText.text = null
                 binding.tvText.isClickable = true
             }
-            State.LOADING -> {
+            LoadMoreState.LOADING -> {
                 binding.loadingBar.visibility = View.VISIBLE
                 binding.tvText.visibility = View.INVISIBLE
                 binding.tvText.text = null
                 binding.tvText.isClickable = false
             }
-            State.FINISHED -> {
+            LoadMoreState.FINISHED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
                 binding.tvText.setText(R.string.load_more_finished)
                 binding.tvText.isClickable = false
             }
-            State.FAILED -> {
+            LoadMoreState.FAILED -> {
                 binding.loadingBar.visibility = View.INVISIBLE
                 binding.tvText.visibility = View.VISIBLE
                 binding.tvText.setText(R.string.load_more_failed)

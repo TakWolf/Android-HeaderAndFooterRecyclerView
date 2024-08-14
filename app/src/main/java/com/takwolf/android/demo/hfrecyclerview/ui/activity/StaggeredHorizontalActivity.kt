@@ -26,9 +26,8 @@ class StaggeredHorizontalActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(3, RecyclerView.HORIZONTAL)
         binding.recyclerView.addHeaderView(R.layout.header_horizontal)
         binding.recyclerView.addFooterView(R.layout.footer_horizontal)
-        val adapter = StaggeredHorizontalAdapter().apply {
-            binding.recyclerView.adapter = this
-        }
-        viewModel.setupViews(this, adapter)
+        val adapter = StaggeredHorizontalAdapter()
+        binding.recyclerView.adapter = adapter
+        viewModel.setupAdapter(this, adapter)
     }
 }

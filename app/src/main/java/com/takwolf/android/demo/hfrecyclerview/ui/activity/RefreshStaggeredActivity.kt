@@ -26,6 +26,7 @@ class RefreshStaggeredActivity : AppCompatActivity() {
         }
 
         binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
+        viewModel.pagingSource.setupSwipeRefreshLayout(this, binding.refreshLayout)
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
         val bannerPageHeader = BannerPageHeader(binding.recyclerView).apply {
             addToRecyclerView(binding.recyclerView)
@@ -33,9 +34,9 @@ class RefreshStaggeredActivity : AppCompatActivity() {
         val loadMoreFooter = LoadMoreFooter.create(binding.recyclerView).apply {
             addToRecyclerView(binding.recyclerView)
         }
-        val adapter = StaggeredVerticalAdapter().apply {
-            binding.recyclerView.adapter = this
-        }
-        viewModel.setupViews(this, binding.refreshLayout, loadMoreFooter, bannerPageHeader.adapter, adapter)
+        viewModel.pagingSource.setupLoadMoreFooter(this, loadMoreFooter)
+        val adapter = StaggeredVerticalAdapter()
+        binding.recyclerView.adapter = adapter
+        viewModel.pagingSource.setupAdapters(this, bannerPageHeader.adapter, adapter)
     }
 }

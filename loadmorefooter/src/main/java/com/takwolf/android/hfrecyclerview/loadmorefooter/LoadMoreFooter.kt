@@ -8,15 +8,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
 
 abstract class LoadMoreFooter(val view: View) {
-    enum class State {
-        DISABLED,
-        IDLE,
-        LOADING,
-        FINISHED,
-        FAILED,
-    }
+    private var recyclerView: HeaderAndFooterRecyclerView? = null
 
-    var state = State.DISABLED
+    var state = LoadMoreState.DISABLED
         set(value) {
             if (field != value) {
                 field = value
@@ -24,10 +18,10 @@ abstract class LoadMoreFooter(val view: View) {
             }
         }
 
-    private var recyclerView: HeaderAndFooterRecyclerView? = null
-
     @IntRange(from = 0)
     var preloadOffset = 0
+
+    var onLoadMoreListener: OnLoadMoreListener? = null
 
     private val onScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -67,8 +61,6 @@ abstract class LoadMoreFooter(val view: View) {
         }
     }
 
-    var onLoadMoreListener: OnLoadMoreListener? = null
-
     fun addToRecyclerView(recyclerView: HeaderAndFooterRecyclerView) {
         if (this.recyclerView != null) {
             throw IllegalStateException("LoadMoreFooter has been added")
@@ -88,8 +80,8 @@ abstract class LoadMoreFooter(val view: View) {
     }
 
     fun checkDoLoadMore() {
-        if (state == State.IDLE || state == State.FAILED) {
-            state = State.LOADING
+        if (state == LoadMoreState.IDLE || state == LoadMoreState.FAILED) {
+            state = LoadMoreState.LOADING
             onLoadMoreListener?.onLoadMore()
         }
     }

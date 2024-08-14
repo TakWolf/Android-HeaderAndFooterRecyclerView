@@ -24,16 +24,16 @@ class MultiRecyclerViewActivity : AppCompatActivity() {
         binding.recyclerViewLeft.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewLeft.addHeaderView(R.layout.header_vertical)
         binding.recyclerViewLeft.addFooterView(R.layout.footer_vertical)
-        val adapter1 = LinearVerticalAdapter().apply {
-            binding.recyclerViewLeft.adapter = this
-        }
+        val adapter1 = LinearVerticalAdapter()
+        binding.recyclerViewLeft.adapter = adapter1
+
         binding.recyclerViewRight.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewRight.addHeaderView(R.layout.header_vertical)
         binding.recyclerViewRight.addFooterView(R.layout.footer_vertical)
-        val adapter2 = LinearVerticalAdapter().apply {
-            binding.recyclerViewRight.adapter = this
-        }
-        viewModel.setupViews(this, adapter1, adapter2)
+        val adapter2 = LinearVerticalAdapter()
+        binding.recyclerViewRight.adapter = adapter2
+
+        viewModel.setupAdapters(this, adapter1, adapter2)
 
         binding.btnReplaceAdapters.setOnClickListener {
             val adapter = binding.recyclerViewLeft.adapter

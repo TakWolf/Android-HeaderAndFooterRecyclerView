@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class PhotoListViewModel : ViewModel() {
     private val photos = MutableStateFlow(Photo.newList(20))
 
-    fun <VH : PhotoListAdapter.ViewHolder> setupViews(
+    fun <VH : PhotoListAdapter.ViewHolder> setupAdapter(
         owner: LifecycleOwner,
         adapter: PhotoListAdapter<VH>,
     ) {

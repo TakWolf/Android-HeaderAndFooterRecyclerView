@@ -1,17 +1,16 @@
-package com.takwolf.android.demo.hfrecyclerview.vm.source
+package com.takwolf.android.hfrecyclerview.loadmorefooter
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.takwolf.android.hfrecyclerview.loadmorefooter.LoadMoreFooter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 abstract class PagingSource {
-    private val refreshState = MutableStateFlow(false)
-    private val loadMoreState = MutableStateFlow(LoadMoreFooter.State.DISABLED)
+    private val refreshState = MutableStateFlow(RefreshState.IDLE)
+    private val loadMoreState = MutableStateFlow(LoadMoreState.DISABLED)
 
     private var dataVersion = 0
 
@@ -20,10 +19,10 @@ abstract class PagingSource {
     }
 
     fun refresh() {
-        if (refreshState.value) {
+        if (refreshState.value == RefreshState.LOADING) {
             return
         }
-        refreshState.value = true
+        refreshState.value = RefreshState.LOADING
         doRefresh(dataVersion)
     }
 
@@ -32,8 +31,8 @@ abstract class PagingSource {
     protected fun onRefreshSuccess(dataVersion: Int, isFinished: Boolean): Boolean {
         if (checkDataVersion(dataVersion)) {
             this.dataVersion += 1
-            refreshState.value = false
-            loadMoreState.value = if (isFinished) LoadMoreFooter.State.FINISHED else LoadMoreFooter.State.IDLE
+            refreshState.value = RefreshState.IDLE
+            loadMoreState.value = if (isFinished) LoadMoreState.FINISHED else LoadMoreState.IDLE
             return true
         } else {
             return false
@@ -42,7 +41,7 @@ abstract class PagingSource {
 
     protected fun onRefreshFailure(dataVersion: Int): Boolean {
         if (checkDataVersion(dataVersion)) {
-            refreshState.value = false
+            refreshState.value = RefreshState.FAILED
             return true
         } else {
             return false
@@ -50,12 +49,12 @@ abstract class PagingSource {
     }
 
     fun loadMore() {
-        if (loadMoreState.value == LoadMoreFooter.State.DISABLED ||
-            loadMoreState.value == LoadMoreFooter.State.LOADING ||
-            loadMoreState.value == LoadMoreFooter.State.FINISHED) {
+        if (loadMoreState.value == LoadMoreState.DISABLED ||
+            loadMoreState.value == LoadMoreState.LOADING ||
+            loadMoreState.value == LoadMoreState.FINISHED) {
             return
         }
-        loadMoreState.value = LoadMoreFooter.State.LOADING
+        loadMoreState.value = LoadMoreState.LOADING
         doLoadMore(dataVersion)
     }
 
@@ -63,7 +62,7 @@ abstract class PagingSource {
 
     protected fun onLoadMoreSuccess(dataVersion: Int, isFinished: Boolean): Boolean {
         if (checkDataVersion(dataVersion)) {
-            loadMoreState.value = if (isFinished) LoadMoreFooter.State.FINISHED else LoadMoreFooter.State.IDLE
+            loadMoreState.value = if (isFinished) LoadMoreState.FINISHED else LoadMoreState.IDLE
             return true
         } else {
             return false
@@ -72,31 +71,38 @@ abstract class PagingSource {
 
     protected fun onLoadMoreFailure(dataVersion: Int): Boolean {
         if (checkDataVersion(dataVersion)) {
-            loadMoreState.value = LoadMoreFooter.State.FAILED
+            loadMoreState.value = LoadMoreState.FAILED
             return true
         } else {
             return false
         }
     }
 
-    fun setupViews(
+    fun setupSwipeRefreshLayout(
         owner: LifecycleOwner,
         refreshLayout: SwipeRefreshLayout,
-        loadMoreFooter: LoadMoreFooter,
     ) {
         refreshLayout.setOnRefreshListener {
             refresh()
         }
-        loadMoreFooter.onLoadMoreListener = LoadMoreFooter.OnLoadMoreListener {
-            loadMore()
-        }
+
         owner.lifecycleScope.launch {
             owner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                refreshState.collect { isRefreshing ->
-                    refreshLayout.isRefreshing = isRefreshing
+                refreshState.collect { state ->
+                    refreshLayout.isRefreshing = state == RefreshState.LOADING
                 }
             }
         }
+    }
+
+    fun setupLoadMoreFooter(
+        owner: LifecycleOwner,
+        loadMoreFooter: LoadMoreFooter,
+    ) {
+        loadMoreFooter.onLoadMoreListener = LoadMoreFooter.OnLoadMoreListener {
+            loadMore()
+        }
+
         owner.lifecycleScope.launch {
             owner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 loadMoreState.collect { state ->

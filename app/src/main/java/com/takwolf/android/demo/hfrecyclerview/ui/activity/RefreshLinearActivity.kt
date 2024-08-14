@@ -25,6 +25,7 @@ class RefreshLinearActivity : AppCompatActivity() {
         }
 
         binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
+        viewModel.pagingSource.setupSwipeRefreshLayout(this, binding.refreshLayout)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val bannerPageHeader = BannerPageHeader(binding.recyclerView).apply {
             addToRecyclerView(binding.recyclerView)
@@ -32,9 +33,9 @@ class RefreshLinearActivity : AppCompatActivity() {
         val loadMoreFooter = LoadMoreFooter.create(binding.recyclerView).apply {
             addToRecyclerView(binding.recyclerView)
         }
-        val adapter = LinearVerticalAdapter().apply {
-            binding.recyclerView.adapter = this
-        }
-        viewModel.setupViews(this, binding.refreshLayout, loadMoreFooter, bannerPageHeader.adapter, adapter)
+        viewModel.pagingSource.setupLoadMoreFooter(this, loadMoreFooter)
+        val adapter = LinearVerticalAdapter()
+        binding.recyclerView.adapter = adapter
+        viewModel.pagingSource.setupAdapters(this, bannerPageHeader.adapter, adapter)
     }
 }

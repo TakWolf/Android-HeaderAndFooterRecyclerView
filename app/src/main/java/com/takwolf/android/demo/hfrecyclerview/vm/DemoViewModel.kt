@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class DemoViewModel : ViewModel() {
-    private var pageNum = -1
-
     val banners = MutableStateFlow(emptyList<Banner>())
     val photos = MutableStateFlow(emptyList<Photo>())
+
+    private var pageNum = -1
 
     val pagingSource = object : PagingSource() {
         override fun doRefresh(dataVersion: Int) {

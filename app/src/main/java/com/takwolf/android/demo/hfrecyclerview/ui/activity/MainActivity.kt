@@ -1,50 +1,142 @@
 package com.takwolf.android.demo.hfrecyclerview.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.HFRVHack.RecyclerView
+import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityMainBinding
+import com.takwolf.android.demo.hfrecyclerview.model.DemoConfigs
+import com.takwolf.android.demo.hfrecyclerview.vm.MainViewModel
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    private val viewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnLinearVertical.setOnClickListener {
-            startActivity(Intent(this, LinearVerticalActivity::class.java))
+        binding.rgLayoutManagerType.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.rb_linear_layout -> {
+                    viewModel.configs.value = viewModel.configs.value.copy(
+                        layoutManagerType = DemoConfigs.LayoutManagerType.LINEAR,
+                    )
+                }
+                R.id.rb_grid_layout -> {
+                    viewModel.configs.value = viewModel.configs.value.copy(
+                        layoutManagerType = DemoConfigs.LayoutManagerType.GRID,
+                    )
+                }
+                R.id.rb_staggered_grid_layout -> {
+                    viewModel.configs.value = viewModel.configs.value.copy(
+                        layoutManagerType = DemoConfigs.LayoutManagerType.STAGGERED_GRID,
+                    )
+                }
+            }
         }
 
-        binding.btnLinearHorizontal.setOnClickListener {
-            startActivity(Intent(this, LinearHorizontalActivity::class.java))
+        binding.rgOrientation.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.rb_vertical -> {
+                    viewModel.configs.value = viewModel.configs.value.copy(
+                        orientation = RecyclerView.VERTICAL,
+                    )
+                }
+                R.id.rb_horizontal -> {
+                    viewModel.configs.value = viewModel.configs.value.copy(
+                        orientation = RecyclerView.HORIZONTAL,
+                    )
+                }
+            }
         }
 
-        binding.btnGridVertical.setOnClickListener {
-            startActivity(Intent(this, GridVerticalActivity::class.java))
+        binding.swEnableRefresh.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.configs.value = viewModel.configs.value.copy(
+                enableRefresh = isChecked,
+            )
         }
 
-        binding.btnGridHorizontal.setOnClickListener {
-            startActivity(Intent(this, GridHorizontalActivity::class.java))
+        binding.swEnableLoadMore.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.configs.value = viewModel.configs.value.copy(
+                enableLoadMore = isChecked,
+            )
         }
 
-        binding.btnStaggeredVertical.setOnClickListener {
-            startActivity(Intent(this, StaggeredVerticalActivity::class.java))
+        binding.swAddBannerHeader.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.configs.value = viewModel.configs.value.copy(
+                addBannerHeader = isChecked,
+            )
         }
 
-        binding.btnStaggeredHorizontal.setOnClickListener {
-            startActivity(Intent(this, StaggeredHorizontalActivity::class.java))
+        binding.swAddStaticHeader.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.configs.value = viewModel.configs.value.copy(
+                addStaticHeader = isChecked,
+            )
         }
 
-        binding.btnRefreshLinear.setOnClickListener {
-            startActivity(Intent(this, RefreshLinearActivity::class.java))
+        binding.swAddStaticFooter.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.configs.value = viewModel.configs.value.copy(
+                addStaticFooter = isChecked,
+            )
         }
 
-        binding.btnRefreshGrid.setOnClickListener {
-            startActivity(Intent(this, RefreshGridActivity::class.java))
+        binding.swReverseLayout.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.configs.value = viewModel.configs.value.copy(
+                reverseLayout = isChecked,
+            )
         }
 
-        binding.btnRefreshStaggered.setOnClickListener {
-            startActivity(Intent(this, RefreshStaggeredActivity::class.java))
+        binding.swIsRtl.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.configs.value = viewModel.configs.value.copy(
+                isRTL = isChecked,
+            )
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.configs.collect { configs ->
+                    when (configs.layoutManagerType) {
+                        DemoConfigs.LayoutManagerType.LINEAR -> {
+                            binding.rbLinearLayout.isChecked = true
+                        }
+                        DemoConfigs.LayoutManagerType.GRID -> {
+                            binding.rbGridLayout.isChecked = true
+                        }
+                        DemoConfigs.LayoutManagerType.STAGGERED_GRID -> {
+                            binding.rbStaggeredGridLayout.isChecked = true
+                        }
+                    }
+
+                    when (configs.orientation) {
+                        RecyclerView.VERTICAL -> {
+                            binding.rbVertical.isChecked = true
+                        }
+                        RecyclerView.HORIZONTAL -> {
+                            binding.rbHorizontal.isChecked = true
+                        }
+                    }
+
+                    binding.swEnableRefresh.isEnabled = configs.orientation == RecyclerView.VERTICAL && !configs.reverseLayout
+
+                    binding.swEnableRefresh.isChecked = configs.enableRefresh
+                    binding.swEnableLoadMore.isChecked = configs.enableLoadMore
+                    binding.swAddBannerHeader.isChecked = configs.addBannerHeader
+                    binding.swAddStaticHeader.isChecked = configs.addStaticHeader
+                    binding.swAddStaticFooter.isChecked = configs.addStaticFooter
+                    binding.swReverseLayout.isChecked = configs.reverseLayout
+                    binding.swIsRtl.isChecked = configs.isRTL
+                }
+            }
+        }
+
+        binding.btnDemo.setOnClickListener {
+            DemoActivity.open(this, viewModel.configs.value)
         }
     }
 }

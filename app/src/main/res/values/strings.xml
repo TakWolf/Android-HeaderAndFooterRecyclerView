@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HeaderAndFooterRecyclerView</string>
-    <string name="linear_vertical">Linear Vertical</string>
-    <string name="linear_horizontal">Linear Horizontal</string>
-    <string name="grid_vertical">Grid Vertical</string>
-    <string name="grid_horizontal">Grid Horizontal</string>
-    <string name="staggered_vertical">Staggered Vertical</string>
-    <string name="staggered_horizontal">Staggered Horizontal</string>
-    <string name="refresh_linear">Refresh Linear</string>
-    <string name="refresh_grid">Refresh Grid</string>
-    <string name="refresh_staggered">Refresh Staggered</string>
+    <string name="demo">Demo</string>
+    <string name="layout_manager">LayoutManager</string>
+    <string name="linear_layout_manager">LinearLayoutManager</string>
+    <string name="grid_layout_manager">GridLayoutManager</string>
+    <string name="staggered_grid_layout_manager">StaggeredGridLayoutManager</string>
+    <string name="orientation">Orientation</string>
+    <string name="vertical">Vertical</string>
+    <string name="horizontal">Horizontal</string>
+    <string name="other_configs">Other Configs</string>
+    <string name="enable_refresh">Enable Refresh</string>
+    <string name="enable_load_more">Enable Load More</string>
+    <string name="add_banner_header">Add Banner Header</string>
+    <string name="add_static_header">Add Static Header</string>
+    <string name="add_static_footer">Add Static Footer</string>
+    <string name="reverse_layout">Reverse Layout</string>
+    <string name="is_rtl">Is RTL</string>
     <string name="header">Header</string>
     <string name="footer">Footer</string>
     <string name="load_more_finished">没有更多内容</string>

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,76 +29,169 @@
             android:padding="8dp"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_linear_vertical"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/linear_vertical"
-                android:textAllCaps="false" />
+                android:text="@string/layout_manager"
+                android:textColor="@color/app_primary"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/rg_layout_manager_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/linear_layout_manager"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp"
+                    tools:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/rb_grid_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/grid_layout_manager"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_staggered_grid_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/staggered_grid_layout_manager"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/orientation"
+                android:textColor="@color/app_primary"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/rg_orientation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/vertical"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp"
+                    tools:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/rb_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/horizontal"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/other_configs"
+                android:textColor="@color/app_primary"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_enable_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/enable_refresh"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_enable_load_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/enable_load_more"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_add_banner_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/add_banner_header"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_add_static_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/add_static_header"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_add_static_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/add_static_footer"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_reverse_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/reverse_layout"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_is_rtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/is_rtl"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
 
             <Button
-                android:id="@+id/btn_linear_horizontal"
+                android:id="@+id/btn_demo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/linear_horizontal"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_grid_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/grid_vertical"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_grid_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/grid_horizontal"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_staggered_vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/staggered_vertical"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_staggered_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/staggered_horizontal"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_refresh_linear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/refresh_linear"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_refresh_grid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/refresh_grid"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btn_refresh_staggered"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/refresh_staggered"
+                android:text="@string/demo"
                 android:textAllCaps="false" />
 
         </LinearLayout>

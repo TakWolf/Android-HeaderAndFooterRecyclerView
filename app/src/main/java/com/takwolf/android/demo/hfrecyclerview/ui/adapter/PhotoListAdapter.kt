@@ -1,18 +1,86 @@
 package com.takwolf.android.demo.hfrecyclerview.ui.adapter
 
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.takwolf.android.demo.hfrecyclerview.R
+import com.takwolf.android.demo.hfrecyclerview.databinding.ItemGridHorizontalBinding
+import com.takwolf.android.demo.hfrecyclerview.databinding.ItemGridVerticalBinding
+import com.takwolf.android.demo.hfrecyclerview.databinding.ItemLinearHorizontalBinding
+import com.takwolf.android.demo.hfrecyclerview.databinding.ItemLinearVerticalBinding
+import com.takwolf.android.demo.hfrecyclerview.databinding.ItemStaggeredHorizontalBinding
+import com.takwolf.android.demo.hfrecyclerview.databinding.ItemStaggeredVerticalBinding
 import com.takwolf.android.demo.hfrecyclerview.model.Photo
 
-abstract class PhotoListAdapter<VH : PhotoListAdapter.ViewHolder> : ListAdapter<Photo, VH>(PhotoDiffItemCallback) {
+abstract class PhotoListAdapter : ListAdapter<Photo, PhotoListAdapter.ViewHolder>(PhotoDiffItemCallback) {
+    companion object {
+        fun linearVertical(): PhotoListAdapter {
+            return object : PhotoListAdapter() {
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                    val binding = ItemLinearVerticalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                    return ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
+                }
+            }
+        }
+
+        fun linearHorizontal(): PhotoListAdapter {
+            return object : PhotoListAdapter() {
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                    val binding = ItemLinearHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                    return ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
+                }
+            }
+        }
+
+        fun gridVertical(): PhotoListAdapter {
+            return object : PhotoListAdapter() {
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                    val binding = ItemGridVerticalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                    return ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
+                }
+            }
+        }
+
+        fun gridHorizontal(): PhotoListAdapter {
+            return object : PhotoListAdapter() {
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                    val binding = ItemGridHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                    return ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
+                }
+            }
+        }
+
+        fun staggeredVertical(): PhotoListAdapter {
+            return object : PhotoListAdapter() {
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                    val binding = ItemStaggeredVerticalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                    return ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
+                }
+            }
+        }
+
+        fun staggeredHorizontal(): PhotoListAdapter {
+            return object : PhotoListAdapter() {
+                override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+                    val binding = ItemStaggeredHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                    return ViewHolder(binding.root, binding.btnItem, binding.imgPhoto)
+                }
+            }
+        }
+    }
+
     var onPhotoDeleteListener: ((position: Int) -> Unit)? = null
 
-    abstract class ViewHolder(
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    class ViewHolder(
         itemView: View,
         btnItem: View,
         private val imgPhoto: ImageView,

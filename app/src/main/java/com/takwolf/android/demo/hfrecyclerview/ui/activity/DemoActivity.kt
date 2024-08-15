@@ -67,7 +67,7 @@ class DemoActivity : AppCompatActivity() {
             }
             DemoConfigs.LayoutManagerType.STAGGERED_GRID -> {
                 StaggeredGridLayoutManager(3, configs.orientation).apply {
-                    this.reverseLayout = reverseLayout
+                    reverseLayout = configs.reverseLayout
                 }
             }
         }

@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 abstract class PagingSource {
-    private val refreshState = MutableStateFlow(RefreshState.IDLE)
-    private val loadMoreState = MutableStateFlow(LoadMoreState.DISABLED)
-
     private var dataVersion = 0
+
+    val refreshState = MutableStateFlow(RefreshState.IDLE)
+    val loadMoreState = MutableStateFlow(LoadMoreState.DISABLED)
 
     protected fun checkDataVersion(dataVersion: Int): Boolean {
         return this.dataVersion == dataVersion

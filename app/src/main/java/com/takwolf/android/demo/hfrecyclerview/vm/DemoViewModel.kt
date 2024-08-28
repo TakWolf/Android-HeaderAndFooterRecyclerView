@@ -1,14 +1,18 @@
 package com.takwolf.android.demo.hfrecyclerview.vm
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.takwolf.android.demo.hfrecyclerview.model.Banner
+import com.takwolf.android.demo.hfrecyclerview.model.DemoConfigs
 import com.takwolf.android.demo.hfrecyclerview.model.Photo
 import com.takwolf.android.hfrecyclerview.paging.PagingSource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class DemoViewModel : ViewModel() {
+class DemoViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
+    val configs = DemoConfigs.getFromSavedStateHandle(savedStateHandle)
+
     val banners = MutableStateFlow(emptyList<Banner>())
     val photos = MutableStateFlow(emptyList<Photo>())
 
@@ -23,7 +27,7 @@ class DemoViewModel : ViewModel() {
                 }
             }
             viewModelScope.launch {
-                val page = Photo.getPageAsync()
+                val page = Photo.getPageAsync(pageSize = if (configs.notFullPage) 1 else 20)
                 if (onRefreshSuccess(dataVersion, !page.hasMore)) {
                     photos.value = page.list
                     pageNum = 0
@@ -33,7 +37,7 @@ class DemoViewModel : ViewModel() {
 
         override fun doLoadMore(dataVersion: Int) {
             viewModelScope.launch {
-                val page = Photo.getPageAsync(pageNum + 1)
+                val page = Photo.getPageAsync(pageNum + 1, if (configs.notFullPage) 1 else 20)
                 if (onLoadMoreSuccess(dataVersion, !page.hasMore)) {
                     photos.value += page.list
                     pageNum += 1

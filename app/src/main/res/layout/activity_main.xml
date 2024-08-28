@@ -178,11 +178,31 @@
                 tools:checked="true" />
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/sw_is_rtl"
+                android:id="@+id/sw_stack_from_end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="@string/is_rtl"
+                android:text="@string/stack_from_end"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_layout_direction_rtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/layout_direction_rtl"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_not_full_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/not_full_page"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="14sp"
                 tools:checked="true" />

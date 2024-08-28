@@ -99,9 +99,21 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        binding.swIsRtl.setOnCheckedChangeListener { _, isChecked ->
+        binding.swStackFromEnd.setOnCheckedChangeListener { _, isChecked ->
             viewModel.configs.value = viewModel.configs.value.copy(
-                isRTL = isChecked,
+                stackFromEnd = isChecked,
+            )
+        }
+
+        binding.swLayoutDirectionRtl.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.configs.value = viewModel.configs.value.copy(
+                layoutDirectionRtl = isChecked,
+            )
+        }
+
+        binding.swNotFullPage.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.configs.value = viewModel.configs.value.copy(
+                notFullPage = isChecked,
             )
         }
 
@@ -130,6 +142,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     binding.swEnableRefresh.isEnabled = configs.orientation == RecyclerView.VERTICAL && !configs.reverseLayout
+                    binding.swStackFromEnd.isEnabled = configs.layoutManagerType == DemoConfigs.LayoutManagerType.LINEAR
 
                     binding.swEnableRefresh.isChecked = configs.enableRefresh
                     binding.swEnableLoadMore.isChecked = configs.enableLoadMore
@@ -137,7 +150,9 @@ class MainActivity : AppCompatActivity() {
                     binding.swAddStaticHeader.isChecked = configs.addStaticHeader
                     binding.swAddStaticFooter.isChecked = configs.addStaticFooter
                     binding.swReverseLayout.isChecked = configs.reverseLayout
-                    binding.swIsRtl.isChecked = configs.isRTL
+                    binding.swStackFromEnd.isChecked = configs.stackFromEnd
+                    binding.swLayoutDirectionRtl.isChecked = configs.layoutDirectionRtl
+                    binding.swNotFullPage.isChecked = configs.notFullPage
                 }
             }
         }

@@ -45,9 +45,9 @@ class DemoActivity : AppCompatActivity() {
         val binding = ActivityDemoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val configs = DemoConfigs.getFromIntentExtra(intent)
+        val configs = viewModel.configs
 
-        window.decorView.layoutDirection = if (configs.isRTL) {
+        window.decorView.layoutDirection = if (configs.layoutDirectionRtl) {
             View.LAYOUT_DIRECTION_RTL
         } else {
             View.LAYOUT_DIRECTION_LTR
@@ -67,7 +67,9 @@ class DemoActivity : AppCompatActivity() {
 
         binding.recyclerView.layoutManager = when (configs.layoutManagerType) {
             DemoConfigs.LayoutManagerType.LINEAR -> {
-                LinearLayoutManager(null, configs.orientation, configs.reverseLayout)
+                LinearLayoutManager(null, configs.orientation, configs.reverseLayout).apply {
+                    stackFromEnd = configs.stackFromEnd
+                }
             }
             DemoConfigs.LayoutManagerType.GRID -> {
                 GridLayoutManager(null, 3, configs.orientation, configs.reverseLayout)

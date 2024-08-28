@@ -16,7 +16,9 @@
     <string name="add_static_header">Add Static Header</string>
     <string name="add_static_footer">Add Static Footer</string>
     <string name="reverse_layout">Reverse Layout</string>
-    <string name="is_rtl">Is RTL</string>
+    <string name="stack_from_end">Stack From End</string>
+    <string name="layout_direction_rtl">Layout Direction RTL</string>
+    <string name="not_full_page">Not Full Page</string>
     <string name="header">Header</string>
     <string name="footer">Footer</string>
     <string name="load_more_finished">没有更多内容</string>

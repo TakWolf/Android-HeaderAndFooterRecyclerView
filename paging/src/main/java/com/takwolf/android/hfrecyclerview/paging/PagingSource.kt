@@ -23,11 +23,10 @@ abstract class PagingSource {
     }
 
     fun refresh() {
-        if (refreshState.value == RefreshState.LOADING) {
-            return
+        if (refreshState.value.canRefresh) {
+            refreshState.value = RefreshState.LOADING
+            doRefresh(dataVersion)
         }
-        refreshState.value = RefreshState.LOADING
-        doRefresh(dataVersion)
     }
 
     protected abstract fun doRefresh(dataVersion: Int)
@@ -53,13 +52,10 @@ abstract class PagingSource {
     }
 
     fun loadMore() {
-        if (loadMoreState.value == LoadMoreState.DISABLED ||
-            loadMoreState.value == LoadMoreState.LOADING ||
-            loadMoreState.value == LoadMoreState.FINISHED) {
-            return
+        if (loadMoreState.value.canLoadMore) {
+            loadMoreState.value = LoadMoreState.LOADING
+            doLoadMore(dataVersion)
         }
-        loadMoreState.value = LoadMoreState.LOADING
-        doLoadMore(dataVersion)
     }
 
     protected abstract fun doLoadMore(dataVersion: Int)

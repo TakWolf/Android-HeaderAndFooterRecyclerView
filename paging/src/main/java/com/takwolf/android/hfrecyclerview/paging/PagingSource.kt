@@ -18,6 +18,10 @@ abstract class PagingSource {
         return this.dataVersion == dataVersion
     }
 
+    protected fun invalidDataVersion() {
+        dataVersion += 1
+    }
+
     fun refresh() {
         if (refreshState.value == RefreshState.LOADING) {
             return
@@ -30,7 +34,7 @@ abstract class PagingSource {
 
     protected fun onRefreshSuccess(dataVersion: Int, isFinished: Boolean): Boolean {
         if (checkDataVersion(dataVersion)) {
-            this.dataVersion += 1
+            invalidDataVersion()
             refreshState.value = RefreshState.IDLE
             loadMoreState.value = if (isFinished) LoadMoreState.FINISHED else LoadMoreState.IDLE
             return true

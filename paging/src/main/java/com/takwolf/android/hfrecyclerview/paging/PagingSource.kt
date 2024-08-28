@@ -93,7 +93,16 @@ abstract class PagingSource {
         owner.lifecycleScope.launch {
             owner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 refreshState.collect { state ->
-                    refreshLayout.isRefreshing = state == RefreshState.LOADING
+                    when (state) {
+                        RefreshState.DISABLED -> {
+                            refreshLayout.isEnabled = false
+                            refreshLayout.isRefreshing = false
+                        }
+                        else -> {
+                            refreshLayout.isEnabled = true
+                            refreshLayout.isRefreshing = state == RefreshState.LOADING
+                        }
+                    }
                 }
             }
         }

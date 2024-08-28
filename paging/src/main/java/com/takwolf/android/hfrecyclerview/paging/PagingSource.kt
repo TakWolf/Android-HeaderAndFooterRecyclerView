@@ -12,7 +12,8 @@ abstract class PagingSource {
     val refreshState = MutableStateFlow(RefreshState.IDLE)
     val loadMoreState = MutableStateFlow(LoadMoreState.DISABLED)
 
-    private var dataVersion = 0
+    protected var dataVersion = 0
+        private set
 
     protected fun checkDataVersion(dataVersion: Int): Boolean {
         return this.dataVersion == dataVersion

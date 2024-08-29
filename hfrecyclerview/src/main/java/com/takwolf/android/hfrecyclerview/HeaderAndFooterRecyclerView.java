@@ -252,15 +252,15 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
                 ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
                 if (linearLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
                     if ((getLayoutDirection() == View.LAYOUT_DIRECTION_LTR && linearLayoutManager.getReverseLayout()) || (getLayoutDirection() == View.LAYOUT_DIRECTION_RTL && !linearLayoutManager.getReverseLayout())) {
-                        offset = getWidth() - holder.itemView.getRight() - layoutParams.rightMargin;
+                        offset = getWidth() - holder.itemView.getRight() - layoutParams.rightMargin - getPaddingRight();
                     } else {
-                        offset = holder.itemView.getLeft() - layoutParams.leftMargin;
+                        offset = holder.itemView.getLeft() - layoutParams.leftMargin - getPaddingLeft();
                     }
                 } else {
                     if (linearLayoutManager.getReverseLayout()) {
-                        offset = getHeight() - holder.itemView.getBottom() - layoutParams.bottomMargin;
+                        offset = getHeight() - holder.itemView.getBottom() - layoutParams.bottomMargin - getPaddingBottom();
                     } else {
-                        offset = holder.itemView.getTop() - layoutParams.topMargin;
+                        offset = holder.itemView.getTop() - layoutParams.topMargin - getPaddingTop();
                     }
                 }
                 linearLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
@@ -274,15 +274,15 @@ public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
                 ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
                 if (staggeredGridLayoutManager.getOrientation() == RecyclerView.HORIZONTAL) {
                     if ((getLayoutDirection() == View.LAYOUT_DIRECTION_LTR && staggeredGridLayoutManager.getReverseLayout()) || (getLayoutDirection() == View.LAYOUT_DIRECTION_RTL && !staggeredGridLayoutManager.getReverseLayout())) {
-                        offset = getWidth() - holder.itemView.getRight() - layoutParams.rightMargin;
+                        offset = getWidth() - holder.itemView.getRight() - layoutParams.rightMargin - getPaddingRight();
                     } else {
-                        offset = holder.itemView.getLeft() - layoutParams.leftMargin;
+                        offset = holder.itemView.getLeft() - layoutParams.leftMargin - getPaddingLeft();
                     }
                 } else {
                     if (staggeredGridLayoutManager.getReverseLayout()) {
-                        offset = getHeight() - holder.itemView.getBottom() - layoutParams.bottomMargin;
+                        offset = getHeight() - holder.itemView.getBottom() - layoutParams.bottomMargin - getPaddingBottom();
                     } else {
-                        offset = holder.itemView.getTop() - layoutParams.topMargin;
+                        offset = holder.itemView.getTop() - layoutParams.topMargin - getPaddingTop();
                     }
                 }
                 staggeredGridLayoutManager.scrollToPositionWithOffset(firstPosition, offset);

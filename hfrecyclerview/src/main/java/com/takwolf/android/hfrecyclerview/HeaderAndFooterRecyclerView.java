@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.HFRVHack;
+import androidx.recyclerview.widget.HackRecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeaderAndFooterRecyclerView extends HFRVHack.RecyclerView {
+public class HeaderAndFooterRecyclerView extends HackRecyclerView {
     final List<View> headerViews = new ArrayList<>();
     final List<View> footerViews = new ArrayList<>();
 

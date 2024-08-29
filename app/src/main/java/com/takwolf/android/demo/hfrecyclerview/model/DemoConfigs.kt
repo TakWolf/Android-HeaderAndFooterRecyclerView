@@ -2,7 +2,7 @@ package com.takwolf.android.demo.hfrecyclerview.model
 
 import android.content.Intent
 import androidx.lifecycle.SavedStateHandle
-import androidx.recyclerview.widget.HFRVHack.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 
 data class DemoConfigs(
     var layoutManagerType: LayoutManagerType = LayoutManagerType.LINEAR,

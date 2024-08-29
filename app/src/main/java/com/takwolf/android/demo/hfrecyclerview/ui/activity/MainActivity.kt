@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.HFRVHack.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityMainBinding
 import com.takwolf.android.demo.hfrecyclerview.model.DemoConfigs

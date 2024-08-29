@@ -241,7 +241,18 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         this.keepScrollPositionOnItemInserted = keepScrollPositionOnItemInserted;
     }
 
-    void keepCurrentScrollPositionWithOffset() {
+    public static final class PositionWithOffset {
+        public final int position;
+        public final int offset;
+
+        public PositionWithOffset(int position, int offset) {
+            this.position = position;
+            this.offset = offset;
+        }
+    }
+
+    @Nullable
+    public PositionWithOffset getScrollPositionWithOffset() {
         RecyclerView.LayoutManager layoutManager = getLayoutManager();
         if (layoutManager instanceof LinearLayoutManager) {
             LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
@@ -263,7 +274,7 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
                         offset = holder.itemView.getTop() - layoutParams.topMargin - getPaddingTop();
                     }
                 }
-                linearLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
+                return new PositionWithOffset(firstPosition, offset);
             }
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
@@ -285,8 +296,18 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
                         offset = holder.itemView.getTop() - layoutParams.topMargin - getPaddingTop();
                     }
                 }
-                staggeredGridLayoutManager.scrollToPositionWithOffset(firstPosition, offset);
+                return new PositionWithOffset(firstPosition, offset);
             }
+        }
+        return null;
+    }
+
+    public void scrollToPositionWithOffset(int position, int offset) {
+        RecyclerView.LayoutManager layoutManager = getLayoutManager();
+        if (layoutManager instanceof LinearLayoutManager) {
+            ((LinearLayoutManager) layoutManager).scrollToPositionWithOffset(position, offset);
+        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+            ((StaggeredGridLayoutManager) layoutManager).scrollToPositionWithOffset(position, offset);
         }
     }
 

@@ -158,7 +158,10 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public void onItemRangeInserted(int positionStart, int itemCount) {
             notifyItemRangeInserted(positionStart + getPositionOffset(), itemCount);
             if (recyclerView.isKeepScrollPositionOnItemInserted()) {
-                recyclerView.keepCurrentScrollPositionWithOffset();
+                HeaderAndFooterRecyclerView.PositionWithOffset positionWithOffset = recyclerView.getScrollPositionWithOffset();
+                if (positionWithOffset != null) {
+                    recyclerView.scrollToPositionWithOffset(positionWithOffset.position, positionWithOffset.offset);
+                }
             }
         }
 

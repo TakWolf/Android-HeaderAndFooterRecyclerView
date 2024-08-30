@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.takwolf.android.hfrecyclerview.loadmorefooter"
+    namespace = "com.takwolf.android.hfrecyclerview.paging"
     compileSdk = 35
 
     defaultConfig {

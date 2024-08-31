@@ -53,7 +53,7 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("com.github.TakWolf.Android-InsetsWidget:insetswidget:0.0.1")
     implementation("com.github.TakWolf:Android-AspectRatioLayout:0.0.1")
-    implementation("io.coil-kt:coil:2.6.0")
+    implementation("io.coil-kt:coil:2.7.0")
     implementation(project(":hfrecyclerview"))
     implementation(project(":paging"))
 }

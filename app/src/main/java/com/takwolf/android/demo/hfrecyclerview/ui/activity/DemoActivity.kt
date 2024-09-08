@@ -28,7 +28,7 @@ class DemoActivity : AppCompatActivity() {
     companion object {
         fun open(activity: AppCompatActivity, configs: DemoConfigs) {
             val intent = Intent(activity, DemoActivity::class.java).apply {
-                configs.putToIntentExtra(this)
+                putExtra("configs", configs)
             }
             activity.startActivity(intent)
         }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class DemoViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
-    val configs = DemoConfigs.getFromSavedStateHandle(savedStateHandle)
+    val configs = savedStateHandle.get<DemoConfigs>("configs") ?: DemoConfigs()
 
     val banners = MutableStateFlow(emptyList<Banner>())
     val photos = MutableStateFlow(emptyList<Photo>())

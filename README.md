@@ -25,12 +25,12 @@ repositories {
 
 dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.12")
+    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.13")
     // 可选。分页组件。
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("androidx.lifecycle:lifecycle-common:2.8.5")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:paging:0.0.12")
+    implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:paging:0.0.13")
 }
 ```
 

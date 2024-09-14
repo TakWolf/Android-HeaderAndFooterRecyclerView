@@ -5,14 +5,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 abstract class RefreshSource {
     val state = MutableStateFlow(RefreshState.IDLE)
 
-    protected var dataVersion = 0
-        private set
+    private var dataVersion = 0
 
-    protected fun checkDataVersion(dataVersion: Int): Boolean {
+    fun checkDataVersion(dataVersion: Int): Boolean {
         return this.dataVersion == dataVersion
     }
 
-    protected fun invalidDataVersion() {
+    fun invalidDataVersion() {
         dataVersion += 1
     }
 

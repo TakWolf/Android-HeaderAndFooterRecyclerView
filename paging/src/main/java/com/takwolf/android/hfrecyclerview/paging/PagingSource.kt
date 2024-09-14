@@ -1,12 +1,6 @@
 package com.takwolf.android.hfrecyclerview.paging
 
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 
 abstract class PagingSource {
     val refreshState = MutableStateFlow(RefreshState.IDLE)
@@ -76,49 +70,6 @@ abstract class PagingSource {
             return true
         } else {
             return false
-        }
-    }
-
-    fun setupSwipeRefreshLayout(
-        owner: LifecycleOwner,
-        refreshLayout: SwipeRefreshLayout,
-    ) {
-        refreshLayout.setOnRefreshListener {
-            refresh()
-        }
-
-        owner.lifecycleScope.launch {
-            owner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                refreshState.collect { state ->
-                    when (state) {
-                        RefreshState.DISABLED -> {
-                            refreshLayout.isEnabled = false
-                            refreshLayout.isRefreshing = false
-                        }
-                        else -> {
-                            refreshLayout.isEnabled = true
-                            refreshLayout.isRefreshing = state == RefreshState.LOADING
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    fun setupLoadMoreFooter(
-        owner: LifecycleOwner,
-        loadMoreFooter: LoadMoreFooter,
-    ) {
-        loadMoreFooter.onLoadMoreListener = LoadMoreFooter.OnLoadMoreListener {
-            loadMore()
-        }
-
-        owner.lifecycleScope.launch {
-            owner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loadMoreState.collect { state ->
-                    loadMoreFooter.state = state
-                }
-            }
         }
     }
 }

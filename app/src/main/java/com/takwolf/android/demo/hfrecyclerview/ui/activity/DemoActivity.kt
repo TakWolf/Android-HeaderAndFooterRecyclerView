@@ -22,6 +22,7 @@ import com.takwolf.android.demo.hfrecyclerview.ui.adapter.PhotoListAdapter
 import com.takwolf.android.demo.hfrecyclerview.ui.widget.BannerPageHeader
 import com.takwolf.android.demo.hfrecyclerview.ui.widget.LoadMoreFooter
 import com.takwolf.android.demo.hfrecyclerview.vm.DemoViewModel
+import com.takwolf.android.hfrecyclerview.paging.observe
 import kotlinx.coroutines.launch
 
 class DemoActivity : AppCompatActivity() {
@@ -60,7 +61,10 @@ class DemoActivity : AppCompatActivity() {
         if (configs.enableRefresh && configs.orientation == RecyclerView.VERTICAL && !configs.reverseLayout) {
             binding.refreshLayout.isEnabled = true
             binding.refreshLayout.setColorSchemeResources(R.color.app_primary)
-            viewModel.pagingSource.setupSwipeRefreshLayout(this, binding.refreshLayout)
+            binding.refreshLayout.setOnRefreshListener {
+                viewModel.pagingSource.refresh()
+            }
+            viewModel.pagingSource.refreshState.observe(this, binding.refreshLayout)
         } else {
             binding.refreshLayout.isEnabled = false
         }
@@ -122,7 +126,10 @@ class DemoActivity : AppCompatActivity() {
             }.apply {
                 addToRecyclerView(binding.recyclerView)
             }
-            viewModel.pagingSource.setupLoadMoreFooter(this, loadMoreFooter)
+            loadMoreFooter.onLoadMoreListener = com.takwolf.android.hfrecyclerview.paging.LoadMoreFooter.OnLoadMoreListener {
+                viewModel.pagingSource.loadMore()
+            }
+            viewModel.pagingSource.loadMoreState.observe(this, loadMoreFooter)
         }
 
         val adapter = when (configs.layoutManagerType) {

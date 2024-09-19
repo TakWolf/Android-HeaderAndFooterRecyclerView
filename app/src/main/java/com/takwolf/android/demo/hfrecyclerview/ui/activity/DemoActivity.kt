@@ -85,13 +85,21 @@ class DemoActivity : AppCompatActivity() {
             }
         }
 
+        if (configs.addStaticHeader) {
+            if (configs.orientation == RecyclerView.VERTICAL) {
+                binding.recyclerView.addHeaderView(R.layout.header_vertical)
+            } else {
+                binding.recyclerView.addHeaderView(R.layout.header_horizontal)
+            }
+        }
+
         if (configs.addBannerHeader) {
             val bannerPageHeader = if (configs.orientation == RecyclerView.VERTICAL) {
                 BannerPageHeader.vertical(binding.recyclerView)
             } else {
                 BannerPageHeader.horizontal(binding.recyclerView)
             }.apply {
-                addToRecyclerView(binding.recyclerView)
+                addToRecyclerView(binding.recyclerView, if (configs.reverseLayout) null else 0)
             }
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -99,14 +107,6 @@ class DemoActivity : AppCompatActivity() {
                         bannerPageHeader.adapter.submitList(banners)
                     }
                 }
-            }
-        }
-
-        if (configs.addStaticHeader) {
-            if (configs.orientation == RecyclerView.VERTICAL) {
-                binding.recyclerView.addHeaderView(R.layout.header_vertical)
-            } else {
-                binding.recyclerView.addHeaderView(R.layout.header_horizontal)
             }
         }
 
@@ -124,7 +124,7 @@ class DemoActivity : AppCompatActivity() {
             } else {
                 LoadMoreFooter.horizontal(binding.recyclerView)
             }.apply {
-                addToRecyclerView(binding.recyclerView)
+                addToRecyclerView(binding.recyclerView, if (configs.reverseLayout) 0 else null)
             }
             loadMoreFooter.onLoadMoreListener = com.takwolf.android.hfrecyclerview.paging.LoadMoreFooter.OnLoadMoreListener {
                 viewModel.pagingSource.loadMore()

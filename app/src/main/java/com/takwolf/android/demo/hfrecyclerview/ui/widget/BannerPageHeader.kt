@@ -30,7 +30,11 @@ class BannerPageHeader private constructor(
         viewPager.adapter = this
     }
 
-    fun addToRecyclerView(recyclerView: HeaderAndFooterRecyclerView) {
-        recyclerView.addHeaderView(rootView)
+    fun addToRecyclerView(recyclerView: HeaderAndFooterRecyclerView, index: Int? = null) {
+        index?.also {
+            recyclerView.addHeaderView(rootView, it)
+        } ?: run {
+            recyclerView.addHeaderView(rootView)
+        }
     }
 }

@@ -49,11 +49,15 @@ abstract class LoadMoreFooter(val view: View) {
         }
     }
 
-    fun addToRecyclerView(recyclerView: HeaderAndFooterRecyclerView) {
+    fun addToRecyclerView(recyclerView: HeaderAndFooterRecyclerView, index: Int? = null) {
         if (this.recyclerView != null) {
             throw IllegalStateException("LoadMoreFooter has been added")
         }
-        recyclerView.addFooterView(view)
+        index?.also {
+            recyclerView.addFooterView(view, it)
+        } ?: run {
+            recyclerView.addFooterView(view)
+        }
         recyclerView.addOnScrollListener(onScrollListener)
         this.recyclerView = recyclerView
         onUpdateViews()

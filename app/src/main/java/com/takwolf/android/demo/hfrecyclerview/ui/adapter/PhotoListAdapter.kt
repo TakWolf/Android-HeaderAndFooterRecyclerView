@@ -7,7 +7,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+import coil3.load
+import coil3.request.error
+import coil3.request.placeholder
 import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemGridHorizontalBinding
 import com.takwolf.android.demo.hfrecyclerview.databinding.ItemGridVerticalBinding

@@ -4,6 +4,7 @@
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen)](https://android-arsenal.com/api?level=21)
 [![License](https://img.shields.io/github/license/TakWolf/Android-HeaderAndFooterRecyclerView)](https://www.apache.org/licenses/LICENSE-2.0)
 [![JitPack](https://jitpack.io/v/TakWolf/Android-HeaderAndFooterRecyclerView.svg)](https://jitpack.io/#TakWolf/Android-HeaderAndFooterRecyclerView)
+[<img src="https://api.gitsponsors.com/api/badge/img?id=92882038" height="20">](https://api.gitsponsors.com/api/badge/link?p=g67C/cOQyq9j/ogYGdKQnUO7OgIJmPTPv9vFKaxxVKPe5e41hMP7q5MlTeIbQk2dIT+DCVv1vR0jY4jfFQ3nI/4zzv54ZkbVJNNyw9DzJPIjtxxidx5bqjayfpVgKPP5P2hOR2AXwZdAzF6EuFAiWg==)
 
 `RecyclerView` 添加 `HeaderView` 和 `FooterView` 的解决方案。
 

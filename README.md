@@ -24,6 +24,7 @@ repositories {
 }
 
 dependencies {
+    implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.16")
     // 可选。分页组件。

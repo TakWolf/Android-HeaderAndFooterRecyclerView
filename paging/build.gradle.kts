@@ -43,7 +43,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.takwolf.android.hfrecyclerview"
             artifactId = "paging"
-            version = "0.0.17"
+            version = "0.0.18"
 
             afterEvaluate {
                 from(components["release"])

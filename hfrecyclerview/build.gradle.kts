@@ -32,7 +32,7 @@ android {
 
 dependencies {
     compileOnly("androidx.core:core-ktx:1.15.0")
-    compileOnly("androidx.recyclerview:recyclerview:1.3.2")
+    compileOnly("androidx.recyclerview:recyclerview:1.4.0")
 }
 
 publishing {

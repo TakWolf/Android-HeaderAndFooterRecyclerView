@@ -56,7 +56,8 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         inspectLayoutManager(getLayoutManager());
         super.setAdapter(proxyAdapter);
         ViewCompat.setWindowInsetsAnimationCallback(this, new WindowInsetsAnimationCompat.Callback(WindowInsetsAnimationCompat.Callback.DISPATCH_MODE_CONTINUE_ON_SUBTREE) {
-            @Nullable private PositionWithOffset positionWithOffset;
+            @Nullable
+            private PositionWithOffset positionWithOffset;
 
             @Override
             public void onPrepare(@NonNull WindowInsetsAnimationCompat animation) {

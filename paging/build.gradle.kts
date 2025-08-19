@@ -32,7 +32,7 @@ android {
 
 dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    compileOnly("androidx.lifecycle:lifecycle-common:2.9.1")
+    compileOnly("androidx.lifecycle:lifecycle-common:2.9.2")
     compileOnly("androidx.recyclerview:recyclerview:1.4.0")
     compileOnly("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     api(project(":hfrecyclerview"))

@@ -29,7 +29,7 @@ dependencies {
     implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:hfrecyclerview:0.0.18")
     // 可选。分页组件。
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    implementation("androidx.lifecycle:lifecycle-common:2.9.3")
+    implementation("androidx.lifecycle:lifecycle-common:2.9.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("com.github.TakWolf.Android-HeaderAndFooterRecyclerView:paging:0.0.18")
 }

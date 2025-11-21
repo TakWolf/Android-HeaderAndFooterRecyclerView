@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 23
 
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -34,7 +34,7 @@ android {
 
 dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    compileOnly("androidx.lifecycle:lifecycle-common:2.9.4")
+    compileOnly("androidx.lifecycle:lifecycle-common:2.10.0")
     compileOnly("androidx.recyclerview:recyclerview:1.4.0")
     compileOnly("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     api(project(":hfrecyclerview"))

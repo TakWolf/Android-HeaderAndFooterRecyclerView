@@ -32,7 +32,7 @@ dependencies {
 }
 
 mavenPublishing {
-    coordinates("io.github.takwolf.android.hfrecyclerview", "hfrecyclerview", "0.0.0")
+    coordinates("io.github.takwolf.android.hfrecyclerview", "hfrecyclerview", "0.0.1")
 
     pom {
         name.set("Android-HeaderAndFooterRecyclerView")

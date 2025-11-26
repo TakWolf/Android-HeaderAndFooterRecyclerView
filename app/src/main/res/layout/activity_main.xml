@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.takwolf.android.insetswidget.InsetsLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:isw_insetsType="statusBars|navigationBars"
+    app:isw_insetsColorTop="@color/app_primary_dark"
+    app:isw_insetsColorBottom="@android:color/white"
+    app:isw_insetsColorLeft="@android:color/white"
+    app:isw_insetsColorRight="@android:color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_primary"
+        android:elevation="@dimen/toolbar_elevation"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="@string/app_name" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/layout_manager"
+                android:textColor="@color/app_primary"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/rg_layout_manager_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_linear_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/linear_layout_manager"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp"
+                    tools:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/rb_grid_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/grid_layout_manager"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_staggered_grid_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/staggered_grid_layout_manager"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/orientation"
+                android:textColor="@color/app_primary"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/rg_orientation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rb_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/vertical"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp"
+                    tools:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/rb_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/horizontal"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/other_configs"
+                android:textColor="@color/app_primary"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_enable_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/enable_refresh"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_enable_load_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/enable_load_more"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_add_banner_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/add_banner_header"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_add_static_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/add_static_header"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_add_static_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/add_static_footer"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_reverse_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/reverse_layout"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_stack_from_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/stack_from_end"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_layout_direction_rtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/layout_direction_rtl"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_not_full_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/not_full_page"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="14sp"
+                tools:checked="true" />
+
+            <Button
+                android:id="@+id/btn_demo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/demo"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</com.takwolf.android.insetswidget.InsetsLinearLayout>

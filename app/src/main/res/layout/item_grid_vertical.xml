@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.takwolf.android.aspectratiolayout.AspectRatioLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btn_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="1dp"
+    android:foreground="?selectableItemBackground"
+    app:arl_widthRatio="1"
+    app:arl_heightRatio="1">
+
+    <ImageView
+        android:id="@+id/img_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        tools:src="@mipmap/ic_launcher"
+        tools:ignore="ContentDescription" />
+
+</com.takwolf.android.aspectratiolayout.AspectRatioLayout>

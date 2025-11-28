@@ -19,9 +19,10 @@ import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.ActivityDemoBinding
 import com.takwolf.android.demo.hfrecyclerview.model.DemoConfigs
 import com.takwolf.android.demo.hfrecyclerview.ui.adapter.PhotoListAdapter
+import com.takwolf.android.demo.hfrecyclerview.ui.widget.AppLoadMoreFooter
 import com.takwolf.android.demo.hfrecyclerview.ui.widget.BannerPageHeader
-import com.takwolf.android.demo.hfrecyclerview.ui.widget.LoadMoreFooter
 import com.takwolf.android.demo.hfrecyclerview.vm.DemoViewModel
+import com.takwolf.android.hfrecyclerview.paging.LoadMoreFooter
 import com.takwolf.android.hfrecyclerview.paging.observe
 import kotlinx.coroutines.launch
 
@@ -120,13 +121,13 @@ class DemoActivity : AppCompatActivity() {
 
         if (configs.enableLoadMore) {
             val loadMoreFooter = if (configs.orientation == RecyclerView.VERTICAL) {
-                LoadMoreFooter.vertical(binding.recyclerView)
+                AppLoadMoreFooter.vertical(binding.recyclerView)
             } else {
-                LoadMoreFooter.horizontal(binding.recyclerView)
+                AppLoadMoreFooter.horizontal(binding.recyclerView)
             }.apply {
                 addToRecyclerView(binding.recyclerView, if (configs.reverseLayout) 0 else null)
             }
-            loadMoreFooter.onLoadMoreListener = com.takwolf.android.hfrecyclerview.paging.LoadMoreFooter.OnLoadMoreListener {
+            loadMoreFooter.onLoadMoreListener = LoadMoreFooter.OnLoadMoreListener {
                 viewModel.pagingSource.loadMore()
             }
             viewModel.pagingSource.loadMoreState.observe(this, loadMoreFooter)

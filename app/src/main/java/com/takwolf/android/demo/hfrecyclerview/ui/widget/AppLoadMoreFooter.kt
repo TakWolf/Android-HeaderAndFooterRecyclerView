@@ -8,22 +8,23 @@ import com.takwolf.android.demo.hfrecyclerview.R
 import com.takwolf.android.demo.hfrecyclerview.databinding.FooterLoadMoreHorizontalBinding
 import com.takwolf.android.demo.hfrecyclerview.databinding.FooterLoadMoreVerticalBinding
 import com.takwolf.android.hfrecyclerview.HeaderAndFooterRecyclerView
+import com.takwolf.android.hfrecyclerview.paging.LoadMoreFooter
 import com.takwolf.android.hfrecyclerview.paging.LoadMoreState
 
-class LoadMoreFooter private constructor(
+class AppLoadMoreFooter private constructor(
     rootView: View,
     private val loadingBar: ProgressBar,
     private val tvText: TextView,
-) : com.takwolf.android.hfrecyclerview.paging.LoadMoreFooter(rootView) {
+) : LoadMoreFooter(rootView) {
     companion object {
-        fun vertical(recyclerView: HeaderAndFooterRecyclerView): LoadMoreFooter {
+        fun vertical(recyclerView: HeaderAndFooterRecyclerView): AppLoadMoreFooter {
             val binding = FooterLoadMoreVerticalBinding.inflate(LayoutInflater.from(recyclerView.context), recyclerView.footerViewContainer, false)
-            return LoadMoreFooter(binding.root, binding.loadingBar, binding.tvText)
+            return AppLoadMoreFooter(binding.root, binding.loadingBar, binding.tvText)
         }
 
-        fun horizontal(recyclerView: HeaderAndFooterRecyclerView): LoadMoreFooter {
+        fun horizontal(recyclerView: HeaderAndFooterRecyclerView): AppLoadMoreFooter {
             val binding = FooterLoadMoreHorizontalBinding.inflate(LayoutInflater.from(recyclerView.context), recyclerView.footerViewContainer, false)
-            return LoadMoreFooter(binding.root, binding.loadingBar, binding.tvText)
+            return AppLoadMoreFooter(binding.root, binding.loadingBar, binding.tvText)
         }
     }
 

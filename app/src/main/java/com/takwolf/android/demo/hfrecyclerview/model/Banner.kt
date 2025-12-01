@@ -4,9 +4,10 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
-import java.util.UUID
 import kotlin.math.roundToInt
 import kotlin.random.Random
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 data class Banner(
     val id: String,
@@ -21,8 +22,9 @@ data class Banner(
             return Color.rgb(red, green, blue)
         }
 
+        @OptIn(ExperimentalUuidApi::class)
         fun new(): Banner {
-            return Banner(UUID.randomUUID().toString(), randomColor())
+            return Banner(Uuid.random().toHexString(), randomColor())
         }
 
         fun newList(size: Int): List<Banner> {

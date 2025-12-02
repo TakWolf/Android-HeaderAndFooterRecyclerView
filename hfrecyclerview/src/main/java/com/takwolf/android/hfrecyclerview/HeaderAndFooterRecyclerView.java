@@ -16,9 +16,6 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsAnimationCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.HackRecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,7 +32,6 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
     private final ProxyAdapter proxyAdapter = new ProxyAdapter(this);
 
     private boolean keepScrollPositionOnItemInserted = true;
-    private boolean keepScrollPositionOnWindowInsets = true;
 
     public HeaderAndFooterRecyclerView(@NonNull Context context) {
         super(context);
@@ -55,24 +51,6 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
     private void init() {
         inspectLayoutManager(getLayoutManager());
         super.setAdapter(proxyAdapter);
-        ViewCompat.setWindowInsetsAnimationCallback(this, new WindowInsetsAnimationCompat.Callback(WindowInsetsAnimationCompat.Callback.DISPATCH_MODE_CONTINUE_ON_SUBTREE) {
-            @Nullable
-            private PositionWithOffset positionWithOffset;
-
-            @Override
-            public void onPrepare(@NonNull WindowInsetsAnimationCompat animation) {
-                positionWithOffset = getScrollPositionWithOffset();
-            }
-
-            @NonNull
-            @Override
-            public WindowInsetsCompat onProgress(@NonNull WindowInsetsCompat windowInsets, @NonNull List<WindowInsetsAnimationCompat> runningAnimations) {
-                if (keepScrollPositionOnWindowInsets && positionWithOffset != null) {
-                    scrollToPositionWithOffset(positionWithOffset.position, positionWithOffset.offset);
-                }
-                return windowInsets;
-            }
-        });
     }
 
     @NonNull
@@ -261,14 +239,6 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
 
     public void setKeepScrollPositionOnItemInserted(boolean keepScrollPositionOnItemInserted) {
         this.keepScrollPositionOnItemInserted = keepScrollPositionOnItemInserted;
-    }
-
-    public boolean isKeepScrollPositionOnWindowInsets() {
-        return keepScrollPositionOnWindowInsets;
-    }
-
-    public void setKeepScrollPositionOnWindowInsets(boolean keepScrollPositionOnWindowInsets) {
-        this.keepScrollPositionOnWindowInsets = keepScrollPositionOnWindowInsets;
     }
 
     public static final class PositionWithOffset {

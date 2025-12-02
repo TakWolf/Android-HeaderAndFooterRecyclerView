@@ -27,7 +27,6 @@ android {
 }
 
 dependencies {
-    compileOnly("androidx.core:core-ktx:1.17.0")
     compileOnly("androidx.recyclerview:recyclerview:1.4.0")
 }
 

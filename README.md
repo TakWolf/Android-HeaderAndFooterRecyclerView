@@ -15,7 +15,6 @@
 ## Snippets
 
 ```kotlin
-implementation("androidx.core:core-ktx:1.17.0")
 implementation("androidx.recyclerview:recyclerview:1.4.0")
 implementation("io.github.takwolf.android.hfrecyclerview:hfrecyclerview:0.0.1")
     

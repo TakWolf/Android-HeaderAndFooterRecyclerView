@@ -35,7 +35,7 @@ dependencies {
 }
 
 mavenPublishing {
-    coordinates("io.github.takwolf.android.hfrecyclerview", "paging", "0.0.1")
+    coordinates("io.github.takwolf.android.hfrecyclerview", "paging", "0.0.2")
 
     pom {
         name.set("Android-HeaderAndFooterRecyclerView")

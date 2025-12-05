@@ -21,7 +21,7 @@ implementation("io.github.takwolf.android.hfrecyclerview:hfrecyclerview:0.0.2")
 // 可选，分页组件。
 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
-implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0")
 implementation("io.github.takwolf.android.hfrecyclerview:paging:0.0.2")
 ```
 

@@ -1,13 +1,14 @@
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
     id("com.vanniktech.maven.publish")
 }
 
 android {
     namespace = "com.takwolf.android.hfrecyclerview.paging"
     compileSdk {
-        version = release(36)
+        version = release(36) {
+            minorApiLevel = 1
+        }
     }
 
     defaultConfig {
@@ -20,17 +21,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     compileOnly("androidx.lifecycle:lifecycle-common:2.10.0")
     compileOnly("androidx.recyclerview:recyclerview:1.4.0")
-    compileOnly("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    compileOnly("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0")
     api(project(":hfrecyclerview"))
 }
 

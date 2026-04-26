@@ -39,7 +39,7 @@ mavenPublishing {
 
     pom {
         name.set("Android-HeaderAndFooterRecyclerView")
-        description.set("Let RecyclerView support header and footer views.")
+        description.set("Let RecyclerView support header and footer views")
         url.set("https://github.com/TakWolf/Android-HeaderAndFooterRecyclerView")
         inceptionYear.set("2025")
         licenses {

@@ -8,7 +8,7 @@ jobs:
   publish:
     environment:
       name: maven-central
-      url: https://central.sonatype.com/artifact/io.github.takwolf.android.hfrecyclerview/hfrecyclerview
+      url: https://central.sonatype.com/namespace/io.github.takwolf.android.hfrecyclerview
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

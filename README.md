@@ -1,7 +1,7 @@
 # Android - HeaderAndFooterRecyclerView
 
-[![Android](https://img.shields.io/badge/android-23%2B-brightgreen)](https://developer.android.com)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.takwolf.android.hfrecyclerview/hfrecyclerview)](https://central.sonatype.com/artifact/io.github.takwolf.android.hfrecyclerview/hfrecyclerview)
+[![Android](https://img.shields.io/badge/android-23%2B-brightgreen?style=flat-square)](https://developer.android.com)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.takwolf.android.hfrecyclerview/hfrecyclerview?style=flat-square)](https://central.sonatype.com/namespace/io.github.takwolf.android.hfrecyclerview)
 
 一个让 `RecyclerView` 支持 `HeaderView` 和 `FooterView` 的解决方案。
 
@@ -12,7 +12,7 @@
 - 支持 `LinearLayoutManager`、`GridLayoutManager` 和 `StaggeredGridLayoutManager` 布局管理器
 - 提供额外分页组件，方便快速实现「下拉刷新」和「加载更多」功能
 
-## Snippets
+## Installation
 
 ```kotlin
 implementation("androidx.recyclerview:recyclerview:1.4.0")

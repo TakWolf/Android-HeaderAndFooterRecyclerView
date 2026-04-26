@@ -16,6 +16,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Android-HeaderAndFooterRecyclerView"
 
-include("app")
-include("hfrecyclerview")
-include("paging")
+include(":app")
+include(":hfrecyclerview")
+include(":paging")

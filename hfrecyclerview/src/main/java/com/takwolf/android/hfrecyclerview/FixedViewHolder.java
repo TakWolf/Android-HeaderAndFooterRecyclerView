@@ -6,36 +6,34 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import org.jspecify.annotations.Nullable;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
 final class FixedViewHolder extends RecyclerView.ViewHolder {
-    static FixedViewHolder create(@NonNull Context context) {
+    static FixedViewHolder create(Context context) {
         return new FixedViewHolder(new LinearLayout(context));
     }
 
-    @NonNull
     private final LinearLayout viewContainer;
 
-    private FixedViewHolder(@NonNull LinearLayout viewContainer) {
+    private FixedViewHolder(LinearLayout viewContainer) {
         super(viewContainer);
         this.viewContainer = viewContainer;
     }
 
-    @NonNull
     LinearLayout getViewContainer() {
         return viewContainer;
     }
 
-    private void adjustViewContainerLayoutParamsAndOrientation(@Nullable RecyclerView.LayoutManager layoutManager) {
+    private void adjustViewContainerLayoutParamsAndOrientation(RecyclerView.@Nullable LayoutManager layoutManager) {
         if (layoutManager instanceof GridLayoutManager) {
             GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
             GridLayoutManager.LayoutParams layoutParams;
@@ -118,7 +116,7 @@ final class FixedViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    void bind(@Nullable RecyclerView.LayoutManager layoutManager, @NonNull List<View> views) {
+    void bind(RecyclerView.@Nullable LayoutManager layoutManager, List<View> views) {
         viewContainer.removeAllViews();
         adjustViewContainerLayoutParamsAndOrientation(layoutManager);
         for (View view : views) {
@@ -129,7 +127,7 @@ final class FixedViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    void bind(@Nullable RecyclerView.LayoutManager layoutManager, @NonNull UpdateInfo updateInfo) {
+    void bind(RecyclerView.@Nullable LayoutManager layoutManager, UpdateInfo updateInfo) {
         adjustViewContainerLayoutParamsAndOrientation(layoutManager);
         switch (updateInfo.action) {
             case UpdateInfo.ACTION_ADD:
@@ -159,14 +157,11 @@ final class FixedViewHolder extends RecyclerView.ViewHolder {
         @Retention(RetentionPolicy.SOURCE)
         @interface Action {}
 
-        @Action
-        private final int action;
-        @NonNull
+        @Action private final int action;
         private final View view;
-        @Nullable
-        private final Integer index;
+        @Nullable private final Integer index;
 
-        UpdateInfo(@Action int action, @NonNull View view, @Nullable Integer index) {
+        UpdateInfo(@Action int action, View view, @Nullable Integer index) {
             this.action = action;
             this.view = view;
             this.index = index;

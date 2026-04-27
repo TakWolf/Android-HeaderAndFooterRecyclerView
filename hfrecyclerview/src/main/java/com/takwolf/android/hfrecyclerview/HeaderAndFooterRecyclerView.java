@@ -13,14 +13,14 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.HackRecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,17 +33,17 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
 
     private boolean keepScrollPositionOnItemInserted = true;
 
-    public HeaderAndFooterRecyclerView(@NonNull Context context) {
+    public HeaderAndFooterRecyclerView(Context context) {
         super(context);
         init();
     }
 
-    public HeaderAndFooterRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public HeaderAndFooterRecyclerView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public HeaderAndFooterRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+    public HeaderAndFooterRecyclerView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -53,7 +53,6 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         super.setAdapter(proxyAdapter);
     }
 
-    @NonNull
     private LinearLayout getFixedViewContainer(@ProxyAdapter.ViewType int viewType) {
         ViewHolder holder = getRecycledViewPool().getRecycledView(viewType);
         if (holder == null) {
@@ -67,34 +66,30 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         }
     }
 
-    @NonNull
     public ViewGroup getHeaderViewContainer() {
         return getFixedViewContainer(ProxyAdapter.VIEW_TYPE_HEADER);
     }
 
-    @NonNull
     public ViewGroup getFooterViewContainer() {
         return getFixedViewContainer(ProxyAdapter.VIEW_TYPE_FOOTER);
     }
 
-    public void addHeaderView(@NonNull View view) {
+    public void addHeaderView(View view) {
         headerViews.add(view);
         proxyAdapter.notifyHeaderViewAdded(view, null);
     }
 
-    public void addHeaderView(@NonNull View view, int index) {
+    public void addHeaderView(View view, int index) {
         headerViews.add(index, view);
         proxyAdapter.notifyHeaderViewAdded(view, index);
     }
 
-    @NonNull
     public View addHeaderView(@LayoutRes int layoutId) {
         View view = LayoutInflater.from(getContext()).inflate(layoutId, getHeaderViewContainer(), false);
         addHeaderView(view);
         return view;
     }
 
-    @NonNull
     public View addHeaderView(@LayoutRes int layoutId, int index) {
         View view = LayoutInflater.from(getContext()).inflate(layoutId, getHeaderViewContainer(), false);
         addHeaderView(view, index);
@@ -113,7 +108,7 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         return headerViews.size();
     }
 
-    public void removeHeaderView(@NonNull View view) {
+    public void removeHeaderView(View view) {
         if (headerViews.remove(view)) {
             proxyAdapter.notifyHeaderViewRemoved(view, null);
         }
@@ -124,24 +119,22 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         proxyAdapter.notifyHeaderViewRemoved(view, index);
     }
 
-    public void addFooterView(@NonNull View view) {
+    public void addFooterView(View view) {
         footerViews.add(view);
         proxyAdapter.notifyFooterViewAdded(view, null);
     }
 
-    public void addFooterView(@NonNull View view, int index) {
+    public void addFooterView(View view, int index) {
         footerViews.add(index, view);
         proxyAdapter.notifyFooterViewAdded(view, index);
     }
 
-    @NonNull
     public View addFooterView(@LayoutRes int layoutId) {
         View view = LayoutInflater.from(getContext()).inflate(layoutId, getFooterViewContainer(), false);
         addFooterView(view);
         return view;
     }
 
-    @NonNull
     public View addFooterView(@LayoutRes int layoutId, int index) {
         View view = LayoutInflater.from(getContext()).inflate(layoutId, getFooterViewContainer(), false);
         addFooterView(view, index);
@@ -160,7 +153,7 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         return footerViews.size();
     }
 
-    public void removeFooterView(@NonNull View view) {
+    public void removeFooterView(View view) {
         if (footerViews.remove(view)) {
             proxyAdapter.notifyFooterViewRemoved(view, null);
         }
@@ -192,7 +185,6 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         return proxyAdapter.getAdapter();
     }
 
-    @NonNull
     public ProxyAdapter getProxyAdapter() {
         return proxyAdapter;
     }
@@ -312,7 +304,7 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
     }
 
     @Override
-    protected int getAdapterPositionInRecyclerView(@NonNull ViewHolder viewHolder) {
+    protected int getAdapterPositionInRecyclerView(ViewHolder viewHolder) {
         if (viewHolder instanceof FixedViewHolder) {
             return NO_POSITION;
         }
@@ -325,6 +317,7 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
 
     @Override
     protected Parcelable onSaveInstanceState() {
+        //noinspection DataFlowIssue
         SavedState savedState = new SavedState(super.onSaveInstanceState());
         for (View view : headerViews) {
             SparseArray<Parcelable> container = new SparseArray<>();
@@ -377,20 +370,22 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         }
 
         @RequiresApi(Build.VERSION_CODES.N)
-        public SavedState(Parcel source, ClassLoader loader) {
+        public SavedState(Parcel source, @Nullable ClassLoader loader) {
             super(source, loader);
             readValues(source, loader);
         }
 
-        private void readValues(@NonNull Parcel source, @Nullable ClassLoader loader) {
+        private void readValues(Parcel source, @Nullable ClassLoader loader) {
             int headersCount = source.readInt();
             for (int i = 0; i < headersCount; i++) {
                 SparseArray<Parcelable> container = source.readSparseArray(loader);
+                //noinspection DataFlowIssue
                 headerStates.add(container);
             }
             int footersCount = source.readInt();
             for (int i = 0; i < footersCount; i++) {
                 SparseArray<Parcelable> container = source.readSparseArray(loader);
+                //noinspection DataFlowIssue
                 footerStates.add(container);
             }
         }
@@ -410,7 +405,7 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
 
         public static final Creator<SavedState> CREATOR = new ClassLoaderCreator<SavedState>() {
             @Override
-            public SavedState createFromParcel(Parcel source, ClassLoader loader) {
+            public SavedState createFromParcel(Parcel source, @Nullable ClassLoader loader) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     return new SavedState(source, loader);
                 } else {

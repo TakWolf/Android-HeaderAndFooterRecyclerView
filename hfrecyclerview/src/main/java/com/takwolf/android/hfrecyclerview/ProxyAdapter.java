@@ -5,9 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jspecify.annotations.Nullable;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,25 +24,22 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private static final long ITEM_ID_HEADER = Long.MIN_VALUE;
     private static final long ITEM_ID_FOOTER = ITEM_ID_HEADER + 1;
 
-    @NonNull
     private final HeaderAndFooterRecyclerView recyclerView;
 
     @SuppressWarnings("rawtypes")
-    @Nullable
-    private RecyclerView.Adapter adapter;
+    private RecyclerView.@Nullable Adapter adapter;
 
-    ProxyAdapter(@NonNull HeaderAndFooterRecyclerView recyclerView) {
+    ProxyAdapter(HeaderAndFooterRecyclerView recyclerView) {
         this.recyclerView = recyclerView;
     }
 
     @SuppressWarnings("rawtypes")
-    @Nullable
-    RecyclerView.Adapter getAdapter() {
+    RecyclerView.@Nullable Adapter getAdapter() {
         return adapter;
     }
 
     @SuppressWarnings("rawtypes")
-    void setAdapter(@Nullable RecyclerView.Adapter adapter) {
+    void setAdapter(RecyclerView.@Nullable Adapter adapter) {
         if (this.adapter != null) {
             this.adapter.unregisterAdapterDataObserver(innerAdapterDataObserver);
             this.adapter.onDetachedFromRecyclerView(recyclerView);
@@ -73,7 +70,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void setStateRestorationPolicy(@NonNull StateRestorationPolicy strategy) {
+    public void setStateRestorationPolicy(StateRestorationPolicy strategy) {
         throw new UnsupportedOperationException("Calling setStateRestorationPolicy is not allowed on the ProxyAdapter.");
     }
 
@@ -105,7 +102,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return getPositionOffset() + (adapter == null ? 0 : adapter.getItemCount());
     }
 
-    void notifyHeaderViewAdded(@NonNull View view, @Nullable Integer index) {
+    void notifyHeaderViewAdded(View view, @Nullable Integer index) {
         if (recyclerView.getHeaderViewsCount() == 1) {
             notifyItemInserted(getHeaderViewHolderNotifyPosition());
         } else {
@@ -113,7 +110,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    void notifyHeaderViewRemoved(@NonNull View view, @Nullable Integer index) {
+    void notifyHeaderViewRemoved(View view, @Nullable Integer index) {
         if (recyclerView.getHeaderViewsCount() == 0) {
             notifyItemRemoved(getHeaderViewHolderNotifyPosition());
         } else {
@@ -121,7 +118,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    void notifyFooterViewAdded(@NonNull View view, @Nullable Integer index) {
+    void notifyFooterViewAdded(View view, @Nullable Integer index) {
         if (recyclerView.getFooterViewsCount() == 1) {
             notifyItemInserted(getFooterViewHolderNotifyPosition());
         } else {
@@ -129,7 +126,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    void notifyFooterViewRemoved(@NonNull View view, @Nullable Integer index) {
+    void notifyFooterViewRemoved(View view, @Nullable Integer index) {
         if (recyclerView.getFooterViewsCount() == 0) {
             notifyItemRemoved(getFooterViewHolderNotifyPosition());
         } else {
@@ -235,9 +232,8 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_HEADER:
             case VIEW_TYPE_FOOTER:
@@ -252,7 +248,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
         if (holder instanceof FixedViewHolder) {
             if (payloads.isEmpty()) {
                 if (holder.getItemViewType() == VIEW_TYPE_HEADER) {
@@ -280,7 +276,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof FixedViewHolder) {
             if (holder.getItemViewType() == VIEW_TYPE_HEADER) {
                 ((FixedViewHolder) holder).bind(recyclerView.getLayoutManager(), recyclerView.headerViews);
@@ -298,7 +294,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
                 // noinspection unchecked
@@ -310,7 +306,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public boolean onFailedToRecycleView(@NonNull RecyclerView.ViewHolder holder) {
+    public boolean onFailedToRecycleView(RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
                 // noinspection unchecked
@@ -324,7 +320,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
                 // noinspection unchecked
@@ -336,7 +332,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onViewDetachedFromWindow(@NonNull RecyclerView.ViewHolder holder) {
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
         if (!(holder instanceof FixedViewHolder)) {
             if (adapter != null) {
                 // noinspection unchecked
@@ -348,14 +344,14 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         if (this.recyclerView != recyclerView) {
             throw new IllegalStateException("ProxyAdapter can not be attached to other RecyclerView.");
         }
     }
 
     @Override
-    public int findRelativeAdapterPositionIn(@NonNull RecyclerView.Adapter<? extends RecyclerView.ViewHolder> adapter, @NonNull RecyclerView.ViewHolder viewHolder, int localPosition) {
+    public int findRelativeAdapterPositionIn(RecyclerView.Adapter<? extends RecyclerView.ViewHolder> adapter, RecyclerView.ViewHolder viewHolder, int localPosition) {
         if (adapter == this && viewHolder instanceof FixedViewHolder) {
             return localPosition;
         } else if (adapter == this.adapter) {

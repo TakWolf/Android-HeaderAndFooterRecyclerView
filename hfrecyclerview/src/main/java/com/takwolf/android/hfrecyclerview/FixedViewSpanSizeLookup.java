@@ -1,8 +1,8 @@
 package com.takwolf.android.hfrecyclerview;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
+
+import org.jspecify.annotations.Nullable;
 
 final class FixedViewSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
     @Nullable
@@ -10,7 +10,7 @@ final class FixedViewSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
     @Nullable
     private ProxyAdapter proxyAdapter;
 
-    void attach(@NonNull GridLayoutManager layoutManager, @NonNull ProxyAdapter proxyAdapter) {
+    void attach(GridLayoutManager layoutManager, ProxyAdapter proxyAdapter) {
         if (this.layoutManager != null || this.proxyAdapter != null) {
             throw new IllegalStateException("FixedViewSpanSizeLookup can not be shared.");
         }

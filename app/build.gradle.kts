@@ -43,18 +43,18 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    implementation("androidx.core:core-ktx:1.18.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
+    implementation("androidx.core:core-ktx:1.19.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("androidx.activity:activity-ktx:1.13.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.11.0")
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
-    implementation("io.github.takwolf.android.insetswidget:insetswidget:0.0.1")
-    implementation("io.github.takwolf.android.aspectratiolayout:aspectratiolayout:0.0.1")
-    implementation("io.coil-kt.coil3:coil:3.4.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.4.0")
+    implementation("io.github.takwolf.android.insetswidget:insetswidget:0.0.2")
+    implementation("io.github.takwolf.android.aspectratiolayout:aspectratiolayout:0.0.2")
+    implementation("io.coil-kt.coil3:coil:3.5.0")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.5.0")
     implementation(project(":hfrecyclerview"))
     implementation(project(":paging"))
 }

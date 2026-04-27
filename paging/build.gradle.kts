@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
     compileOnly("androidx.lifecycle:lifecycle-common:2.10.0")
     compileOnly("androidx.recyclerview:recyclerview:1.4.0")
     compileOnly("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0")

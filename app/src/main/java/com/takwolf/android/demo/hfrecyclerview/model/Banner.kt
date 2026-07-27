@@ -6,6 +6,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
@@ -32,7 +33,7 @@ data class Banner(
         }
 
         suspend fun getListAsync(size: Int): List<Banner> = coroutineScope {
-            delay(1000)
+            delay(1000.milliseconds)
             newList(size)
         }
     }

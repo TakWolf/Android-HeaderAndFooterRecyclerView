@@ -75,11 +75,11 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private boolean isShowHeaderViewHolder() {
-        return recyclerView.getHeaderViewsCount() > 0;
+        return recyclerView.getHeaderViewCount() > 0;
     }
 
     private boolean isShowFooterViewHolder() {
-        return recyclerView.getFooterViewsCount() > 0;
+        return recyclerView.getFooterViewCount() > 0;
     }
 
     boolean isHeaderViewHolderPosition(int position) {
@@ -103,7 +103,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     void notifyHeaderViewAdded(View view, @Nullable Integer index) {
-        if (recyclerView.getHeaderViewsCount() == 1) {
+        if (recyclerView.getHeaderViewCount() == 1) {
             notifyItemInserted(getHeaderViewHolderNotifyPosition());
         } else {
             notifyItemChanged(getHeaderViewHolderNotifyPosition(), new FixedViewHolder.UpdateInfo(FixedViewHolder.UpdateInfo.ACTION_ADD, view, index));
@@ -111,7 +111,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     void notifyHeaderViewRemoved(View view, @Nullable Integer index) {
-        if (recyclerView.getHeaderViewsCount() == 0) {
+        if (recyclerView.getHeaderViewCount() == 0) {
             notifyItemRemoved(getHeaderViewHolderNotifyPosition());
         } else {
             notifyItemChanged(getHeaderViewHolderNotifyPosition(), new FixedViewHolder.UpdateInfo(FixedViewHolder.UpdateInfo.ACTION_REMOVE, view, index));
@@ -119,7 +119,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     void notifyFooterViewAdded(View view, @Nullable Integer index) {
-        if (recyclerView.getFooterViewsCount() == 1) {
+        if (recyclerView.getFooterViewCount() == 1) {
             notifyItemInserted(getFooterViewHolderNotifyPosition());
         } else {
             notifyItemChanged(getFooterViewHolderNotifyPosition(), new FixedViewHolder.UpdateInfo(FixedViewHolder.UpdateInfo.ACTION_ADD, view, index));
@@ -127,7 +127,7 @@ public final class ProxyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     void notifyFooterViewRemoved(View view, @Nullable Integer index) {
-        if (recyclerView.getFooterViewsCount() == 0) {
+        if (recyclerView.getFooterViewCount() == 0) {
             notifyItemRemoved(getFooterViewHolderNotifyPosition());
         } else {
             notifyItemChanged(getFooterViewHolderNotifyPosition(), new FixedViewHolder.UpdateInfo(FixedViewHolder.UpdateInfo.ACTION_REMOVE, view, index));

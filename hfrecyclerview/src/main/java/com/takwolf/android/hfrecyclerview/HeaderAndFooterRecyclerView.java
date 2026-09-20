@@ -104,7 +104,7 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         return headerViews.get(index);
     }
 
-    public int getHeaderViewsCount() {
+    public int getHeaderViewCount() {
         return headerViews.size();
     }
 
@@ -149,7 +149,7 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         return footerViews.get(index);
     }
 
-    public int getFooterViewsCount() {
+    public int getFooterViewCount() {
         return footerViews.size();
     }
 
@@ -376,14 +376,14 @@ public class HeaderAndFooterRecyclerView extends HackRecyclerView {
         }
 
         private void readValues(Parcel source, @Nullable ClassLoader loader) {
-            int headersCount = source.readInt();
-            for (int i = 0; i < headersCount; i++) {
+            int headerCount = source.readInt();
+            for (int i = 0; i < headerCount; i++) {
                 SparseArray<Parcelable> container = source.readSparseArray(loader);
                 //noinspection DataFlowIssue
                 headerStates.add(container);
             }
-            int footersCount = source.readInt();
-            for (int i = 0; i < footersCount; i++) {
+            int footerCount = source.readInt();
+            for (int i = 0; i < footerCount; i++) {
                 SparseArray<Parcelable> container = source.readSparseArray(loader);
                 //noinspection DataFlowIssue
                 footerStates.add(container);

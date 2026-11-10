@@ -17,7 +17,7 @@
 ```kotlin
 implementation("androidx.recyclerview:recyclerview:1.4.0")
 implementation("io.github.takwolf.android.hfrecyclerview:hfrecyclerview:0.0.3")
-    
+
 // 可选，分页组件。
 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
@@ -44,10 +44,10 @@ implementation("io.github.takwolf.android.hfrecyclerview:paging:0.0.3")
 val recyclerView = binding.recyclerView
 recyclerView.layoutManager = LinearLayoutManager(context)
 recyclerView.adapter = adapter
-        
+
 val headerView = layoutInflater.inflate(R.layout.header, recyclerView.headerViewContainer, false)
 recyclerView.addHeaderView(headerView)
-        
+
 val footerView = layoutInflater.inflate(R.layout.footer, recyclerView.footerViewContainer, false)
 recyclerView.addFooterView(footerView)
 ```
